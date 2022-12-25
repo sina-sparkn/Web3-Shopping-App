@@ -1,6 +1,7 @@
 import "../dist/output.css";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import items from "./items.json";
+import IMG from "./components/images";
 
 const getEthereumObject = () => window.ethereum;
 
@@ -62,23 +63,55 @@ function App() {
     getAccount().catch(console.error);
   }, []);
 
-  return (
-    <div className="w-full h-full flex flex-col justify-center items-center">
-      <h1 className="font-extrabold text-3xl">
-        Worlds first Web3 Shopping App
-      </h1>
-      <div className="w-1/5 h-1/3 rounded-lg flex flex-col items-center justify-center">
-        {!Account && (
-          <button
-            onClick={connectToMetaMask}
-            className="bg-blue-400 p-4 px-5 rounded-xl text-xl font-bold text-white hover:bg-blue-500 duration-200"
-          >
-            connect with metamask
-          </button>
-        )}
+  if (Account) {
+    return (
+      <div className="w-full h-auto pb-10 bg-slate-200">
+        <div className="w-full h-20 text-white fixed bg-black/90 backdrop-blur-xl flex items-center px-64">
+          <p className="clashBold text-2xl">MoonShop</p>
+          <div className="grow"></div>
+          <div className="flex gap-20">
+            <a href="#" className="cursor-pointer hover:underline">
+              Q&A
+            </a>
+            <a href="#" className="cursor-pointer hover:underline">
+              EtherScan
+            </a>
+            <a href="#" className="cursor-pointer hover:underline">
+              CART!
+            </a>
+          </div>
+        </div>
+        <div className="pt-32 px-10 grid grid-cols-4 gap-16 justify-items-center">
+          {items.map((item, index) => {
+            return (
+              <div key={index} className="flex flex-col gap-5 ">
+                <img src={IMG(index)} className=" ring ring-black" />
+                <div className="flex gap-10 text-black text-xl font-bold">
+                  <p>{item.item}</p>
+                  <p>{item.price} ETH</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="bg1 w-full h-full flex flex-col gap-10 justify-center items-center bg-black bg-gradient-to-br from-pink-600/50 to-black">
+        <h1 className="font-extrabold text-3xl text-white">
+          Worlds first Web3 Shopping App
+        </h1>
+
+        <button
+          onClick={connectToMetaMask}
+          className="clashSemiBold bg-transparent text-white border text-2xl px-5 py-3 rounded-lg hover:bg-pink-600/30 focus:ring focus:ring-white duration-200"
+        >
+          connect with metamask
+        </button>
+      </div>
+    );
+  }
 }
 
 export default App;
