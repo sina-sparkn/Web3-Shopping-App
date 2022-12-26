@@ -1,0 +1,11 @@
+{
+  "name": "Reward Five",
+  "description": "Thank you for purchasing more than 0.001 ETH!",
+  "image": "https://ipfs.io/ipfs/QmdrzX1Eq9WjsS5Baq6FPsY32tFdAV1VGD7Nb1m9TDLUBc",
+  "attributes": [
+    {
+      "trait_type": "MODE",
+      "value": "More Than 0.001"
+    }
+  ]
+}

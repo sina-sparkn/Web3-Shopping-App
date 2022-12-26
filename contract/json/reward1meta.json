@@ -1,11 +1,11 @@
 {
-  "name": "reward one",
-  "description": "thank you for purchasing more then 0.0004 ETH",
-  "image": "https://ipfs.io/ipfs/QmRdEr3M4qC6H3zoiHJf5xJBkHRwLTxWH4jrXF1T7fB7G7",
+  "name": "Reward One",
+  "description": "Thank you for first time purchase. you are awesome!",
+  "image": "https://ipfs.io/ipfs/QmRN3R2dER7LzwsDNDiEQ3PV5PYGt19ebegZUPkYr2iWbP",
   "attributes": [
     {
       "trait_type": "MODE",
-      "value": "REWARD ONE"
+      "value": "First Purchase"
     }
   ]
 }

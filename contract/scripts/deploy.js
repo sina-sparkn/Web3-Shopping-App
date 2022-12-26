@@ -1,14 +1,18 @@
 const hre = require("hardhat");
 
 async function main() {
-  const rewardOneFactory = await hre.ethers.getContractFactory("reward1");
-  const rewardOneContract = await rewardOneFactory.deploy();
-  await rewardOneContract.deployed();
+  const rewardFactory = await hre.ethers.getContractFactory("rewardOne");
+  const rewardContract = await rewardFactory.deploy();
+  await rewardContract.deployed();
 
-  console.log(`contract address : ${rewardOneContract.address}`);
+  console.log(`contract address : ${rewardContract.address}`);
 
-  const mintOne = await rewardOneContract.mint(1);
+  const mintOne = await rewardContract.mintReward1();
   await mintOne.wait();
+  const mintTwo = await rewardContract.mintReward2();
+  await mintTwo.wait();
+  const mintThree = await rewardContract.mintReward3();
+  await mintThree.wait();
 }
 
 main().catch((error) => {
