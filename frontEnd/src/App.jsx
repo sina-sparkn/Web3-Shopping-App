@@ -1,7 +1,19 @@
 import "../dist/output.css";
+import "./otherStyles.css";
 import { useState, useEffect } from "react";
 import items from "./items.json";
 import IMG from "./components/images";
+import heroImg from "./assets/svg/Asset 6.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTwitter,
+  faGithub,
+  faTelegram,
+  faInstagram,
+} from "@fortawesome/free-brands-svg-icons";
+import mooninklogo1 from "./assets/svg/Asset 2.svg";
+import mooninklogo2 from "./assets/svg/Asset 3.svg";
+import mooninklogo3 from "./assets/svg/Asset 4.svg";
 
 const getEthereumObject = () => window.ethereum;
 
@@ -63,55 +75,106 @@ function App() {
     getAccount().catch(console.error);
   }, []);
 
-  if (Account) {
-    return (
-      <div className="w-full h-auto pb-10 bg-slate-200">
-        <div className="w-full h-20 text-white fixed bg-black/90 backdrop-blur-xl flex items-center px-64">
-          <p className="clashBold text-2xl">MoonShop</p>
-          <div className="grow"></div>
-          <div className="flex gap-20">
-            <a href="#" className="cursor-pointer hover:underline">
-              Q&A
+  return (
+    <div className="w-full h-auto bg-black ">
+      <div className="w-full h-auto text-white bg-black">
+        <section className="w-full h-auto flex justify-between py-5 px-10 mb-20">
+          {/* <div className="text-2xl font-extrabold">MOONINK</div> */}
+          <a className="flex gap-5" href="#">
+            <img src={mooninklogo1} alt="mooninklogo" className="w-8" />
+            <img src={mooninklogo2} alt="moonink-typeface" className="w-44" />
+          </a>
+
+          <div className="flex items-center gap-16">
+            <div className="flex gap-5 items-center text-lg">
+              <a href="#">
+                <FontAwesomeIcon
+                  icon={faTwitter}
+                  className="hover:text-violet-400 duration-200"
+                />
+              </a>
+              <a href="#">
+                <FontAwesomeIcon
+                  icon={faInstagram}
+                  className="hover:text-violet-400 duration-200"
+                />
+              </a>
+              <a href="#">
+                <FontAwesomeIcon
+                  icon={faTelegram}
+                  className="hover:text-violet-400 duration-200"
+                />
+              </a>
+              <a href="https://github.com/ssparknt">
+                <FontAwesomeIcon
+                  icon={faGithub}
+                  className="hover:text-violet-400 duration-200"
+                />
+              </a>
+            </div>
+            <a href="#">Q&A</a>
+            <button className="bg-violet-700 font-bold px-8 py-3 rounded-lg hover:bg-white hover:text-black duration-200">
+              ENTER
+            </button>
+          </div>
+        </section>
+        <section className="pl-10 flex">
+          <div className="w-1/2 flex flex-col pt-16 gap-12">
+            <h1 className=" font-extrabold text-7xl">
+              THE FIRST WEB3 <br /> SHOPPING EXPERIENCE
+            </h1>
+            <button className="bg-violet-700 font-bold text-xl max-w-xs py-4 rounded-lg hover:bg-white hover:text-black duration-200">
+              ENTER THE APP
+            </button>
+          </div>
+          <img src={heroImg} alt="heroImg" className="w-1/2" />
+        </section>
+        <section className="px-10 -mt-40">
+          <h2 className="text-4xl font-bold">What is MOONINK ?</h2>
+          <br />
+          <p className="text-lg">
+            MOONINK is the first Web3 onlineShop. <br /> it means you can buy
+            products or sell your own products.
+            <br />
+            you can buy using <strong>$MINK</strong> Token and get rewarded by
+            completing different Tasks.
+          </p>
+        </section>
+        <hr className="mx-40 mt-20" />
+        <footer className="mt-12 px-10 pb-10 flex justify-between items-center">
+          <p>sina is back baby!</p>
+          <img src={mooninklogo3} alt="moonink-fullogo" className="w-24" />
+          <div className="flex gap-5 items-center text-lg">
+            <a href="#">
+              <FontAwesomeIcon
+                icon={faTwitter}
+                className="hover:text-violet-400 duration-200"
+              />
             </a>
-            <a href="#" className="cursor-pointer hover:underline">
-              EtherScan
+            <a href="#">
+              <FontAwesomeIcon
+                icon={faInstagram}
+                className="hover:text-violet-400 duration-200"
+              />
             </a>
-            <a href="#" className="cursor-pointer hover:underline">
-              CART!
+            <a href="#">
+              <FontAwesomeIcon
+                icon={faTelegram}
+                className="hover:text-violet-400 duration-200"
+              />
+            </a>
+            <a href="https://github.com/ssparknt">
+              <FontAwesomeIcon
+                icon={faGithub}
+                className="hover:text-violet-400 duration-200"
+              />
             </a>
           </div>
-        </div>
-        <div className="pt-32 px-10 grid grid-cols-4 gap-16 justify-items-center">
-          {items.map((item, index) => {
-            return (
-              <div key={index} className="flex flex-col gap-5 ">
-                <img src={IMG(index)} className=" ring ring-black" />
-                <div className="flex gap-10 text-black text-xl font-bold">
-                  <p>{item.item}</p>
-                  <p>{item.price} ETH</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        </footer>
+        <div className="bg-violet-600 h-5"></div>
       </div>
-    );
-  } else {
-    return (
-      <div className="bg1 w-full h-full flex flex-col gap-10 justify-center items-center bg-black bg-gradient-to-br from-pink-600/50 to-black">
-        <h1 className="font-extrabold text-3xl text-white">
-          Worlds first Web3 Shopping App
-        </h1>
-
-        <button
-          onClick={connectToMetaMask}
-          className="clashSemiBold bg-transparent text-white border text-2xl px-5 py-3 rounded-lg hover:bg-pink-600/30 focus:ring focus:ring-white duration-200"
-        >
-          connect with metamask
-        </button>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default App;
