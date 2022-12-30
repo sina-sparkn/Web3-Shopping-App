@@ -1,0 +1,32 @@
+return (
+      <div className="w-full h-auto pb-10 bg-slate-200">
+        <div className="w-full h-20 text-white fixed bg-black/90 backdrop-blur-xl flex items-center px-64">
+          <p className="clashBold text-2xl">MoonShop</p>
+          <div className="grow"></div>
+          <div className="flex gap-20">
+            <a href="#" className="cursor-pointer hover:underline">
+              Q&A
+            </a>
+            <a href="#" className="cursor-pointer hover:underline">
+              EtherScan
+            </a>
+            <a href="#" className="cursor-pointer hover:underline">
+              CART!
+            </a>
+          </div>
+        </div>
+        <div className="pt-32 px-10 grid grid-cols-4 gap-16 justify-items-center">
+          {items.map((item, index) => {
+            return (
+              <div key={index} className="flex flex-col gap-5 ">
+                <img src={IMG(index)} className=" ring ring-black" />
+                <div className="flex gap-10 text-black text-xl font-bold">
+                  <p>{item.item}</p>
+                  <p>{item.price} ETH</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );

@@ -5,17 +5,18 @@ pragma solidity ^0.8.17;
 import "./ERC1155.sol";
 import "./Ownable.sol";
 
-contract rewardFive is ERC1155, Ownable {
+contract rewardThree is ERC1155, Ownable {
     string name_;
     string symbol_;
 
     constructor()
         ERC1155(
-            "https://ipfs.io/ipfs/QmSamNbBXpUaxQAiQrx5RyCM8PiPTH1ozjxjvNL5UrSLmB/reward5meta.json"
+            "https://ipfs.io/ipfs/QmSamNbBXpUaxQAiQrx5RyCM8PiPTH1ozjxjvNL5UrSLmB/reward3meta.json"
         )
     {
-        name_ = "REWARD-FIVE-MOONSHOP";
-        symbol_ = "RFIVE";
+        name_ = "REWARD-THREE-MOONSHOP";
+        symbol_ = "RTHREE";
+        Status.mintStatus = true;
     }
 
     struct status {
@@ -25,7 +26,7 @@ contract rewardFive is ERC1155, Ownable {
     status Status;
 
     string tokenURI =
-        "https://ipfs.io/ipfs/QmSamNbBXpUaxQAiQrx5RyCM8PiPTH1ozjxjvNL5UrSLmB/reward5meta.json";
+        "https://ipfs.io/ipfs/QmSamNbBXpUaxQAiQrx5RyCM8PiPTH1ozjxjvNL5UrSLmB/reward3meta.json";
 
     function name() public view returns (string memory) {
         return name_;
@@ -40,9 +41,9 @@ contract rewardFive is ERC1155, Ownable {
     }
 
     function mintRewardOne() public returns (bool mintResult) {
-        require(Status.mintStatus == true, "mint is not available!");
+        require(Status.mintStatus, "mint is not available!");
 
-        _mint(_msgSender(), 5, 1, "");
+        _mint(_msgSender(), 3, 1, "");
         return (true);
     }
 
