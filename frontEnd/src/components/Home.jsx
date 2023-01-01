@@ -10,7 +10,6 @@ import mooninklogo1 from "../assets/svg/Asset 2.svg";
 import mooninklogo2 from "../assets/svg/Asset 3.svg";
 import mooninklogo3 from "../assets/svg/Asset 4.svg";
 import { Link } from "react-router-dom";
-import { Fragment } from "react";
 
 const Home = () => {
   return (
@@ -63,7 +62,7 @@ const Home = () => {
             <h1 className=" font-extrabold text-7xl">
               THE FIRST WEB3 <br /> SHOPPING EXPERIENCE
             </h1>
-            <button className="bg-violet-700 font-bold text-xl max-w-xs  rounded-lg hover:bg-white hover:text-black duration-200">
+            <button className="bg-violet-700 font-bold text-xl max-w-xs rounded-lg hover:bg-white hover:text-black duration-200">
               <Link to="/Shop">
                 <div className="w-full h-full py-4">ENTER THE APP</div>
               </Link>

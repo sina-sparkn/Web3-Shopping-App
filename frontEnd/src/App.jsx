@@ -1,9 +1,6 @@
 import "../dist/output.css";
 import "./otherStyles.css";
-import { useState, useEffect } from "react";
 import Home from "./components/Home";
-import items from "./items.json";
-import IMG from "./components/images";
 import { Routes, Route } from "react-router-dom";
 import Shop from "./components/Shop";
 import QA from "./components/QA";

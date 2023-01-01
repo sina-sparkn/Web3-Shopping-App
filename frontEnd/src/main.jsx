@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import { StaticRouter } from "react-router-dom/server";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <StaticRouter location="/Shop">
       <App />
-    </BrowserRouter>
+    </StaticRouter>
   </React.StrictMode>
 );
