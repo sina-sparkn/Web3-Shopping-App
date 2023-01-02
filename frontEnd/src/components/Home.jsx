@@ -17,10 +17,10 @@ const Home = () => {
       <div className="w-full h-auto text-white bg-black">
         <section className="w-full h-auto flex justify-between py-5 px-10 mb-20">
           {/* <div className="text-2xl font-extrabold">MOONINK</div> */}
-          <a className="flex gap-5" href="#">
+          <Link className="flex gap-5" to="/">
             <img src={mooninklogo1} alt="mooninklogo" className="w-8" />
             <img src={mooninklogo2} alt="moonink-typeface" className="w-44" />
-          </a>
+          </Link>
 
           <div className="flex items-center gap-16">
             <div className="flex gap-5 items-center text-lg">
@@ -49,8 +49,10 @@ const Home = () => {
                 />
               </a>
             </div>
-            <Link to="/QA">Q&A</Link>
-            <button className="bg-violet-700 font-bold rounded-lg hover:bg-white hover:text-black duration-200">
+            <Link to="/QA" className="hover:text-violet-400 duration-200">
+              Q&A
+            </Link>
+            <button className="bg-violet-700 font-bold rounded-xl hover:bg-white hover:text-black duration-200">
               <Link to="/Shop">
                 <div className="w-full h-full px-8 py-3">ENTER</div>
               </Link>
@@ -62,7 +64,7 @@ const Home = () => {
             <h1 className=" font-extrabold text-7xl">
               THE FIRST WEB3 <br /> SHOPPING EXPERIENCE
             </h1>
-            <button className="bg-violet-700 font-bold text-xl max-w-xs rounded-lg hover:bg-white hover:text-black duration-200">
+            <button className="bg-violet-700 font-bold text-xl max-w-xs rounded-xl hover:bg-white hover:text-black duration-200">
               <Link to="/Shop">
                 <div className="w-full h-full py-4">ENTER THE APP</div>
               </Link>
