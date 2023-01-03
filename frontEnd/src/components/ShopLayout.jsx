@@ -1,15 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import { DisconnectToggled } from "../ReduxStore/features/disconnectSlicer";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import mooninklogo from "../assets/svg/Asset 2.svg";
-import mooninktypeFace from "../assets/svg/Asset 3.svg";
-import {
-  faCartShopping,
-  faPowerOff,
-  faCrown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import blockie from "../assets/image/blockie.png";
 
@@ -86,7 +81,7 @@ const ShopLayout = () => {
 
   return (
     <>
-      <header className="w-full p-3 px-16 flex justify-between items-center">
+      <header className="w-full p-3 px-16 flex justify-between items-center mb-10">
         <Link to="/">
           <div className="flex gap-4">
             <img src={mooninklogo} alt="mooninklogo" className="w-7" />
@@ -95,8 +90,8 @@ const ShopLayout = () => {
         {/* <input type="text" className="border-none rounded-full text-black" /> */}
         <div className="flex gap-10">
           <Link to="/Shop">Start</Link>
-          <Link to="/Shop/Glasses">Glasses</Link>
           <Link to="/Shop/Clothing">Clothing</Link>
+          <Link to="/Shop/Glasses">Glasses</Link>
         </div>
 
         <div className="flex items-center gap-10">
@@ -123,14 +118,13 @@ const ShopLayout = () => {
               ></img>
               <FontAwesomeIcon
                 icon={faPowerOff}
-                className="text-red-600 bg-red-500/30 p-2 text-2xl rounded-full cursor-pointer"
+                className="text-red-600 bg-red-500/30 p-2 text-2xl rounded-full cursor-pointer hover:bg-red-500/40 duration-200"
                 onClick={disconnectFunc}
               />
             </div>
           )}
         </div>
       </header>
-
       <Outlet />
     </>
   );

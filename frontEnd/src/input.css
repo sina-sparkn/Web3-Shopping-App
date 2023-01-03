@@ -13,6 +13,7 @@ body,
 * {
   margin: 0;
   padding: 0;
+  background-color: rgba(red, green, blue, 0.2);
 }
 
 ::-webkit-scrollbar {
@@ -20,10 +21,13 @@ body,
 }
 
 ::-webkit-scrollbar-track {
-  border-radius: 1px;
-  background-color: transparent;
+  background-color: black;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(197, 40, 40);
+  background: rgb(181, 181, 181);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: white;
 }
