@@ -8,6 +8,9 @@ const NotFound = () => {
         <Link to="/">
           <div>return home</div>
         </Link>
+        <Link to="/Shop">
+          <div>return to Shop</div>
+        </Link>
       </button>
     </>
   );

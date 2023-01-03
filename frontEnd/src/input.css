@@ -14,3 +14,16 @@ body,
   margin: 0;
   padding: 0;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 1px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(197, 40, 40);
+}

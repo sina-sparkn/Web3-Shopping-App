@@ -30,3 +30,23 @@ return (
         </div>
       </div>
     );
+
+
+      <main className="mt-10 pl-6 pr-14 flex">
+        <section className="w-1/4 py-10 px-10 pt-0 h-screen flex text-center flex-col gap-5 overflow-y-scroll ">
+          <Link to="/Shop">
+            <div className="hover:bg-white hover:text-black duration-200 border py-4 cursor-pointer text-xl flex items-center justify-center gap-4 font-bold rounded-xl">
+              Welcome to MOONINK
+            </div>
+          </Link>
+          <Link to="/Shop/Clothing">
+            <div className="hover:bg-white hover:text-black duration-200 border py-4 cursor-pointer text-xl flex items-center justify-center gap-4 font-bold rounded-xl">
+              <FontAwesomeIcon icon={faCrown} />
+              Clothing
+            </div>
+          </Link>
+        </section>
+        <section></section>
+      </main>
+
+         
