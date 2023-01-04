@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import ShopLayout from "./ShopLayout";
 import NotFound from "./NotFound";
-import Clothing from "./shop/Clothing/Clothing";
+import Products from "./Products";
 
 const Shop = () => {
   return (
@@ -9,8 +9,7 @@ const Shop = () => {
       <Routes>
         <Route path="/" element={<ShopLayout />}>
           <Route index element={<div>Start</div>}></Route>
-          <Route path="Clothing" element={<Clothing />}></Route>
-          <Route path="Glasses" element={<div>Glasses</div>}></Route>
+          <Route path=":id" element={<Products />}></Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

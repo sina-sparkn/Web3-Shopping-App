@@ -91,7 +91,7 @@ const ShopLayout = () => {
         <div className="flex gap-10">
           <Link to="/Shop">Start</Link>
           <Link to="/Shop/Clothing">Clothing</Link>
-          <Link to="/Shop/Glasses">Glasses</Link>
+          <Link to="/Shop/Accessories">Accessories</Link>
         </div>
 
         <div className="flex items-center gap-10">

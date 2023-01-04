@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import img1 from "../../assets/image/1.jpg";
-import img2 from "../../assets/image/2.jpg";
-import img3 from "../../assets/image/3.jpg";
-import img4 from "../../assets/image/4.jpg";
-import img5 from "../../assets/image/5.jpg";
-import img6 from "../../assets/image/6.jpg";
-import img7 from "../../assets/image/7.jpg";
-import img8 from "../../assets/image/8.jpg";
-import img9 from "../../assets/image/9.jpg";
-import img10 from "../../assets/image/10.jpg";
+import img1 from "../../assets/image/Clothing/1.jpg";
+import img2 from "../../assets/image/Clothing/2.jpg";
+import img3 from "../../assets/image/Clothing/3.jpg";
+import img4 from "../../assets/image/Clothing/4.jpg";
+import img5 from "../../assets/image/Clothing/5.jpg";
+import img6 from "../../assets/image/Clothing/6.jpg";
+import img7 from "../../assets/image/Clothing/7.jpg";
+import img8 from "../../assets/image/Clothing/8.jpg";
+import img9 from "../../assets/image/Clothing/9.jpg";
+import img10 from "../../assets/image/Clothing/10.jpg";
 
 const initialState = [
   {
@@ -67,5 +67,4 @@ const ClothesSlicer = createSlice({
   initialState,
 });
 
-// export const { AllClothes } = ClothesSlicer.actions;
 export default ClothesSlicer.reducer;
