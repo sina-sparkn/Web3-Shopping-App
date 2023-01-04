@@ -88,7 +88,7 @@ const ShopLayout = () => {
           </div>
         </Link>
         {/* <input type="text" className="border-none rounded-full text-black" /> */}
-        <div className="flex gap-10 ">
+        <div className="flex gap-10">
           <Link
             to="/Shop"
             className="text-slate-300 hover:text-white duration-200"
@@ -129,7 +129,7 @@ const ShopLayout = () => {
             </button>
           ) : (
             <div className="flex items-center gap-3">
-              <button className="font-bold text-white rounded-full p-2 px-6 bg-violet-700 hover:text-black hover:bg-white duration-200">
+              <button className="font-bold text-white rounded-full p-2 px-6 cursor-default bg-violet-700 hover:text-black hover:bg-white duration-200">
                 {displayAddress}
               </button>
               <img

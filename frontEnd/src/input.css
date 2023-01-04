@@ -2,18 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap");
+
 html,
 body,
 #root {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  background-color: black;
 }
 
 * {
   margin: 0;
   padding: 0;
-  background-color: rgba(red, green, blue, 0.2);
+  font-family: "Figtree", sans-serif;
 }
 
 ::-webkit-scrollbar {
