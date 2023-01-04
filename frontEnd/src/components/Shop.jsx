@@ -3,6 +3,7 @@ import ShopLayout from "./ShopLayout";
 import NotFound from "./NotFound";
 import Products from "./Products";
 import Start from "./Start";
+import ProductPage from "./ProductPage";
 
 const Shop = () => {
   return (
@@ -11,6 +12,7 @@ const Shop = () => {
         <Route path="/" element={<ShopLayout />}>
           <Route index element={<Start />}></Route>
           <Route path=":id" element={<Products />}></Route>
+          <Route path=":id/:id2" element={<ProductPage />}></Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

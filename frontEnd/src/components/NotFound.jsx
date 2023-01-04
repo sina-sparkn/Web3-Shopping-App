@@ -2,17 +2,17 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <>
+    <div className="flex flex-col gap-5 pt-80 px-5 items-center justify-center">
       <div>404 page not found</div>
-      <button>
+      <div className="flex gap-10">
         <Link to="/">
-          <div>return home</div>
+          <button className="hover:underline">Return to Home</button>
         </Link>
         <Link to="/Shop">
-          <div>return to Shop</div>
+          <button className="hover:underline">Return to Shop</button>
         </Link>
-      </button>
-    </>
+      </div>
+    </div>
   );
 };
 

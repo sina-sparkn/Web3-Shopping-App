@@ -16,14 +16,36 @@ const Home = () => {
     <div className="w-full h-auto bg-black ">
       <div className="w-full h-auto text-white bg-black">
         <section className="w-full h-auto flex justify-between py-5 px-10 mb-20">
-          {/* <div className="text-2xl font-extrabold">MOONINK</div> */}
           <Link className="flex gap-5" to="/">
             <img src={mooninklogo1} alt="mooninklogo" className="w-8" />
             <img src={mooninklogo2} alt="moonink-typeface" className="w-44" />
           </Link>
 
-          <div className="flex items-center gap-16">
-            <div className="flex gap-5 items-center text-lg">
+          <div className="flex items-center gap-10">
+            <Link
+              to="/QA"
+              className="text-gray-300 hover:text-white hover:underline duration-200"
+            >
+              Q&A
+            </Link>
+            <button className="bg-violet-700 font-bold rounded-xl hover:bg-white hover:text-black duration-200">
+              <Link to="/Shop">
+                <div className="w-full h-full px-5 py-3">Launch The App</div>
+              </Link>
+            </button>
+          </div>
+        </section>
+        <section className="pl-10 flex">
+          <div className="w-1/2 flex flex-col pt-16 gap-12">
+            <h1 className=" font-extrabold text-7xl">
+              THE FIRST WEB3 <br /> SHOPPING EXPERIENCE
+            </h1>
+            <button className="bg-violet-700 font-bold text-xl max-w-xs rounded-xl hover:bg-white hover:text-black duration-200">
+              <Link to="/Shop">
+                <div className="w-full h-full py-4">Launch The App</div>
+              </Link>
+            </button>
+            <div className="flex gap-4 items-center text-2xl">
               <a href="#">
                 <FontAwesomeIcon
                   icon={faTwitter}
@@ -49,26 +71,6 @@ const Home = () => {
                 />
               </a>
             </div>
-            <Link to="/QA" className="hover:text-violet-400 duration-200">
-              Q&A
-            </Link>
-            <button className="bg-violet-700 font-bold rounded-xl hover:bg-white hover:text-black duration-200">
-              <Link to="/Shop">
-                <div className="w-full h-full px-8 py-3">ENTER</div>
-              </Link>
-            </button>
-          </div>
-        </section>
-        <section className="pl-10 flex">
-          <div className="w-1/2 flex flex-col pt-16 gap-12">
-            <h1 className=" font-extrabold text-7xl">
-              THE FIRST WEB3 <br /> SHOPPING EXPERIENCE
-            </h1>
-            <button className="bg-violet-700 font-bold text-xl max-w-xs rounded-xl hover:bg-white hover:text-black duration-200">
-              <Link to="/Shop">
-                <div className="w-full h-full py-4">ENTER THE APP</div>
-              </Link>
-            </button>
           </div>
           <img src={heroImg} alt="heroImg" className="w-1/2" />
         </section>
@@ -86,8 +88,8 @@ const Home = () => {
         <hr className="mx-40 mt-20" />
         <footer className="mt-12 px-10 pb-10 flex justify-between items-center">
           <p>sina is back baby!</p>
-          <img src={mooninklogo3} alt="moonink-fullogo" className="w-24" />
-          <div className="flex gap-5 items-center text-lg">
+          <img src={mooninklogo2} alt="moonink-fullogo" className="w-28" />
+          <div className="flex gap-4 items-center text-xl">
             <a href="#">
               <FontAwesomeIcon
                 icon={faTwitter}

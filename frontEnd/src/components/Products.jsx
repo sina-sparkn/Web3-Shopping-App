@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Cloting = () => {
   const { id } = useParams();
@@ -14,14 +14,16 @@ const Cloting = () => {
     <div className="grid grid-cols-5 px-16 gap-10 justify-items-center">
       {AllProducts.map((item, index) => {
         return (
-          <div
-            key={index}
-            className="ring ring-violet-600 rounded-xl p-3  cursor-pointer relative "
-          >
-            <img src={item.image} className="mb-5 rounded-xl " />
+          <div key={index} className=" rounded-xl p-3 cursor-pointer relative">
+            <Link to={`${item.item}`}>
+              <img
+                src={item.image}
+                className="ring ring-transparent mb-5 rounded-xl hover:ring-violet-600 duration-200"
+              />
+            </Link>
             <div className="flex justify-between">
               <p>{item.item}</p>
-              <p className="hover:bg-white hover:text-black px-1 rounded-lg duration-200">
+              <p className="hover:bg-violet-700 px-2 rounded-lg duration-200">
                 {item.price} ETH
               </p>
             </div>

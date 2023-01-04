@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 html,
 body,
@@ -17,7 +16,7 @@ body,
 * {
   margin: 0;
   padding: 0;
-  font-family: "Figtree", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 ::-webkit-scrollbar {
