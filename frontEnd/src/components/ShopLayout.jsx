@@ -88,22 +88,42 @@ const ShopLayout = () => {
           </div>
         </Link>
         {/* <input type="text" className="border-none rounded-full text-black" /> */}
-        <div className="flex gap-10">
-          <Link to="/Shop">Start</Link>
-          <Link to="/Shop/Clothing">Clothing</Link>
-          <Link to="/Shop/Accessories">Accessories</Link>
+        <div className="flex gap-10 ">
+          <Link
+            to="/Shop"
+            className="text-slate-300 hover:text-white duration-200"
+          >
+            Start
+          </Link>
+          <Link
+            to="/Shop/Clothing"
+            className="text-slate-300 hover:text-white duration-200"
+          >
+            Clothing
+          </Link>
+          <Link
+            to="/Shop/Accessories"
+            className="text-slate-300 hover:text-white duration-200"
+          >
+            Accessories
+          </Link>
         </div>
 
-        <div className="flex items-center gap-10">
-          <FontAwesomeIcon
-            icon={faCartShopping}
-            className="text-xl text-white cursor-pointer p-3 rounded-full hover:bg-white hover:text-black duration-200"
-          />
+        <div className="flex items-center gap-10 ">
+          <div className="relative cursor-pointer">
+            <FontAwesomeIcon
+              icon={faCartShopping}
+              className="text-xl text-white p-3 rounded-full hover:bg-white hover:text-black duration-200"
+            />
+            <div className="bg-red-500 px-1.5 font-bold text-sm rounded-full absolute top-0 left-7">
+              0
+            </div>
+          </div>
 
           {!Account || disconncectStatus ? (
             <button
               onClick={connectToMetaMask}
-              className="font-bold text-white rounded-full p-2 px-10 bg-violet-700 hover:text-black hover:bg-white duration-200"
+              className="font-bold text-white rounded-full p-2 px-10 bg-violet-700 hover:text-black hover:bg-white active:bg-violet-500 duration-200"
             >
               Connect MetaMask
             </button>
