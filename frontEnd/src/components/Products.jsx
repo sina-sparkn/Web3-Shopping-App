@@ -19,6 +19,7 @@ const Cloting = () => {
           <div key={index} className=" rounded-xl p-3 relative">
             <Link to={`${item.item}`}>
               <img
+                loading="lazy"
                 src={item.image}
                 className="ring ring-transparent mb-5 rounded-xl cursor-pointer hover:ring-violet-600 duration-200"
               />

@@ -3,6 +3,8 @@ import disconnectSlicer from "./features/disconnectSlicer";
 import ClothesSlicer from "./features/ClothesSlicer";
 import AccessoriesSlicer from "./features/AccessoriesSlicer";
 import WatchesSlicer from "./features/WatchesSlicer";
+import CartSlicer from "./features/CartSlicer";
+import CartCounterSlicer from "./features/CartCounterSlicer";
 
 export default configureStore({
   reducer: {
@@ -10,5 +12,7 @@ export default configureStore({
     Tshirts: ClothesSlicer,
     Accessories: AccessoriesSlicer,
     Watches: WatchesSlicer,
+    Cart: CartSlicer,
+    CartCounter: CartCounterSlicer,
   },
 });

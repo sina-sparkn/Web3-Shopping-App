@@ -4,11 +4,7 @@ import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import mooninklogo from "../assets/svg/Asset 2.svg";
-import {
-  faCartShopping,
-  faBagShopping,
-  faPowerOff,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBagShopping, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import blockie from "../assets/image/blockie.png";
 
@@ -17,8 +13,8 @@ const getEthereumObject = () => window.ethereum;
 const ShopLayout = () => {
   const dispatch = useDispatch();
   const disconncectStatus = useSelector((state) => state.Disconnect);
+  const CartCounted = useSelector((state) => state.CartCounter);
   const [Account, setAccount] = useState("");
-
   const disconnectFunc = () => {
     dispatch(DisconnectToggled(true));
   };
@@ -94,12 +90,14 @@ const ShopLayout = () => {
 
         <div className="flex items-center gap-10 ">
           <div className="relative cursor-pointer">
-            <FontAwesomeIcon
-              icon={faBagShopping}
-              className="text-xl text-white p-2 rounded-full hover:bg-white hover:text-black duration-200"
-            />
+            <Link to="Cart">
+              <FontAwesomeIcon
+                icon={faBagShopping}
+                className="text-xl text-white p-2 rounded-full hover:bg-white hover:text-black duration-200"
+              />
+            </Link>
             <div className="bg-white text-black ring ring-black px-1 font-bold text-xs rounded-full absolute top-1.5 left-7">
-              0
+              {CartCounted}
             </div>
           </div>
 
@@ -137,19 +135,19 @@ const ShopLayout = () => {
           Start
         </Link>
         <Link
-          to="/Shop/Tshirts"
+          to="Tshirts"
           className="text-slate-300 hover:text-white duration-200"
         >
           Tshirts
         </Link>
         <Link
-          to="/Shop/Accessories"
+          to="Accessories"
           className="text-slate-300 hover:text-white duration-200"
         >
           Accessories
         </Link>
         <Link
-          to="/Shop/Watches"
+          to="Watches"
           className="text-slate-300 hover:text-white duration-200"
         >
           Watches
