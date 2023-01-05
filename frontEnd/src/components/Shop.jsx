@@ -8,7 +8,7 @@ import Cart from "./Cart";
 
 const Shop = () => {
   return (
-    <div className="bg-black h-auto pb-10 text-white">
+    <div className="bg-black h-full pb-10 text-white">
       <Routes>
         <Route path="/" element={<ShopLayout />}>
           <Route index element={<Start />}></Route>
