@@ -1,7 +1,7 @@
 const QA = () => {
   return (
     <>
-      <div>question and Answer</div>
+      <div className="text-white">question and Answer</div>
     </>
   );
 };

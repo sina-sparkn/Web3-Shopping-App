@@ -4,13 +4,17 @@ const ProductPage = () => {
   const { id, id2 } = useParams();
 
   let productDetails;
-  if (id === "Clothing") {
+  if (id === "Tshirts") {
     productDetails = useSelector((state) =>
       state.Clothing.find((key) => key.item === id2)
     );
   } else if (id === "Accessories") {
     productDetails = useSelector((state) =>
       state.Accessories.find((key) => key.item === id2)
+    );
+  } else if (id === "Watches") {
+    productDetails = useSelector((state) =>
+      state.Watches.find((key) => key.item === id2)
     );
   }
 
@@ -19,7 +23,7 @@ const ProductPage = () => {
       <img
         src={productDetails.image}
         alt={`${id2} in ${id}`}
-        className="w-96 rounded-xl"
+        className="w-1/4 rounded-xl"
       />
       <div className="w-3/4 flex flex-col justify-between items-center">
         <p className="text-5xl font-semibold">{productDetails.item}</p>

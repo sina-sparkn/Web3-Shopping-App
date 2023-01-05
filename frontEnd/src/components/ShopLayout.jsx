@@ -4,7 +4,11 @@ import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import mooninklogo from "../assets/svg/Asset 2.svg";
-import { faCartShopping, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartShopping,
+  faBagShopping,
+  faPowerOff,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import blockie from "../assets/image/blockie.png";
 
@@ -81,41 +85,20 @@ const ShopLayout = () => {
 
   return (
     <>
-      <header className="w-full p-3 px-16 flex justify-between items-center mb-10">
+      <header className="w-full p-3 px-16 flex justify-between items-center">
         <Link to="/">
           <div className="flex gap-4">
             <img src={mooninklogo} alt="mooninklogo" className="w-7" />
           </div>
         </Link>
-        {/* <input type="text" className="border-none rounded-full text-black" /> */}
-        <div className="flex gap-10">
-          <Link
-            to="/Shop"
-            className="text-slate-300 hover:text-white duration-200"
-          >
-            Start
-          </Link>
-          <Link
-            to="/Shop/Clothing"
-            className="text-slate-300 hover:text-white duration-200"
-          >
-            Clothing
-          </Link>
-          <Link
-            to="/Shop/Accessories"
-            className="text-slate-300 hover:text-white duration-200"
-          >
-            Accessories
-          </Link>
-        </div>
 
         <div className="flex items-center gap-10 ">
           <div className="relative cursor-pointer">
             <FontAwesomeIcon
-              icon={faCartShopping}
-              className="text-xl text-white p-3 rounded-full hover:bg-white hover:text-black duration-200"
+              icon={faBagShopping}
+              className="text-xl text-white p-2 rounded-full hover:bg-white hover:text-black duration-200"
             />
-            <div className="bg-red-500 px-1.5 font-bold text-sm rounded-full absolute top-0 left-7">
+            <div className="bg-white text-black ring ring-black px-1 font-bold text-xs rounded-full absolute top-1.5 left-7">
               0
             </div>
           </div>
@@ -145,6 +128,34 @@ const ShopLayout = () => {
           )}
         </div>
       </header>
+      <hr className="border-0 bg-white/10 h-0.5" />
+      <section className="flex py-5 gap-10 px-16 items-center">
+        <Link
+          to="/Shop"
+          className="text-slate-300 hover:text-white duration-200"
+        >
+          Start
+        </Link>
+        <Link
+          to="/Shop/Tshirts"
+          className="text-slate-300 hover:text-white duration-200"
+        >
+          Tshirts
+        </Link>
+        <Link
+          to="/Shop/Accessories"
+          className="text-slate-300 hover:text-white duration-200"
+        >
+          Accessories
+        </Link>
+        <Link
+          to="/Shop/Watches"
+          className="text-slate-300 hover:text-white duration-200"
+        >
+          Watches
+        </Link>
+      </section>
+      <hr className="border-0 bg-white/10 h-0.5 mb-5" />
       <Outlet />
     </>
   );
