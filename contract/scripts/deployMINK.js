@@ -1,9 +1,9 @@
-//! 0xB959D43Ef03f2A19D91Cf0d8d5f7C802915eE502
+//! 0x628AEf2404D70D33266166Ef9c26353f676f8719
 
 const hre = require("hardhat");
 
 async function main() {
-  const MINKTokenFactory = await hre.ethers.getContractFactory("MINKtokenTest");
+  const MINKTokenFactory = await hre.ethers.getContractFactory("MINKtoken");
   const MinkTokenContract = await MINKTokenFactory.deploy(1000000000);
   await MinkTokenContract.deployed();
 

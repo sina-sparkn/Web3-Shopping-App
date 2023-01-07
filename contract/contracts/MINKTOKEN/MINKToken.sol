@@ -4,10 +4,10 @@ pragma solidity ^0.8.17;
 
 import "./ERC20.sol";
 
-contract MINKtokenTest is ERC20 {
+contract MINKtoken is ERC20 {
     address private owner;
 
-    constructor(uint256 totalSupply) ERC20("MINKTest", "MINKTEST") {
+    constructor(uint256 totalSupply) ERC20("MINK", "MINK") {
         owner = msg.sender;
         _mint(owner, totalSupply);
     }
