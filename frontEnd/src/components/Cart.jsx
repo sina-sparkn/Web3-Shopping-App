@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import { ethers } from "ethers";
 import abi from "../utils/MINKtoken.json";
-
 const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
+  const DisconnectStatus = useSelector((state) => state.Disconnect);
+
   let TotalPrice = 0;
   AddedProducts.map((item) => {
     TotalPrice += parseFloat(item.price);
@@ -25,12 +26,12 @@ const Cart = () => {
           signer
         );
 
-        const PayOut = await minkToken.transfer(to, 10000);
+        const PayOut = await minkToken.transfer(to, TotalPrice * 1000);
         console.log("paying...");
         await PayOut.wait();
         console.log("Done!--", PayOut.hash);
       } else {
-        console.log("ethereum object does not found!");
+        console.log("Ethereum object does not found!");
       }
     } catch (error) {
       console.error(error);
@@ -60,13 +61,22 @@ const Cart = () => {
           })}
         </section>
         <section className="w-3/4 flex items-center gap-10 flex-col">
-          <p>{`Total price : ${TotalPrice} ETH`}</p>
-          <button
-            onClick={Checkout}
-            className="px-7 py-3 rounded-full text-white bg-violet-600 hover:bg-white hover:text-black duration-200"
-          >
-            Checkout with metamask
-          </button>
+          <p>{`Total price : ${TotalPrice} MINK`}</p>
+          {!DisconnectStatus ? (
+            <button
+              onClick={Checkout}
+              className="px-7 py-3 rounded-full text-white bg-violet-600 hover:bg-white hover:text-black duration-200"
+            >
+              Checkout with metamask
+            </button>
+          ) : (
+            <button
+              disabled
+              className="px-7 py-3 rounded-full text-black bg-gray-600 cursor-not-allowed"
+            >
+              Connect your MetaMask to procced
+            </button>
+          )}
         </section>
       </div>
     );

@@ -11,37 +11,37 @@ import img7 from "../../assets/image/Watches/7.webp";
 const initialState = [
   {
     item: "ANN",
-    price: "0.0017",
+    price: "17",
     image: img1,
   },
   {
     item: "CHRO",
-    price: "0.0077",
+    price: "77",
     image: img2,
   },
   {
     item: "OUTDOOR",
-    price: "0.0084",
+    price: "84",
     image: img3,
   },
   {
     item: "ECLIPS",
-    price: "0.0034",
+    price: "34",
     image: img4,
   },
   {
     item: "MOONDT",
-    price: "0.0059",
+    price: "59",
     image: img5,
   },
   {
     item: "SLIMBLCK",
-    price: "0.07",
+    price: "49",
     image: img6,
   },
   {
     item: "DIVER",
-    price: "0.0069",
+    price: "690",
     image: img7,
   },
 ];

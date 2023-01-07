@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { AddtoCart } from "../ReduxStore/features/CartSlicer";
 import { CartIncremented } from "../ReduxStore/features/CartCounterSlicer";
+import MinkLogo from "../assets/svg/Asset 2.svg";
 
 const ProductPage = () => {
   const disconnectStatus = useSelector((state) => state.Disconnect);
@@ -49,7 +50,10 @@ const ProductPage = () => {
       />
       <div className="w-3/4 flex flex-col justify-between items-center">
         <p className="text-5xl font-semibold">{productDetails.item}</p>
-        <p>{productDetails.price} ETH</p>
+        <p className="text-3xl flex items-center gap-4">
+          {productDetails.price}
+          <img className="w-7" src={MinkLogo} alt="MinkLogo" />
+        </p>
         <div className="flex w-1/2">
           {!disconnectStatus && AccountStatus ? (
             <button
@@ -66,7 +70,7 @@ const ProductPage = () => {
               disabled
               className="flex-grow py-4 rounded-full bg-gray-600 text-black text-lg cursor-not-allowed"
             >
-              Please connect your metamask
+              Connect your MetaMask to procced
             </button>
           )}
         </div>

@@ -14,52 +14,52 @@ import img10 from "../../assets/image/Accessories/10.jpg";
 const initialState = [
   {
     item: "blck",
-    price: "0.0015",
+    price: "15",
     image: img1,
   },
   {
     item: "blubB",
-    price: "0.001",
+    price: "10",
     image: img2,
   },
   {
     item: "WhiteMS",
-    price: "0.003",
+    price: "38",
     image: img3,
   },
   {
     item: "brownB",
-    price: "0.0034",
+    price: "34",
     image: img4,
   },
   {
     item: "yellowB",
-    price: "0.005",
+    price: "55",
     image: img5,
   },
   {
     item: "lessBlck",
-    price: "0.0055",
+    price: "19",
     image: img6,
   },
   {
     item: "Monolisa",
-    price: "0.0069",
+    price: "69",
     image: img7,
   },
   {
     item: "FAV",
-    price: "0.008",
+    price: "87",
     image: img8,
   },
   {
     item: "HOLY",
-    price: "0.007",
+    price: "42",
     image: img9,
   },
   {
     item: "whiteAF",
-    price: "0.0011",
+    price: "72",
     image: img10,
   },
 ];

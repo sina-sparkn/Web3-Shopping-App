@@ -13,52 +13,52 @@ import img10 from "../../assets/image/Clothing/10.jpg";
 const initialState = [
   {
     item: "WAVYBABY!",
-    price: "0.0001",
+    price: "18",
     image: img1,
   },
   {
     item: "PORANGE",
-    price: "0.0002",
+    price: "23",
     image: img2,
   },
   {
     item: "CHAOS",
-    price: "0.0003",
+    price: "67",
     image: img3,
   },
   {
     item: "SPLASH!",
-    price: "0.0004",
+    price: "41",
     image: img4,
   },
   {
     item: "WTF",
-    price: "0.0005",
+    price: "48",
     image: img5,
   },
   {
     item: "LilNasX",
-    price: "0.0006",
+    price: "117",
     image: img6,
   },
   {
     item: "Painter",
-    price: "0.0007",
+    price: "85",
     image: img7,
   },
   {
     item: "DOODLE",
-    price: "0.0008",
+    price: "69",
     image: img8,
   },
   {
     item: "WAVYBOB",
-    price: "0.0009",
+    price: "152",
     image: img9,
   },
   {
     item: "BBFINGER",
-    price: "0.001",
+    price: "78",
     image: img10,
   },
 ];
