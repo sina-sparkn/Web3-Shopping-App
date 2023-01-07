@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import mooninklogo from "../assets/svg/Asset 2.svg";
+import mooninklogoType from "../assets/svg/Asset 3.svg";
 import { faBagShopping, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import blockie from "../assets/image/blockie.png";
@@ -89,7 +90,6 @@ const ShopLayout = () => {
             <img src={mooninklogo} alt="mooninklogo" className="w-7" />
           </div>
         </Link>
-
         <div className="flex items-center gap-10 ">
           <div className="relative cursor-pointer">
             <Link to="Cart">
@@ -157,6 +157,13 @@ const ShopLayout = () => {
       </section>
       <hr className="border-0 bg-white/10 h-0.5 mb-5" />
       <Outlet />
+      <hr className="border-0 bg-white/10 h-0.5 mb-5" />
+      <footer className="flex items-center justify-between px-16 pb-5">
+        <img src={mooninklogoType} alt="mooninklogoType" className="w-32 " />
+        <p className="text-xs text-white/50">
+          Copyright © 2023 MOONINK Inc. All rights reserved.
+        </p>
+      </footer>
     </>
   );
 };

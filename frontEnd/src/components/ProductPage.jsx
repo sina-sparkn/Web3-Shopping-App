@@ -41,7 +41,7 @@ const ProductPage = () => {
   };
 
   return (
-    <div className="px-16 flex justify-between">
+    <div className="px-16 flex justify-between mb-10 mt-10">
       <img
         src={productDetails.image}
         alt={`${id2} in ${id}`}

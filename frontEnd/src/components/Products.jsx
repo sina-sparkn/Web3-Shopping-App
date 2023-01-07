@@ -16,7 +16,7 @@ const Cloting = () => {
     <div className="grid grid-cols-4 px-14 gap-10 justify-items-center">
       {AllProducts.map((item, index) => {
         return (
-          <div key={index} className=" rounded-xl p-3 relative">
+          <div key={index} className=" rounded-xl p-3 relative ">
             <Link to={`${item.item}`}>
               <img
                 loading="lazy"

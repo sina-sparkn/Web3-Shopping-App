@@ -13,8 +13,8 @@ const Shop = () => {
         <Route path="/" element={<ShopLayout />}>
           <Route index element={<Start />}></Route>
           <Route path=":id" element={<Products />}></Route>
-          <Route path="/Cart" element={<Cart />}></Route>
           <Route path=":id/:id2" element={<ProductPage />}></Route>
+          <Route path="/Cart" element={<Cart />}></Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
