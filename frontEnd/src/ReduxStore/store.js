@@ -5,6 +5,7 @@ import AccessoriesSlicer from "./features/AccessoriesSlicer";
 import WatchesSlicer from "./features/WatchesSlicer";
 import CartSlicer from "./features/CartSlicer";
 import CartCounterSlicer from "./features/CartCounterSlicer";
+import IsAccountSlicer from "./features/IsAccountSlicer";
 
 export default configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
     Watches: WatchesSlicer,
     Cart: CartSlicer,
     CartCounter: CartCounterSlicer,
+    Account: IsAccountSlicer,
   },
 });

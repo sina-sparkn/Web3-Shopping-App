@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { DisconnectToggled } from "../ReduxStore/features/disconnectSlicer";
+import { ChangeAccountTrue } from "../ReduxStore/features/IsAccountSlicer";
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -54,6 +55,7 @@ const ShopLayout = () => {
       });
 
       dispatch(DisconnectToggled(false));
+      dispatch(ChangeAccountTrue(true));
 
       console.log(`connected to account : ${accounts[0]}`);
       setAccount(accounts[0]);
@@ -65,7 +67,7 @@ const ShopLayout = () => {
   useEffect(() => {
     const getAccount = async () => {
       const account = await findMetaMaskAccounts();
-
+      dispatch(ChangeAccountTrue(account));
       if (account !== null) {
         setAccount(account);
       }

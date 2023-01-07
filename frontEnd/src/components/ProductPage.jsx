@@ -4,6 +4,9 @@ import { AddtoCart } from "../ReduxStore/features/CartSlicer";
 import { CartIncremented } from "../ReduxStore/features/CartCounterSlicer";
 
 const ProductPage = () => {
+  const disconnectStatus = useSelector((state) => state.Disconnect);
+  const AccountStatus = useSelector((state) => state.Account);
+
   const { id, id2 } = useParams();
 
   let productDetails;
@@ -48,15 +51,24 @@ const ProductPage = () => {
         <p className="text-5xl font-semibold">{productDetails.item}</p>
         <p>{productDetails.price} ETH</p>
         <div className="flex w-1/2">
-          <button
-            onClick={() => {
-              AddItemToCart();
-              CartAddCounter();
-            }}
-            className="flex-grow py-4 rounded-full bg-white text-black text-lg hover:bg-violet-700 hover:text-white active:bg-violet-600 duration-200"
-          >
-            Add To Cart
-          </button>
+          {!disconnectStatus && AccountStatus ? (
+            <button
+              onClick={() => {
+                AddItemToCart();
+                CartAddCounter();
+              }}
+              className="flex-grow py-4 rounded-full bg-white text-black text-lg hover:bg-violet-700 hover:text-white active:bg-violet-600 duration-200"
+            >
+              Add To Cart
+            </button>
+          ) : (
+            <button
+              disabled
+              className="flex-grow py-4 rounded-full bg-gray-600 text-black text-lg cursor-not-allowed"
+            >
+              Please connect your metamask
+            </button>
+          )}
         </div>
       </div>
     </div>
