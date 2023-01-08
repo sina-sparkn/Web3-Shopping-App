@@ -85,10 +85,13 @@ const Home = () => {
             completing different Tasks.
           </p>
         </section>
-        <hr className="mx-40 mt-20" />
+        <hr className="mt-20 border-0 h-0.5 bg-white/10" />
         <footer className="mt-12 px-10 pb-10 flex justify-between items-center">
-          <p>sina is back baby!</p>
           <img src={mooninklogo2} alt="moonink-fullogo" className="w-28" />
+          <p className="text-white/40 text-xs">
+            Copyright © 2023 MOONINK Inc. All rights reserved.
+          </p>
+
           <div className="flex gap-4 items-center text-xl">
             <a href="#">
               <FontAwesomeIcon

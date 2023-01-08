@@ -1,9 +1,19 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { ethers } from "ethers";
+import {
+  RemoveAllCart,
+  RemoveFromCart,
+} from "../ReduxStore/features/CartSlicer";
+import {
+  CleanCart,
+  CartDecremented,
+} from "../ReduxStore/features/CartCounterSlicer";
+
 import abi from "../utils/MINKtoken.json";
 const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
   const DisconnectStatus = useSelector((state) => state.Disconnect);
+  const dispatch = useDispatch();
 
   let TotalPrice = 0;
   AddedProducts.map((item) => {
@@ -25,11 +35,13 @@ const Cart = () => {
           contractABI,
           signer
         );
-
         const PayOut = await minkToken.transfer(to, TotalPrice * 1000);
         console.log("paying...");
         await PayOut.wait();
         console.log("Done!--", PayOut.hash);
+
+        dispatch(RemoveAllCart());
+        dispatch(CleanCart());
       } else {
         console.log("Ethereum object does not found!");
       }

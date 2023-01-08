@@ -14,12 +14,14 @@ const CartSlicer = createSlice({
         image: action.payload.image,
       });
     },
-    RemovefromCart(state, action) {
-      // return state.filter((item) => e.item != action.payload);
+    RemoveAllCart(state, action) {
+      state = state.splice(0, state.length);
+    },
+    RemoveFromCart(state, action) {
+      state = state.filter((item) => {});
     },
   },
 });
 
-export const { AddtoCart, RemovefromCart, CartCounterFunc } =
-  CartSlicer.actions;
+export const { AddtoCart, RemoveAllCart, RemoveFromCart } = CartSlicer.actions;
 export default CartSlicer.reducer;

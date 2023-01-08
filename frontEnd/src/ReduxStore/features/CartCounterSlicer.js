@@ -8,10 +8,20 @@ const CartCounterSlicer = createSlice({
 
   reducers: {
     CartIncremented(state, action) {
-      return (state = state + action.payload);
+      state = state + action.payload;
+      return state;
+    },
+    CleanCart(state, action) {
+      state = state * 0;
+      return state;
+    },
+    CartDecremented(state, action) {
+      state = state - action.payload;
+      return state;
     },
   },
 });
 
-export const { CartIncremented } = CartCounterSlicer.actions;
+export const { CartIncremented, CleanCart, CartDecremented } =
+  CartCounterSlicer.actions;
 export default CartCounterSlicer.reducer;

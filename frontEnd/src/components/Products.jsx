@@ -28,7 +28,7 @@ const Cloting = () => {
             <div className="flex justify-between">
               <p className="font-bold cursor-default">{item.item}</p>
               <Link to={`${item.item}`}>
-                <p className="hover:bg-violet-700 px-2 flex gap-2 cursor-pointer rounded-lg duration-200">
+                <p className="hover:bg-violet-700 px-3 flex gap-2 cursor-pointer rounded-lg duration-200">
                   {item.price}{" "}
                   <img className="w-3.5" src={MintLogo} alt="MintLogo" />
                 </p>
