@@ -18,7 +18,7 @@ const CartSlicer = createSlice({
       state = state.splice(0, state.length);
     },
     RemoveFromCart(state, action) {
-      state = state.filter((item) => {});
+      return state.filter((item) => item.name != action.payload.name);
     },
   },
 });

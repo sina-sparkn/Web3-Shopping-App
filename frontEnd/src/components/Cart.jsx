@@ -1,5 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { ethers } from "ethers";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   RemoveAllCart,
   RemoveFromCart,
@@ -64,6 +66,12 @@ const Cart = () => {
     }
   };
 
+  const removeItem = (ItemName) => {
+    console.log(ItemName);
+    dispatch(CartDecremented(1));
+    dispatch(RemoveFromCart({ name: ItemName }));
+  };
+
   if (TotalPrice === 0) {
     return (
       <div className="flex h-3/4 text-3xl items-center justify-center">
@@ -76,12 +84,17 @@ const Cart = () => {
         <section className="w-1/4 flex flex-col gap-4 justify-items-center h-screen overflow-scroll">
           {AddedProducts.map((item, index) => {
             return (
-              <div key={index} className="pr-3">
+              <div key={index} className="pr-3 relative">
                 <img src={item.image} alt={item.name} />
-                <div className="flex justify-between">
+                <div className="flex items-center justify-between relative">
                   <p>{item.name}</p>
                   <p>{item.price} ETH</p>
                 </div>
+                <FontAwesomeIcon
+                  onClick={() => removeItem(item.name)}
+                  icon={faCircleXmark}
+                  className="absolute top-1.5 right-5 text-red-600 text-2xl cursor-pointer hover:text-red-500"
+                ></FontAwesomeIcon>
               </div>
             );
           })}
