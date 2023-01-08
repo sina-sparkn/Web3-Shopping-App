@@ -16,6 +16,11 @@ interface IERC20 {
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     /**
+     * @dev Emitted when Transfer called and Store users purchase details.
+     */
+    event PurchaseList(string indexed Items, address from, address to);
+
+    /**
      * @dev Emitted when the allowance of a `spender` for an `owner` is set by
      * a call to {approve}. `value` is the new allowance.
      */
@@ -42,7 +47,11 @@ interface IERC20 {
      *
      * Emits a {Transfer} event.
      */
-    function transfer(address to, uint256 amount) external returns (bool);
+    function transfer(
+        address to,
+        uint256 amount,
+        string memory items
+    ) external returns (bool);
 
     /**
      * @dev Returns the remaining number of tokens that `spender` will be
@@ -84,6 +93,7 @@ interface IERC20 {
     function transferFrom(
         address from,
         address to,
-        uint256 amount
+        uint256 amount,
+        string memory items
     ) external returns (bool);
 }
