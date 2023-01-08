@@ -101,7 +101,7 @@ const Cart = () => {
         </section>
         <section className="w-3/4 flex items-center gap-10 flex-col">
           <p>{`Total price : ${TotalPrice} MINK`}</p>
-          {!DisconnectStatus ? (
+          {/* {!DisconnectStatus ? (
             <button
               onClick={Checkout}
               className="px-7 py-3 rounded-full text-white bg-violet-600 hover:bg-white hover:text-black duration-200"
@@ -115,8 +115,38 @@ const Cart = () => {
             >
               Connect your MetaMask to procced
             </button>
-          )}
-          {loading && <span class="loader"></span>}
+          )} */}
+
+          {(() => {
+            if (!DisconnectStatus) {
+              if (loading) {
+                return (
+                  <button className="px-7 flex items-center justify-center gap-3 py-3 rounded-full text-white bg-violet-600 hover:bg-white hover:text-black duration-200">
+                    Pending
+                    <span class="loader"></span>
+                  </button>
+                );
+              } else {
+                return (
+                  <button
+                    onClick={Checkout}
+                    className="px-7 py-3 rounded-full text-white bg-violet-600 hover:bg-white hover:text-black duration-200"
+                  >
+                    Checkout with metamask
+                  </button>
+                );
+              }
+            } else {
+              return (
+                <button
+                  disabled
+                  className="px-7 py-3 rounded-full text-black bg-gray-600 cursor-not-allowed"
+                >
+                  Connect your MetaMask to procced
+                </button>
+              );
+            }
+          })()}
         </section>
       </div>
     );

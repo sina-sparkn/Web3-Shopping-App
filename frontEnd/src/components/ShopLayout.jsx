@@ -6,9 +6,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import mooninklogo from "../assets/svg/Asset 2.svg";
 import mooninklogoType from "../assets/svg/Asset 3.svg";
-import { faBagShopping, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBagShopping,
+  faPowerOff,
+  faHeart,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import blockie from "../assets/image/blockie.png";
+import blockie from "../assets/image/download.png";
 
 const getEthereumObject = () => window.ethereum;
 
@@ -91,18 +95,29 @@ const ShopLayout = () => {
           </div>
         </Link>
         <div className="flex items-center gap-10 ">
-          <div className="relative cursor-pointer">
-            <Link to="Cart">
-              <FontAwesomeIcon
-                icon={faBagShopping}
-                className="text-xl text-white p-2 rounded-full hover:bg-white hover:text-black duration-200"
-              />
-            </Link>
-            <div className="bg-white text-black ring ring-black px-1 font-bold text-xs rounded-full absolute top-1.5 left-7">
-              {CartCounted}
+          <div className="flex items-center gap-5">
+            <div className="relative cursor-pointer">
+              <Link to="Cart">
+                <FontAwesomeIcon
+                  icon={faBagShopping}
+                  className="text-xl text-white p-2 rounded-full hover:bg-white hover:text-black duration-200"
+                />
+              </Link>
+              <div className="bg-white text-black ring ring-black px-1 font-bold text-xs rounded-full absolute top-1.5 left-7">
+                {CartCounted}
+              </div>
+            </div>
+
+            <div className="relative cursor-pointer">
+              <Link to="Bonus">
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className="text-xl text-white p-2 rounded-full hover:bg-white hover:text-black duration-200"
+                />
+              </Link>
+              <div class="blob bg-red-500 w-2.5 h-2.5 absolute top-1.5 right-0.5 rounded-full"></div>
             </div>
           </div>
-
           {!Account || disconncectStatus ? (
             <button
               onClick={connectToMetaMask}
@@ -111,7 +126,7 @@ const ShopLayout = () => {
               Connect MetaMask
             </button>
           ) : (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <button className="font-bold text-white rounded-full p-2 px-6 cursor-default bg-violet-700 hover:text-black hover:bg-white duration-200">
                 {displayAddress}
               </button>
