@@ -16,11 +16,17 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   let TotalPrice = 0;
+  let AllItems = "";
+
   AddedProducts.map((item) => {
-    TotalPrice += parseFloat(item.price);
+    TotalPrice += parseInt(item.price);
+    AllItems += ` (${item.name} ${item.price}MINK) , `;
   });
 
-  const contractAddress = "0x628AEf2404D70D33266166Ef9c26353f676f8719";
+  AllItems = AllItems.slice(0, AllItems.length - 3);
+  console.log(AllItems);
+
+  const contractAddress = "0xf5980862640589eD5821ba42bfD61C577d1F0F5e";
   const contractABI = abi.abi;
   const to = "0x465DEA85d09025A97a44eCd49e5DcA469c0ef723";
 
@@ -35,7 +41,11 @@ const Cart = () => {
           contractABI,
           signer
         );
-        const PayOut = await minkToken.transfer(to, TotalPrice * 1000);
+        const PayOut = await minkToken.transfer(
+          to,
+          TotalPrice * 1000,
+          AllItems
+        );
         console.log("paying...");
         await PayOut.wait();
         console.log("Done!--", PayOut.hash);
