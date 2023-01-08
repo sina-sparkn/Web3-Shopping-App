@@ -9,11 +9,14 @@ import {
   CartDecremented,
 } from "../ReduxStore/features/CartCounterSlicer";
 
+import { useState } from "react";
+
 import abi from "../utils/MINKtoken.json";
 const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
   const DisconnectStatus = useSelector((state) => state.Disconnect);
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   let TotalPrice = 0;
   let AllItems = "";
@@ -24,7 +27,6 @@ const Cart = () => {
   });
 
   AllItems = AllItems.slice(0, AllItems.length - 3);
-  console.log(AllItems);
 
   const contractAddress = "0xf5980862640589eD5821ba42bfD61C577d1F0F5e";
   const contractABI = abi.abi;
@@ -33,6 +35,7 @@ const Cart = () => {
   const Checkout = async () => {
     try {
       const { ethereum } = window;
+      setLoading(true);
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
@@ -50,6 +53,7 @@ const Cart = () => {
         await PayOut.wait();
         console.log("Done!--", PayOut.hash);
 
+        setLoading(false);
         dispatch(RemoveAllCart());
         dispatch(CleanCart());
       } else {
@@ -99,6 +103,7 @@ const Cart = () => {
               Connect your MetaMask to procced
             </button>
           )}
+          {loading && <span class="loader"></span>}
         </section>
       </div>
     );
