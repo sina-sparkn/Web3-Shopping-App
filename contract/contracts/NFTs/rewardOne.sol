@@ -2,15 +2,15 @@
 
 pragma solidity ^0.8.17;
 
-import "./ERC1155.sol";
+import "./SoulBoundERC1155.sol";
 import "./Ownable.sol";
 
-contract rewardOne is ERC1155, Ownable {
+contract rewardOne is SoulBoundERC1155, Ownable {
     string name_;
     string symbol_;
 
     constructor()
-        ERC1155(
+        SoulBoundERC1155(
             "https://ipfs.io/ipfs/QmSamNbBXpUaxQAiQrx5RyCM8PiPTH1ozjxjvNL5UrSLmB/reward1meta.json"
         )
     {
@@ -41,7 +41,7 @@ contract rewardOne is ERC1155, Ownable {
     }
 
     function mintRewardOne() public returns (bool mintResult) {
-        require(Status.mintStatus, "mint is not available!");
+        // require(Status.mintStatus, "mint is not available!");
 
         _mint(_msgSender(), 1, 1, "");
         return (true);

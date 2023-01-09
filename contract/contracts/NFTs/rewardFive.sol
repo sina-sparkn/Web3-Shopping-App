@@ -2,15 +2,15 @@
 
 pragma solidity ^0.8.17;
 
-import "./ERC1155.sol";
+import "./SoulBoundERC1155.sol";
 import "./Ownable.sol";
 
-contract rewardFive is ERC1155, Ownable {
+contract rewardFive is SoulBoundERC1155, Ownable {
     string name_;
     string symbol_;
 
     constructor()
-        ERC1155(
+        SoulBoundERC1155(
             "https://ipfs.io/ipfs/QmSamNbBXpUaxQAiQrx5RyCM8PiPTH1ozjxjvNL5UrSLmB/reward5meta.json"
         )
     {
