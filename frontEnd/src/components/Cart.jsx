@@ -30,7 +30,7 @@ const Cart = () => {
 
   AllItems = AllItems.slice(0, AllItems.length - 3);
 
-  const contractAddress = "0x4007f28631d753CF4166D2D9D56678Fc07348ef4";
+  const contractAddress = "0xD763400f38E83fFc2641631bAAb4238f7B08Ce2b";
   const contractABI = abi.abi;
   const to = "0x465DEA85d09025A97a44eCd49e5DcA469c0ef723";
 
@@ -46,7 +46,7 @@ const Cart = () => {
           contractABI,
           signer
         );
-        const PayOut = await minkToken.runPurchase(
+        const PayOut = await minkToken.purchase(
           to,
           AllItems,
           TotalPrice * 1000
