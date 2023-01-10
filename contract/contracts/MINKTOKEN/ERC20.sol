@@ -119,10 +119,10 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     function transfer(
         address to,
         uint256 amount,
-        string memory items
+        string memory purchases
     ) public virtual override returns (bool) {
         address owner = _msgSender();
-        _transfer(owner, to, amount, items);
+        _transfer(owner, to, amount, purchases);
         return true;
     }
 
@@ -180,11 +180,11 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         address from,
         address to,
         uint256 amount,
-        string memory items
+        string memory purchases
     ) public virtual override returns (bool) {
         address spender = _msgSender();
         _spendAllowance(from, spender, amount);
-        _transfer(from, to, amount, items);
+        _transfer(from, to, amount, purchases);
         return true;
     }
 
@@ -260,7 +260,7 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         address from,
         address to,
         uint256 amount,
-        string memory items
+        string memory purchases
     ) internal virtual {
         require(from != address(0), "ERC20: transfer from the zero address");
         require(to != address(0), "ERC20: transfer to the zero address");
@@ -280,8 +280,9 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         }
 
         emit Transfer(from, to, amount);
-        emit PurchaseList(items, from, to);
-
+        if (bytes(purchases).length > 0) {
+            emit purchaseDetails(purchases, from, to, true);
+        }
         _afterTokenTransfer(from, to, amount);
     }
 

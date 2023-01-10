@@ -6,11 +6,11 @@ import "./ERC20.sol";
 import "./Ownable.sol";
 
 contract MINKtoken is ERC20, Ownable {
-    constructor(uint256 totalSupply) ERC20("MINK", "MINK") {
+    constructor(uint256 totalSupply) ERC20("MINKTest", "MINKTest") {
         _mint(owner(), totalSupply);
     }
 
-    function decimals() public view override returns (uint8) {
+    function decimals() public pure override returns (uint8) {
         return 3;
     }
 }

@@ -30,7 +30,7 @@ const Cart = () => {
 
   AllItems = AllItems.slice(0, AllItems.length - 3);
 
-  const contractAddress = "0xf5980862640589eD5821ba42bfD61C577d1F0F5e";
+  const contractAddress = "0x9F18d8C8075461a027926a5e2955Eb0fDc497c33";
   const contractABI = abi.abi;
   const to = "0x465DEA85d09025A97a44eCd49e5DcA469c0ef723";
 
@@ -62,6 +62,7 @@ const Cart = () => {
         console.log("Ethereum object does not found!");
       }
     } catch (error) {
+      setLoading(false);
       console.error(error);
     }
   };
@@ -101,29 +102,13 @@ const Cart = () => {
         </section>
         <section className="w-3/4 flex items-center gap-10 flex-col">
           <p>{`Total price : ${TotalPrice} MINK`}</p>
-          {/* {!DisconnectStatus ? (
-            <button
-              onClick={Checkout}
-              className="px-7 py-3 rounded-full text-white bg-violet-600 hover:bg-white hover:text-black duration-200"
-            >
-              Checkout with metamask
-            </button>
-          ) : (
-            <button
-              disabled
-              className="px-7 py-3 rounded-full text-black bg-gray-600 cursor-not-allowed"
-            >
-              Connect your MetaMask to procced
-            </button>
-          )} */}
-
           {(() => {
             if (!DisconnectStatus) {
               if (loading) {
                 return (
                   <button className="px-7 flex items-center justify-center gap-3 py-3 rounded-full text-white bg-violet-600 hover:bg-white hover:text-black duration-200">
                     Pending
-                    <span class="loader"></span>
+                    <span className="loader"></span>
                   </button>
                 );
               } else {

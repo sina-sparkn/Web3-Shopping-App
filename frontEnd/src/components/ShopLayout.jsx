@@ -115,7 +115,7 @@ const ShopLayout = () => {
                   className="text-xl text-white p-2 rounded-full hover:bg-white hover:text-black duration-200"
                 />
               </Link>
-              <div class="blob bg-red-500 w-2.5 h-2.5 absolute top-1.5 right-0.5 rounded-full"></div>
+              <div className="blob bg-red-500 w-2.5 h-2.5 absolute top-1.5 right-0.5 rounded-full"></div>
             </div>
           </div>
           {!Account || disconncectStatus ? (

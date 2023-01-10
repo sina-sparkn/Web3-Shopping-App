@@ -41,7 +41,7 @@ contract rewardOne is SoulBoundERC1155, Ownable {
     }
 
     function mintRewardOne() public returns (bool mintResult) {
-        // require(Status.mintStatus, "mint is not available!");
+        require(Status.mintStatus, "mint is not available!");
 
         _mint(_msgSender(), 1, 1, "");
         return (true);
