@@ -30,7 +30,7 @@ const Cart = () => {
 
   AllItems = AllItems.slice(0, AllItems.length - 3);
 
-  const contractAddress = "0x9F18d8C8075461a027926a5e2955Eb0fDc497c33";
+  const contractAddress = "0x4007f28631d753CF4166D2D9D56678Fc07348ef4";
   const contractABI = abi.abi;
   const to = "0x465DEA85d09025A97a44eCd49e5DcA469c0ef723";
 
@@ -46,10 +46,10 @@ const Cart = () => {
           contractABI,
           signer
         );
-        const PayOut = await minkToken.transfer(
+        const PayOut = await minkToken.runPurchase(
           to,
-          TotalPrice * 1000,
-          AllItems
+          AllItems,
+          TotalPrice * 1000
         );
         console.log("paying...");
         await PayOut.wait();
@@ -68,7 +68,6 @@ const Cart = () => {
   };
 
   const removeItem = (ItemName) => {
-    console.log(ItemName);
     dispatch(CartDecremented(1));
     dispatch(RemoveFromCart({ name: ItemName }));
   };
