@@ -2,7 +2,15 @@
 module.exports = {
   content: ["./src/**/*.jsx", "./src/*.jsx"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        achpurple: "#A04BEA",
+        achblue: "#4D56E8",
+        achpink: "#E84DB9",
+        achred: "#E82A2A",
+        achgold: "#EAAD18",
+      },
+    },
   },
   plugins: [
     function ({ addVariant }) {
