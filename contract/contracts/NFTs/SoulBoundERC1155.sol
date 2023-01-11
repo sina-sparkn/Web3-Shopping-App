@@ -3,7 +3,7 @@
 
 pragma solidity ^0.8.17;
 
-import "./SoulBoundIERC1155.sol";
+import "./IERC1155.sol";
 import "./IERC1155Receiver.sol";
 import "./IERC1155MetadataURI.sol";
 import "./Address.sol";
@@ -17,16 +17,14 @@ import "./ERC165.sol";
  *
  * _Available since v3.1._
  */
-contract SoulBoundERC1155 is
-    Context,
-    ERC165,
-    SoulBoundIERC1155,
-    IERC1155MetadataURI
-{
+contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     using Address for address;
 
     // Mapping from token ID to account balances
     mapping(uint256 => mapping(address => uint256)) private _balances;
+
+    // Mapping from account to operator approvals
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     // Used as the URI for all token types by relying on ID substitution, e.g. https://token-cdn-domain/{id}.json
     string private _uri;
@@ -49,7 +47,7 @@ contract SoulBoundERC1155 is
         returns (bool)
     {
         return
-            interfaceId == type(SoulBoundIERC1155).interfaceId ||
+            interfaceId == type(IERC1155).interfaceId ||
             interfaceId == type(IERC1155MetadataURI).interfaceId ||
             super.supportsInterface(interfaceId);
     }
@@ -115,6 +113,164 @@ contract SoulBoundERC1155 is
         }
 
         return batchBalances;
+    }
+
+    /**
+     * @dev See {IERC1155-setApprovalForAll}.
+     */
+    function setApprovalForAll(address operator, bool approved)
+        public
+        virtual
+        override
+    {
+        _setApprovalForAll(_msgSender(), operator, approved);
+    }
+
+    /**
+     * @dev See {IERC1155-isApprovedForAll}.
+     */
+    function isApprovedForAll(address account, address operator)
+        public
+        view
+        virtual
+        override
+        returns (bool)
+    {
+        return _operatorApprovals[account][operator];
+    }
+
+    /**
+     * @dev See {IERC1155-safeTransferFrom}.
+     */
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) public virtual override {
+        require(
+            from == _msgSender() || isApprovedForAll(from, _msgSender()),
+            "ERC1155: caller is not token owner or approved"
+        );
+        _safeTransferFrom(from, to, id, amount, data);
+    }
+
+    /**
+     * @dev See {IERC1155-safeBatchTransferFrom}.
+     */
+    function safeBatchTransferFrom(
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) public virtual override {
+        require(
+            from == _msgSender() || isApprovedForAll(from, _msgSender()),
+            "ERC1155: caller is not token owner or approved"
+        );
+        _safeBatchTransferFrom(from, to, ids, amounts, data);
+    }
+
+    /**
+     * @dev Transfers `amount` tokens of token type `id` from `from` to `to`.
+     *
+     * Emits a {TransferSingle} event.
+     *
+     * Requirements:
+     *
+     * - `to` cannot be the zero address.
+     * - `from` must have a balance of tokens of type `id` of at least `amount`.
+     * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the
+     * acceptance magic value.
+     */
+    function _safeTransferFrom(
+        address from,
+        address to,
+        uint256 id,
+        uint256 amount,
+        bytes memory data
+    ) internal virtual {
+        require(to != address(0), "ERC1155: transfer to the zero address");
+
+        address operator = _msgSender();
+        uint256[] memory ids = _asSingletonArray(id);
+        uint256[] memory amounts = _asSingletonArray(amount);
+
+        _beforeTokenTransfer(operator, from, to, ids, amounts, data);
+
+        uint256 fromBalance = _balances[id][from];
+        require(
+            fromBalance >= amount,
+            "ERC1155: insufficient balance for transfer"
+        );
+        unchecked {
+            _balances[id][from] = fromBalance - amount;
+        }
+        _balances[id][to] += amount;
+
+        emit TransferSingle(operator, from, to, id, amount);
+
+        _afterTokenTransfer(operator, from, to, ids, amounts, data);
+
+        _doSafeTransferAcceptanceCheck(operator, from, to, id, amount, data);
+    }
+
+    /**
+     * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {_safeTransferFrom}.
+     *
+     * Emits a {TransferBatch} event.
+     *
+     * Requirements:
+     *
+     * - If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the
+     * acceptance magic value.
+     */
+    function _safeBatchTransferFrom(
+        address from,
+        address to,
+        uint256[] memory ids,
+        uint256[] memory amounts,
+        bytes memory data
+    ) internal virtual {
+        require(
+            ids.length == amounts.length,
+            "ERC1155: ids and amounts length mismatch"
+        );
+        require(to != address(0), "ERC1155: transfer to the zero address");
+
+        address operator = _msgSender();
+
+        _beforeTokenTransfer(operator, from, to, ids, amounts, data);
+
+        for (uint256 i = 0; i < ids.length; ++i) {
+            uint256 id = ids[i];
+            uint256 amount = amounts[i];
+
+            uint256 fromBalance = _balances[id][from];
+            require(
+                fromBalance >= amount,
+                "ERC1155: insufficient balance for transfer"
+            );
+            unchecked {
+                _balances[id][from] = fromBalance - amount;
+            }
+            _balances[id][to] += amount;
+        }
+
+        emit TransferBatch(operator, from, to, ids, amounts);
+
+        _afterTokenTransfer(operator, from, to, ids, amounts, data);
+
+        _doSafeBatchTransferAcceptanceCheck(
+            operator,
+            from,
+            to,
+            ids,
+            amounts,
+            data
+        );
     }
 
     /**
@@ -226,6 +382,98 @@ contract SoulBoundERC1155 is
     }
 
     /**
+     * @dev Destroys `amount` tokens of token type `id` from `from`
+     *
+     * Emits a {TransferSingle} event.
+     *
+     * Requirements:
+     *
+     * - `from` cannot be the zero address.
+     * - `from` must have at least `amount` tokens of token type `id`.
+     */
+    function _burn(
+        address from,
+        uint256 id,
+        uint256 amount
+    ) internal virtual {
+        require(from != address(0), "ERC1155: burn from the zero address");
+
+        address operator = _msgSender();
+        uint256[] memory ids = _asSingletonArray(id);
+        uint256[] memory amounts = _asSingletonArray(amount);
+
+        _beforeTokenTransfer(operator, from, address(0), ids, amounts, "");
+
+        uint256 fromBalance = _balances[id][from];
+        require(fromBalance >= amount, "ERC1155: burn amount exceeds balance");
+        unchecked {
+            _balances[id][from] = fromBalance - amount;
+        }
+
+        emit TransferSingle(operator, from, address(0), id, amount);
+
+        _afterTokenTransfer(operator, from, address(0), ids, amounts, "");
+    }
+
+    /**
+     * @dev xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {_burn}.
+     *
+     * Emits a {TransferBatch} event.
+     *
+     * Requirements:
+     *
+     * - `ids` and `amounts` must have the same length.
+     */
+    function _burnBatch(
+        address from,
+        uint256[] memory ids,
+        uint256[] memory amounts
+    ) internal virtual {
+        require(from != address(0), "ERC1155: burn from the zero address");
+        require(
+            ids.length == amounts.length,
+            "ERC1155: ids and amounts length mismatch"
+        );
+
+        address operator = _msgSender();
+
+        _beforeTokenTransfer(operator, from, address(0), ids, amounts, "");
+
+        for (uint256 i = 0; i < ids.length; i++) {
+            uint256 id = ids[i];
+            uint256 amount = amounts[i];
+
+            uint256 fromBalance = _balances[id][from];
+            require(
+                fromBalance >= amount,
+                "ERC1155: burn amount exceeds balance"
+            );
+            unchecked {
+                _balances[id][from] = fromBalance - amount;
+            }
+        }
+
+        emit TransferBatch(operator, from, address(0), ids, amounts);
+
+        _afterTokenTransfer(operator, from, address(0), ids, amounts, "");
+    }
+
+    /**
+     * @dev Approve `operator` to operate on all of `owner` tokens
+     *
+     * Emits an {ApprovalForAll} event.
+     */
+    function _setApprovalForAll(
+        address owner,
+        address operator,
+        bool approved
+    ) internal virtual {
+        require(owner != operator, "ERC1155: setting approval status for self");
+        _operatorApprovals[owner][operator] = approved;
+        emit ApprovalForAll(owner, operator, approved);
+    }
+
+    /**
      * @dev Hook that is called before any token transfer. This includes minting
      * and burning, as well as batched variants.
      *
@@ -253,10 +501,7 @@ contract SoulBoundERC1155 is
         uint256[] memory amounts,
         bytes memory data
     ) internal virtual {
-        require(
-            from == address(0),
-            "SoulBound_Error : token transfer is blocked"
-        );
+        require(from == address(0), "SoulBound : Token is NON Transferable");
     }
 
     /**

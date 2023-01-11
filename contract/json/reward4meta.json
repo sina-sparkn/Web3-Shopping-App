@@ -1,11 +1,23 @@
 {
-  "name": "Reward Four",
-  "description": "Thank you for purchasing more than 0.0008 ETH!",
-  "image": "https://ipfs.io/ipfs/QmNM9HTHcpopYXQVyKVsTRQCU6MHFSuXBP7hUT8xrHc6jQ",
+  "name": "MASTER!",
+  "description": "Thank you for purchasing more than 1000 MINK!",
+  "image": "https://ipfs.io/ipfs/QmfYkc2u7n3s8KhdDpkta5RsN8YAbALDSE1aYjySpuJDPf/MASTER.png",
   "attributes": [
     {
-      "trait_type": "MODE",
-      "value": "More Than 0.0008"
+      "trait_type": "background",
+      "value": "black"
+    },
+    {
+      "trait_type": "mode",
+      "value": "MASTER!"
+    },
+    {
+      "trait_type": "badge",
+      "value": "shield"
+    },
+    {
+      "trait_type": "achievement",
+      "value": "more than 1000 MINK"
     }
   ]
 }
