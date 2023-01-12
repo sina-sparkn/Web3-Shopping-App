@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { ethers } from "ethers";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import abi from "../utils/MINKtoken.json";
 import {
   RemoveAllCart,
   RemoveFromCart,
@@ -11,9 +13,6 @@ import {
   CartDecremented,
 } from "../ReduxStore/features/CartCounterSlicer";
 
-import { useState } from "react";
-
-import abi from "../utils/MINKtoken.json";
 const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
   const DisconnectStatus = useSelector((state) => state.Disconnect);
