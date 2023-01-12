@@ -2,12 +2,14 @@
 
 pragma solidity ^0.8.17;
 
-import "./SoulBoundERC1155.sol";
+import "./ERC1155.sol";
 import "./Ownable.sol";
 
 contract rewardThree is ERC1155, Ownable {
     string name_;
     string symbol_;
+
+    mapping(address => bool) minted;
 
     constructor()
         ERC1155(
@@ -42,9 +44,15 @@ contract rewardThree is ERC1155, Ownable {
 
     function mintReward() public returns (bool mintResult) {
         require(Status.mintStatus, "mint is not available!");
+        require(minted[_msgSender()], "you have clamied your reward once!");
 
         _mint(_msgSender(), 3, 1, "");
+        minted[_msgSender()] = true;
         return (true);
+    }
+
+    function getminted(address user) public view returns (bool) {
+        return minted[user];
     }
 
     function setMintStatus(bool _mintStatus) public onlyOwner {
