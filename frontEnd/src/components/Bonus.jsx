@@ -7,12 +7,7 @@ import ko from "../assets/svg/achievement/ko.svg";
 import master from "../assets/svg/achievement/master.svg";
 import legend from "../assets/svg/achievement/legend.svg";
 import { useSelector } from "react-redux";
-
-import reward1abi from "../utils/rewardOne.json";
-import reward2abi from "../utils/rewardTwo.json";
-import reward3abi from "../utils/rewardThree.json";
-import reward4abi from "../utils/rewardFour.json";
-import reward5abi from "../utils/rewardFive.json";
+import NFTAbi from "../utils/TestOneFile.json";
 
 const Bonus = () => {
   const account = useSelector((state) => state.Account);
@@ -20,6 +15,7 @@ const Bonus = () => {
   const MINKcontractAddress = "0xD763400f38E83fFc2641631bAAb4238f7B08Ce2b";
   const contractABI = MINKabi.abi;
   const [totalPurchase, setTotalPurchase] = useState(0);
+  const [minted, setMinted] = useState({});
 
   const TotalPurchase = async () => {
     try {
@@ -57,49 +53,22 @@ const Bonus = () => {
     Legend: 1700,
   };
 
-  const SoulBoundsContract = {
-    firstyfirst: {
-      contract: "0xF7aAC7cD74f17fC7784Fd85FcDfA9e796E403223",
-      abi: reward1abi.abi,
-      minted: false,
-    },
-    brightway: {
-      contract: "",
-      abi: reward2abi.abi,
-      minted: false,
-    },
-    KOC: {
-      contract: "",
-      abi: reward3abi.abi,
-      minted: false,
-    },
-    master: {
-      contract: "",
-      abi: reward4abi.abi,
-      minted: false,
-    },
-    legend: {
-      contract: "",
-      abi: reward5abi.abi,
-      minted: false,
-    },
-  };
+  const SoulBoundsContract = "0xc99BF3717E39A5AA642A12bCc577C28c90E5AFBB";
+  const SoulBoundsContractAbi = NFTAbi.abi;
 
-  //*mint first Award
-  const [minted1, setMinted1] = useState(false);
-  const MintFirstyFirst = async () => {
+  const Mint = async (id) => {
     try {
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const SoulBound = new ethers.Contract(
-          SoulBoundsContract.firstyfirst.contract,
-          SoulBoundsContract.firstyfirst.abi,
+          SoulBoundsContract,
+          SoulBoundsContractAbi,
           signer
         );
 
-        const mint = await SoulBound.mintReward();
+        const mint = await SoulBound.mintReward(id);
         console.log("minting...");
         await mint.wait();
         console.log("minted--");
@@ -110,20 +79,28 @@ const Bonus = () => {
       console.error(error);
     }
   };
-  //*get the first award minted Status
-  const getFirstyFirst = async () => {
+
+  const getMinted = async () => {
     try {
       const { ethereum } = window;
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const SoulBound = new ethers.Contract(
-          SoulBoundsContract.firstyfirst.contract,
-          SoulBoundsContract.firstyfirst.abi,
+          SoulBoundsContract,
+          SoulBoundsContractAbi,
           signer
         );
-        const mintStatus = await SoulBound.getminted(ethereum.selectedAddress);
-        return mintStatus;
+
+        let mintStatus;
+        let mintedResults = [];
+
+        for (let i = 1; i <= 5; i++) {
+          mintStatus = await SoulBound.getminted(ethereum.selectedAddress, i);
+          mintedResults.push(mintStatus);
+        }
+
+        return mintedResults;
       } else {
         console.log("Ethereum object does not found!");
         return null;
@@ -142,9 +119,27 @@ const Bonus = () => {
     };
 
     const updateminted = async () => {
-      const Minted1 = await getFirstyFirst();
-      if (Minted1 !== null) {
-        setMinted1(Minted1);
+      const Minted = await getMinted();
+
+      const mintedStatus = {
+        ff: Minted[0],
+        bw: Minted[1],
+        ko: Minted[2],
+        mr: Minted[3],
+        ld: Minted[4],
+      };
+
+      if (
+        Minted[0] ||
+        Minted[1] ||
+        Minted[2] ||
+        Minted[3] ||
+        Minted[4] !== null
+      ) {
+        setMinted((minted) => ({
+          ...minted,
+          ...mintedStatus,
+        }));
       }
     };
 
@@ -160,9 +155,9 @@ const Bonus = () => {
           {SumofAllPurchaes > achievement.FirstyFirst && (
             <div className="flex flex-col gap-5">
               <img src={firstyfirst} alt="FIRSTYFIRST" className="w-full" />
-              {!minted1 ? (
+              {!minted.ff ? (
                 <button
-                  onClick={MintFirstyFirst}
+                  onClick={() => Mint(1)}
                   className="px-4 py-4 bg-achpurple rounded-full hover:bg-white hover:text-black duration-200 "
                 >
                   MINT FIRSTYFIRST
@@ -180,36 +175,84 @@ const Bonus = () => {
           {SumofAllPurchaes >= achievement.BrightWay && (
             <div className="flex flex-col gap-5">
               <img src={brightway} alt="FIRSTYFIRST" className="w-full" />
-              <button className="px-4 py-4 bg-achblue rounded-full hover:bg-white hover:text-black duration-200">
-                MINT BRIGHTWAY
-              </button>
+              {!minted.bw ? (
+                <button
+                  onClick={() => Mint(2)}
+                  className="px-4 py-4 bg-achblue rounded-full hover:bg-white hover:text-black duration-200 "
+                >
+                  MINT BRIGHTWAY
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="px-4 py-4 bg-gray-600 text-black rounded-full cursor-not-allowed "
+                >
+                  You've Claimed it!
+                </button>
+              )}
             </div>
           )}
 
           {SumofAllPurchaes >= achievement.KO && (
             <div className="flex flex-col gap-5 ">
               <img src={ko} alt="FIRSTYFIRST" className="w-full" />
-              <button className="px-4 py-4 bg-achpink rounded-full hover:bg-white hover:text-black duration-200">
-                MINT KO!
-              </button>
+              {!minted.ko ? (
+                <button
+                  onClick={() => Mint(3)}
+                  className="px-4 py-4 bg-achpink rounded-full hover:bg-white hover:text-black duration-200"
+                >
+                  MINT KO!
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="px-4 py-4 bg-gray-600 text-black rounded-full cursor-not-allowed "
+                >
+                  You've Claimed it!
+                </button>
+              )}
             </div>
           )}
 
           {SumofAllPurchaes >= achievement.Master && (
             <div className="flex flex-col gap-5 ">
               <img src={master} alt="FIRSTYFIRST" className="w-full" />
-              <button className="px-4 py-4 bg-achred rounded-full hover:bg-white hover:text-black duration-200">
-                MINT MASTER
-              </button>
+              {!minted.mr ? (
+                <button
+                  onClick={() => Mint(4)}
+                  className="px-4 py-4 bg-achred rounded-full hover:bg-white hover:text-black duration-200"
+                >
+                  MINT MASTER
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="px-4 py-4 bg-gray-600 text-black rounded-full cursor-not-allowed "
+                >
+                  You've Claimed it!
+                </button>
+              )}
             </div>
           )}
 
           {SumofAllPurchaes >= achievement.Legend && (
             <div className="flex flex-col gap-5 ">
               <img src={legend} alt="FIRSTYFIRST" className="w-full" />
-              <button className="px-4 py-4 bg-achgold rounded-full hover:bg-white hover:text-black duration-200">
-                MINT LEGEND
-              </button>
+              {!minted.ld ? (
+                <button
+                  onClick={() => Mint(5)}
+                  className="px-4 py-4 bg-achgold rounded-full hover:bg-white hover:text-black duration-200"
+                >
+                  MINT LEGEND
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="px-4 py-4 bg-gray-600 text-black rounded-full cursor-not-allowed "
+                >
+                  You've Claimed it!
+                </button>
+              )}
             </div>
           )}
         </div>
