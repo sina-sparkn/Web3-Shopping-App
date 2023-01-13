@@ -1,10 +1,10 @@
 const hre = require("hardhat");
 
 async function main() {
-  const rewardFactory1 = await hre.ethers.getContractFactory("rewardOne");
+  const rewardFactory1 = await hre.ethers.getContractFactory("TestOneFile");
   const rewardContract1 = await rewardFactory1.deploy();
   await rewardContract1.deployed();
-  console.log(`contract address 1 : ${rewardContract1.address}`);
+  console.log(`contract address : ${rewardContract1.address}`);
 
   // const rewardFactory2 = await hre.ethers.getContractFactory("rewardTwo");
   // const rewardContract2 = await rewardFactory2.deploy();
