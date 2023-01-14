@@ -34,13 +34,16 @@ contract TestOneFile is ERC1155, Ownable {
         return symbol_;
     }
 
-    function mintReward(uint256 id) public returns (bool mintResult) {
+    function mintReward() public returns (bool mintResult) {
         require(Status.mintStatus, "mint is not available!");
-        require(
-            !minted[_msgSender()][id],
-            "you have minted this soulbound achievement once!"
-        );
 
+        uint256 id;
+        for (uint256 i = 1; i <= 5; i++) {
+            if (!getminted(_msgSender(), i)) {
+                id = i;
+                break;
+            }
+        }
         _mint(_msgSender(), id, 1, "");
         minted[_msgSender()][id] = true;
         return (true);
