@@ -1,5 +1,3 @@
-//! 0xD763400f38E83fFc2641631bAAb4238f7B08Ce2b
-
 const hre = require("hardhat");
 
 async function main() {
@@ -8,13 +6,11 @@ async function main() {
   await MinkTokenContract.deployed();
 
   console.log(`contract address ${MinkTokenContract.address}`);
-
-  const supply = await MinkTokenContract.totalSupply();
-
-  console.log(`MINK totalSupply is : ${supply}`);
 }
 
 main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+
+//* contract address : 0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42

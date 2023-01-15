@@ -5,7 +5,7 @@ import "./ERC1155.sol";
 import "./Strings.sol";
 import "./Ownable.sol";
 
-contract TestOneFile is ERC1155, Ownable {
+contract sbrewards is ERC1155, Ownable {
     string name_;
     string symbol_;
 
@@ -16,8 +16,8 @@ contract TestOneFile is ERC1155, Ownable {
             "https://ipfs.io/ipfs/QmVHFbsN1iwPDmKZtUARW4WDRSRSTb9oM9EeaSn2wVk5yp/{id}.json"
         )
     {
-        name_ = "MooninkRewardsTest";
-        symbol_ = "MIRTEST";
+        name_ = "MooninkRewards";
+        symbol_ = "MINKR";
         Status.mintStatus = true;
     }
 

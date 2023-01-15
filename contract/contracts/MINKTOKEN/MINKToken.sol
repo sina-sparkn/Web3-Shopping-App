@@ -6,7 +6,7 @@ import "./ERC20.sol";
 import "./Ownable.sol";
 
 contract MINKtoken is ERC20, Ownable {
-    constructor(uint256 totalSupply) ERC20("MINKTest", "MINKTest") {
+    constructor(uint256 totalSupply) ERC20("MINKTOKEN", "MINK") {
         _mint(owner(), totalSupply);
     }
 
@@ -15,7 +15,6 @@ contract MINKtoken is ERC20, Ownable {
     }
 
     mapping(address => uint256) TotalPurchasePerUser;
-    mapping(address => uint256) RewardCounter;
 
     function purchase(
         address to,
@@ -36,14 +35,6 @@ contract MINKtoken is ERC20, Ownable {
 
         emit purchaseDetails(Purchasedetails, _msgSender(), to, true);
         return true;
-    }
-
-    function setRewardCounter() public {
-        RewardCounter[_msgSender()] += 1;
-    }
-
-    function getRewardCounter() public view returns (uint256) {
-        return RewardCounter[_msgSender()];
     }
 
     function getTotalPurchasePerUser(address user)
