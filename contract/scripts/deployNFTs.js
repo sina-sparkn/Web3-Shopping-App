@@ -1,8 +1,8 @@
 const hre = require("hardhat");
 
 async function main() {
-  const rewardFactory = await hre.ethers.getContractFactory("sbrewards");
-  const rewardContract = await rewardFactory.deploy();
+  const rewardFactory = await hre.ethers.getContractFactory("MoonInkMedals");
+  const rewardContract = await rewardFactory.deploy("MoonInkMedals", "MINKMED");
   await rewardContract.deployed();
   console.log(`contract address : ${rewardContract.address}`);
 }

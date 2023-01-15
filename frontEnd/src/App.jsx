@@ -5,7 +5,6 @@ import { Routes, Route } from "react-router-dom";
 import Shop from "./components/Shop";
 import QA from "./components/QA";
 import NotFound from "./components/NotFound";
-import ShopLayout from "./components/ShopLayout";
 
 function App() {
   return (

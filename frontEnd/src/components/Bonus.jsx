@@ -7,12 +7,12 @@ import ko from "../assets/svg/achievement/ko.svg";
 import master from "../assets/svg/achievement/master.svg";
 import legend from "../assets/svg/achievement/legend.svg";
 import { useSelector } from "react-redux";
-import NFTAbi from "../utils/TestOneFile.json";
+import NFTAbi from "../utils/MoonInkMedals.json";
 
 const Bonus = () => {
   const account = useSelector((state) => state.Account);
   const disconnectStatus = useSelector((state) => state.Disconnect);
-  const MINKcontractAddress = "0xD763400f38E83fFc2641631bAAb4238f7B08Ce2b";
+  const MINKcontractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42";
   const contractABI = MINKabi.abi;
   const [totalPurchase, setTotalPurchase] = useState(0);
   const [minted, setMinted] = useState({});
@@ -53,13 +53,13 @@ const Bonus = () => {
     Legend: 1700,
   };
 
-  const SoulBoundsContract = "0xc99BF3717E39A5AA642A12bCc577C28c90E5AFBB";
+  const SoulBoundsContract = "0x748D5504958D86A0E18682aeED90f7EB45238B0F";
   const SoulBoundsContractAbi = NFTAbi.abi;
 
-  const Mint = async (id) => {
+  const Mint = async () => {
     try {
       const { ethereum } = window;
-      if (ethereum) {
+      if (ethereum && ethereum.networkVersion === "5") {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const SoulBound = new ethers.Contract(
@@ -68,12 +68,14 @@ const Bonus = () => {
           signer
         );
 
-        const mint = await SoulBound.mintReward(id);
+        const mint = await SoulBound.mintReward();
         console.log("minting...");
         await mint.wait();
         console.log("minted--");
       } else {
-        console.log("Ethereum object does not found!");
+        console.error(
+          "Ethereum object does not found! or the test network you are connected with is not goerli!"
+        );
       }
     } catch (error) {
       console.error(error);
@@ -157,7 +159,7 @@ const Bonus = () => {
               <img src={firstyfirst} alt="FIRSTYFIRST" className="w-full" />
               {!minted.ff ? (
                 <button
-                  onClick={() => Mint(1)}
+                  onClick={() => Mint()}
                   className="px-4 py-4 bg-achpurple rounded-full hover:bg-white hover:text-black duration-200 "
                 >
                   MINT FIRSTYFIRST
@@ -177,7 +179,7 @@ const Bonus = () => {
               <img src={brightway} alt="FIRSTYFIRST" className="w-full" />
               {!minted.bw ? (
                 <button
-                  onClick={() => Mint(2)}
+                  onClick={() => Mint()}
                   className="px-4 py-4 bg-achblue rounded-full hover:bg-white hover:text-black duration-200 "
                 >
                   MINT BRIGHTWAY
@@ -198,7 +200,7 @@ const Bonus = () => {
               <img src={ko} alt="FIRSTYFIRST" className="w-full" />
               {!minted.ko ? (
                 <button
-                  onClick={() => Mint(3)}
+                  onClick={() => Mint()}
                   className="px-4 py-4 bg-achpink rounded-full hover:bg-white hover:text-black duration-200"
                 >
                   MINT KO!
@@ -219,7 +221,7 @@ const Bonus = () => {
               <img src={master} alt="FIRSTYFIRST" className="w-full" />
               {!minted.mr ? (
                 <button
-                  onClick={() => Mint(4)}
+                  onClick={() => Mint()}
                   className="px-4 py-4 bg-achred rounded-full hover:bg-white hover:text-black duration-200"
                 >
                   MINT MASTER
@@ -240,7 +242,7 @@ const Bonus = () => {
               <img src={legend} alt="FIRSTYFIRST" className="w-full" />
               {!minted.ld ? (
                 <button
-                  onClick={() => Mint(5)}
+                  onClick={() => Mint()}
                   className="px-4 py-4 bg-achgold rounded-full hover:bg-white hover:text-black duration-200"
                 >
                   MINT LEGEND

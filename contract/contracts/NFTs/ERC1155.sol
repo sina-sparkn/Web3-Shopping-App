@@ -198,6 +198,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         uint256[] memory ids = _asSingletonArray(id);
         uint256[] memory amounts = _asSingletonArray(amount);
 
+        _SoulBoundCheck(from);
         _beforeTokenTransfer(operator, from, to, ids, amounts, data);
 
         uint256 fromBalance = _balances[id][from];
@@ -242,6 +243,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
 
         address operator = _msgSender();
 
+        _SoulBoundCheck(from);
         _beforeTokenTransfer(operator, from, to, ids, amounts, data);
 
         for (uint256 i = 0; i < ids.length; ++i) {
@@ -402,6 +404,7 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         uint256[] memory ids = _asSingletonArray(id);
         uint256[] memory amounts = _asSingletonArray(amount);
 
+        _SoulBoundCheck(from);
         _beforeTokenTransfer(operator, from, address(0), ids, amounts, "");
 
         uint256 fromBalance = _balances[id][from];
@@ -436,6 +439,8 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         );
 
         address operator = _msgSender();
+
+        _SoulBoundCheck(from);
 
         _beforeTokenTransfer(operator, from, address(0), ids, amounts, "");
 
@@ -500,7 +505,12 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
         uint256[] memory ids,
         uint256[] memory amounts,
         bytes memory data
-    ) internal virtual {
+    ) internal virtual {}
+
+    /*
+     * prevent the user or oprator to transfer the token
+     */
+    function _SoulBoundCheck(address from) internal virtual {
         require(from == address(0), "SoulBound : Token is NON Transferable");
     }
 

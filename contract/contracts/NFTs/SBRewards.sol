@@ -5,26 +5,20 @@ import "./ERC1155.sol";
 import "./Strings.sol";
 import "./Ownable.sol";
 
-contract sbrewards is ERC1155, Ownable {
+contract MoonInkMedals is ERC1155, Ownable {
     string name_;
     string symbol_;
 
     mapping(address => mapping(uint256 => bool)) minted;
 
-    constructor()
+    constructor(string memory _name, string memory _symbol)
         ERC1155(
             "https://ipfs.io/ipfs/QmVHFbsN1iwPDmKZtUARW4WDRSRSTb9oM9EeaSn2wVk5yp/{id}.json"
         )
     {
-        name_ = "MooninkRewards";
-        symbol_ = "MINKR";
-        Status.mintStatus = true;
+        name_ = _name;
+        symbol_ = _symbol;
     }
-
-    struct status {
-        bool mintStatus;
-    }
-    status Status;
 
     function name() public view returns (string memory) {
         return name_;
@@ -35,8 +29,6 @@ contract sbrewards is ERC1155, Ownable {
     }
 
     function mintReward() public returns (bool mintResult) {
-        require(Status.mintStatus, "mint is not available!");
-
         uint256 id;
         for (uint256 i = 1; i <= 5; i++) {
             if (!getminted(_msgSender(), i)) {
@@ -51,10 +43,6 @@ contract sbrewards is ERC1155, Ownable {
 
     function getminted(address user, uint256 id) public view returns (bool) {
         return minted[user][id];
-    }
-
-    function setMintStatus(bool _mintStatus) public onlyOwner {
-        Status.mintStatus = _mintStatus;
     }
 
     function uri(uint256 _tokenid)

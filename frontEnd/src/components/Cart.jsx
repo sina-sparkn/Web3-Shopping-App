@@ -29,7 +29,7 @@ const Cart = () => {
 
   AllItems = AllItems.slice(0, AllItems.length - 3);
 
-  const contractAddress = "0xD763400f38E83fFc2641631bAAb4238f7B08Ce2b";
+  const contractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42";
   const contractABI = abi.abi;
   const to = "0x465DEA85d09025A97a44eCd49e5DcA469c0ef723";
 
@@ -37,7 +37,7 @@ const Cart = () => {
     try {
       const { ethereum } = window;
       setLoading(true);
-      if (ethereum) {
+      if (ethereum && ethereum.networkVersion === "5") {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const minkToken = new ethers.Contract(
@@ -58,7 +58,10 @@ const Cart = () => {
         dispatch(RemoveAllCart());
         dispatch(CleanCart());
       } else {
-        console.log("Ethereum object does not found!");
+        console.error(
+          "Ethereum object does not found! or the test network you are connected with is not goerli!"
+        );
+        setLoading(false);
       }
     } catch (error) {
       setLoading(false);
