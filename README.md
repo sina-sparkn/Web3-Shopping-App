@@ -9,11 +9,10 @@
 - All users purchase details stores on Ethereum blockchain
 - After a certain amount of purchase user receives a SouldBound token as an achievement award.
 
-# ContractAddresses(Goerli)
+# Links (Goerli)
 - <a href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42">mink token</a>
 - <a href="https://goerli.etherscan.io/address/0x748D5504958D86A0E18682aeED90f7EB45238B0F">MoonInk soulbound Medals</a>
-
-
+- <a href="https://testnets.opensea.io/collection/mooninkmedals">OpenSea</a>
 
 # FAQ
 
