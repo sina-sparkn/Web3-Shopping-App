@@ -5,9 +5,6 @@ import { CartIncremented } from "../ReduxStore/features/CartCounterSlicer";
 import MinkLogo from "../assets/svg/Asset 2.svg";
 
 const ProductPage = () => {
-  const disconnectStatus = useSelector((state) => state.Disconnect);
-  const AccountStatus = useSelector((state) => state.Account);
-
   const { id, id2 } = useParams();
 
   let productDetails;
@@ -55,24 +52,15 @@ const ProductPage = () => {
           <img className="w-7" src={MinkLogo} alt="MinkLogo" />
         </p>
         <div className="flex w-1/2">
-          {!disconnectStatus && AccountStatus ? (
-            <button
-              onClick={() => {
-                AddItemToCart();
-                CartAddCounter();
-              }}
-              className="flex-grow py-4 rounded-full bg-white text-black text-lg hover:bg-violet-700 hover:text-white active:bg-violet-600 duration-200"
-            >
-              Add To Cart
-            </button>
-          ) : (
-            <button
-              disabled
-              className="flex-grow py-4 rounded-full bg-gray-600 text-black text-lg cursor-not-allowed"
-            >
-              Connect your MetaMask to procced
-            </button>
-          )}
+          <button
+            onClick={() => {
+              AddItemToCart();
+              CartAddCounter();
+            }}
+            className="flex-grow py-4 rounded-full bg-white text-black text-lg hover:bg-violet-700 hover:text-white active:bg-violet-600 duration-200"
+          >
+            Add To Cart
+          </button>
         </div>
       </div>
     </div>

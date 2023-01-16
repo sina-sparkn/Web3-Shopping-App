@@ -9,6 +9,7 @@ module.exports = {
         achpink: "#E84DB9",
         achred: "#E82A2A",
         achgold: "#EAAD18",
+        maindarkpurple: "#1C003A",
       },
     },
   },
