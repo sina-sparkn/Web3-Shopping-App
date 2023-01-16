@@ -1,12 +1,8 @@
-import heroImg from "../assets/svg/Asset 6.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisV, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import mooninkicon from "../assets/svg/iconwhite.svg";
 import mooninktypeface from "../assets/svg/typefacewhite.svg";
 import bg from "../assets/svg/bg.svg";
-import cart from "../assets/svg/icons/shopping-cart.svg";
-import box from "../assets/svg/icons/box-seam.svg";
-import award from "../assets/svg/icons/award.svg";
 import { Link } from "react-router-dom";
 
 const Home = () => {
