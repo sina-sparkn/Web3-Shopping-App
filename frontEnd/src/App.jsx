@@ -1,4 +1,4 @@
-import "../dist/output.css";
+import "./output.css";
 import "./otherStyles.css";
 import Home from "./components/Home";
 import { Routes, Route } from "react-router-dom";
