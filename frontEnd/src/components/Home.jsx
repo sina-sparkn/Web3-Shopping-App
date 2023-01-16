@@ -14,8 +14,11 @@ const Home = () => {
           <img
             src={mooninktypeface}
             alt="mooninktypeface"
-            className="w-32"
+            className="w-32 hidden sm:block"
           ></img>
+        </div>
+        <div className="bg-red-500 px-5 font-bold py-2.5 rounded-full">
+          Goerli testnet version!
         </div>
 
         <div className="block sm:hidden">
