@@ -1,8 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/*/*.jsx", "./src/*.jsx"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        lmd: "1056px",
+      },
       colors: {
         achpurple: "#A04BEA",
         achblue: "#4D56E8",
