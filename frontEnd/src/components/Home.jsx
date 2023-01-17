@@ -95,7 +95,7 @@ const Home = () => {
               src={AwardedAstro}
               alt="astronaut receiving purchases"
             />
-            <h4 className="text-center">SB awarde token</h4>
+            <h4 className="text-center">SB award token</h4>
             <p className="text-lg font-normal text-white/80 text-center">
               Every time you <strong>reach a new tier</strong> and
               <strong> mint </strong>a <strong>Soulbound</strong> token of that
@@ -104,6 +104,43 @@ const Home = () => {
           </div>
         </section>
       </main>
+      <hr className="border-0 mt-10 w-full h-1 z-10 bg-white/10" />
+      <footer className="flex flex-col lg:flex-row items-center gap-8 justify-between py-10 px-10">
+        <img
+          className="w-2/5 lg:w-2/12"
+          src={mooninktypeface}
+          alt="mooninktypeface"
+        ></img>
+        <span className="text-xs text-white/50 text-center">
+          Copyright © 2023 MOONINK Inc. All rights reserved.
+        </span>
+        <div className="flex gap-5">
+          <a
+            href="#"
+            className="text-white/80 hover:underline hover:text-white cursor-pointer"
+          >
+            Twitter
+          </a>
+          <a
+            href="#"
+            className="text-white/80 hover:underline hover:text-white cursor-pointer"
+          >
+            Instagram
+          </a>
+          <a
+            href="#"
+            className="text-white/80 hover:underline hover:text-white cursor-pointer"
+          >
+            Linkedin
+          </a>
+          <a
+            href="#"
+            className="text-white/80 hover:underline hover:text-white cursor-pointer"
+          >
+            Github
+          </a>
+        </div>
+      </footer>
     </div>
   );
 };
