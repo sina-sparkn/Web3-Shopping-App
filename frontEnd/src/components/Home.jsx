@@ -68,7 +68,10 @@ const Home = () => {
         <hr className="border-0 w-full lmd:w-10/12 h-0.5 z-10 bg-white/10" />
 
         <section className="z-10 text-3xl font-bold grid gap-10 md:grid-cols-3 lmd:w-10/12">
-          <div className="py-5 px-3 border-2 border-violet-600/30 flex flex-col items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl ">
+          <div
+            className="py-8 px-3 border-2 border-violet-600/30 flex flex-col 
+            items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl "
+          >
             <img
               className="w-4/5"
               src={PurchaseAstro}
@@ -94,7 +97,10 @@ const Home = () => {
             </p>
           </div>
 
-          <div className="py-5 px-3 border-2 border-violet-600/30 flex flex-col items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl ">
+          <div
+            className="py-8 px-3 border-2 border-violet-600/30 flex flex-col 
+            items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl "
+          >
             <img
               className="w-4/5"
               src={ReceivedAstro}
@@ -102,12 +108,14 @@ const Home = () => {
             />
             <h4 className="text-center">Receive your orders</h4>
             <p className="text-lg font-normal text-white/80 text-center">
-              You will receive your orders but you won't this is
-              <span className="text-white font-bold"> testnet version</span>.
+              You will receive your orders as fast as possible
             </p>
           </div>
 
-          <div className="py-5 px-3 border-2 border-violet-600/30 flex flex-col items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl">
+          <div
+            className="py-8 px-3 border-2 border-violet-600/30 flex flex-col 
+            items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl"
+          >
             <img
               className="w-4/5"
               src={AwardedAstro}
@@ -115,9 +123,9 @@ const Home = () => {
             />
             <h4 className="text-center">SBT Award</h4>
             <p className="text-lg font-normal text-white/80 text-center">
-              Every time you <strong>reach a new tier</strong> and
-              <strong> mint </strong>a <strong>Soulbound</strong> token of that
-              tier.
+              You can reach a new <strong>tier</strong> and
+              <strong> mint </strong>the <strong>Soulbound</strong> token of
+              that tier.
             </p>
           </div>
         </section>
@@ -127,10 +135,12 @@ const Home = () => {
         Frequently asked qustions :
       </h4>
       <section className="mt-10 flex flex-col items-center gap-5 md:px-32">
-        <div className="flex w-full flex-col gap-5  md:w-3/4">
+        <div className="flex w-full flex-col gap-5 md:w-3/4">
           <button
             onClick={Accordion1}
-            className="text-start bg-violet-600/20  text-2xl font-bold border-2 border-violet-600/40 px-5 py-3 flex items-center justify-between gap-3 rounded-xl"
+            className="text-start bg-violet-600/20 text-2xl font-bold border-2
+            border-violet-600/40 px-5 py-3 flex items-center justify-between gap-3 rounded-xl 
+            hover:bg-violet-600/30 duration-100"
           >
             What are SoulBound Tokens
             {clicked1 ? (
@@ -150,7 +160,9 @@ const Home = () => {
         <div className="flex w-full flex-col gap-5 md:w-3/4">
           <button
             onClick={Accordion2}
-            className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2 border-violet-600/40 flex items-center justify-between gap-3 rounded-xl"
+            className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2
+            border-violet-600/40 flex items-center justify-between gap-3 rounded-xl 
+            hover:bg-violet-600/30 duration-100"
           >
             What is MINK Token
             {clicked2 ? (
@@ -173,7 +185,9 @@ const Home = () => {
         <div className="flex w-full flex-col gap-5 md:w-3/4">
           <button
             onClick={Accordion3}
-            className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2 border-violet-600/40 flex items-center justify-between gap-3 rounded-xl"
+            className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2 
+            border-violet-600/40 flex items-center justify-between gap-3 rounded-xl
+            hover:bg-violet-600/30 duration-100"
           >
             What is MINK token Contract
             {clicked3 ? (
@@ -196,6 +210,12 @@ const Home = () => {
         </div>
       </section>
       <hr className="border-0 mt-10 w-full h-0.5 z-10 bg-white/10" />
+      <p className="text-center mt-5 text-red-500 flex justify-center items-center gap-3">
+        <FontAwesomeIcon icon={faCircleExclamation} />
+        note that this is a testnet product and sending products is not
+        available!
+      </p>
+      <hr className="border-0 mt-5 w-full h-0.5 z-10 bg-white/10" />
       <footer className="flex flex-col lg:flex-row items-center gap-8 justify-between py-10 ">
         <p className="text-sm">
           Made with <FontAwesomeIcon className="text-red-600" icon={faHeart} />{" "}
