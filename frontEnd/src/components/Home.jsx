@@ -1,20 +1,35 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faEllipsisV,
-  faArrowDown,
   faCircleExclamation,
+  faAngleDown,
+  faAngleUp,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
-import mooninkicon from "../assets/svg/iconwhite.svg";
+import mooninkicon from "../assets/svg/ticonwhite.svg";
 import mooninktypeface from "../assets/svg/typefacewhite.svg";
 import bg from "../assets/svg/bg.svg";
 import { Link } from "react-router-dom";
 import PurchaseAstro from "../assets/svg/illustrations/purchase.svg";
 import ReceivedAstro from "../assets/svg/illustrations/received.svg";
 import AwardedAstro from "../assets/svg/illustrations/awarded.svg";
+import { useState } from "react";
 
 const Home = () => {
+  const [clicked1, setClicked1] = useState(false);
+  const [clicked2, setClicked2] = useState(false);
+  const [clicked3, setClicked3] = useState(false);
+  const Accordion1 = () => {
+    setClicked1(!clicked1);
+  };
+  const Accordion2 = () => {
+    setClicked2(!clicked2);
+  };
+  const Accordion3 = () => {
+    setClicked3(!clicked3);
+  };
+
   return (
-    <div className="bg-maindarkpurple/70 h-auto text-white px-6">
+    <div className="bg-maindarkpurple/70 h-auto text-white px-6 ">
       <header className="flex items-center justify-between py-6">
         <div className="flex gap-3">
           <img src={mooninkicon} alt="mooninklogo" className="w-9" />
@@ -24,16 +39,10 @@ const Home = () => {
             className="w-32 hidden sm:block"
           ></img>
         </div>
-        <div className="border-2 border-red-500 text-red-500 px-5 flex items-center gap-2 font-bold py-2.5 rounded-full">
+        <div className="text-red-500 flex items-center gap-2 font-bold  rounded-full">
           <FontAwesomeIcon icon={faCircleExclamation} className="text-lg" />
           Goerli testnet version
         </div>
-
-        <button className="bg-violet-600 font-bold rounded-full hover:bg-white hover:text-black duration-200 hidden sm:block">
-          <Link to="/Shop">
-            <div className="w-full h-full px-5 py-3">Launch The App</div>
-          </Link>
-        </button>
       </header>
       <hr className="border-0 h-0.5 bg-white/10" />
       <main className="h-auto flex relative flex-col items-center justify-center gap-10">
@@ -42,25 +51,24 @@ const Home = () => {
           SHOPPING EXPERIENCE
         </h1>
         <h2 className="text-2xl text-center text-white/80 z-10">
-          Buy stuff and get Rewarded in web3 space.
+          Order and get rewarded in web3 Space!
         </h2>
-        <button className="bg-violet-600 z-10 px-10 font-bold text-base sm:text-xl rounded-full hover:bg-white hover:text-black duration-200">
-          <Link to="/Shop">
-            <div className="w-full h-full py-4">Launch The App</div>
-          </Link>
-        </button>
+
+        <Link to="/Shop">
+          <button class="button-77">Launch The App</button>
+        </Link>
         <img
           src={bg}
           draggable="false"
           className="z-0 absolute top-0 hidden sm:block"
         />
-        <h3 className="font-bold text-4xl mt-32 z-10 text-center">
+        <h3 className="font-bold text-4xl mt-20 z-10 text-center">
           What you can do with Moonink ?
         </h3>
-        <hr className="border-0 w-full lmd:w-10/12 h-1 z-10 bg-white/10" />
+        <hr className="border-0 w-full lmd:w-10/12 h-0.5 z-10 bg-white/10" />
 
-        <section className="z-10 p-5 text-3xl font-bold grid gap-10 md:grid-cols-3 lmd:w-10/12">
-          <div className="p-5 flex flex-col items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl ">
+        <section className="z-10 text-3xl font-bold grid gap-10 md:grid-cols-3 lmd:w-10/12">
+          <div className="py-5 px-3 border-2 border-violet-600/30 flex flex-col items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl ">
             <img
               className="w-4/5"
               src={PurchaseAstro}
@@ -68,15 +76,25 @@ const Home = () => {
             />
             <h4 className="text-center">Make a purchase</h4>
             <p className="text-lg font-normal text-white/80 text-center">
-              Easier than ever with just one click! just use the{" "}
-              <a href="#" className="text-white underline">
+              Easier than ever with{" "}
+              <a
+                href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
+                className="text-white font-bold underline underline-offset-2"
+              >
+                $MINK
+              </a>{" "}
+              token use the{" "}
+              <a
+                href="#"
+                className="text-white font-bold underline underline-offset-2"
+              >
                 Faucet
               </a>{" "}
               to get Started.
             </p>
           </div>
 
-          <div className="p-5 flex flex-col items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl ">
+          <div className="py-5 px-3 border-2 border-violet-600/30 flex flex-col items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl ">
             <img
               className="w-4/5"
               src={ReceivedAstro}
@@ -84,18 +102,18 @@ const Home = () => {
             />
             <h4 className="text-center">Receive your orders</h4>
             <p className="text-lg font-normal text-white/80 text-center">
-              You will receive your orders but you won't this is a
+              You will receive your orders but you won't this is
               <span className="text-white font-bold"> testnet version</span>.
             </p>
           </div>
 
-          <div className="p-5 flex flex-col items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl">
+          <div className="py-5 px-3 border-2 border-violet-600/30 flex flex-col items-center gap-10 bg-gradient-to-br from-maindarkpurple to-violet-600/20 rounded-3xl">
             <img
               className="w-4/5"
               src={AwardedAstro}
               alt="astronaut receiving purchases"
             />
-            <h4 className="text-center">SB award token</h4>
+            <h4 className="text-center">SBT Award</h4>
             <p className="text-lg font-normal text-white/80 text-center">
               Every time you <strong>reach a new tier</strong> and
               <strong> mint </strong>a <strong>Soulbound</strong> token of that
@@ -104,37 +122,117 @@ const Home = () => {
           </div>
         </section>
       </main>
-      <hr className="border-0 mt-10 w-full h-1 z-10 bg-white/10" />
-      <footer className="flex flex-col lg:flex-row items-center gap-8 justify-between py-10 px-10">
-        <img
-          className="w-2/5 lg:w-2/12"
-          src={mooninktypeface}
-          alt="mooninktypeface"
-        ></img>
+      <hr className="border-0 w-full lmd:w-10/12 h-0.5 bg-white/10 m-auto mt-10" />
+      <h4 className="text-4xl leading-snug md:px-32 mt-10 font-bold text-center">
+        Frequently asked qustions :
+      </h4>
+      <section className="mt-10 flex flex-col items-center gap-5 md:px-32">
+        <div className="flex w-full flex-col gap-5  md:w-3/4">
+          <button
+            onClick={Accordion1}
+            className="text-start bg-violet-600/20  text-2xl font-bold border-2 border-violet-600/40 px-5 py-3 flex items-center justify-between gap-3 rounded-xl"
+          >
+            What are SoulBound Tokens
+            {clicked1 ? (
+              <FontAwesomeIcon icon={faAngleUp} />
+            ) : (
+              <FontAwesomeIcon icon={faAngleDown} />
+            )}
+          </button>
+          {clicked1 && (
+            <p className="px-5 pb-5 leading-8 antialiased max-w-xl text-lg  rounded-xl">
+              • Soulbound Tokens (SBTs) are digital identity tokens that
+              represent the traits, features, and achievements that make up a
+              person or entity. SBTs are issued by “Souls”.
+            </p>
+          )}
+        </div>
+        <div className="flex w-full flex-col gap-5 md:w-3/4">
+          <button
+            onClick={Accordion2}
+            className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2 border-violet-600/40 flex items-center justify-between gap-3 rounded-xl"
+          >
+            What is MINK Token
+            {clicked2 ? (
+              <FontAwesomeIcon icon={faAngleUp} />
+            ) : (
+              <FontAwesomeIcon icon={faAngleDown} />
+            )}
+          </button>
+          {clicked2 && (
+            <p className="px-5 pb-5 leading-8 antialiased max-w-xl text-lg rounded-xl">
+              • MINK token is an <strong>ERC20 token</strong> currently running
+              on Ethereum testnetwork <strong>"Goerli"</strong>. MINK token
+              contract grab the purchases details and store them in Ethereum
+              blockchain for
+              <strong> better security</strong> and more
+              <strong> decentralization</strong>.
+            </p>
+          )}
+        </div>
+        <div className="flex w-full flex-col gap-5 md:w-3/4">
+          <button
+            onClick={Accordion3}
+            className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2 border-violet-600/40 flex items-center justify-between gap-3 rounded-xl"
+          >
+            What is MINK token Contract
+            {clicked3 ? (
+              <FontAwesomeIcon icon={faAngleUp} />
+            ) : (
+              <FontAwesomeIcon icon={faAngleDown} />
+            )}
+          </button>
+          {clicked3 && (
+            <p className="px-5 pb-5 leading-8 antialiased max-w-xl text-lg rounded-xl truncate">
+              • Contract Address on Goerli: <br />
+              <a
+                href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
+                className="text-base underline underline-offset-2"
+              >
+                0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42
+              </a>
+            </p>
+          )}
+        </div>
+      </section>
+      <hr className="border-0 mt-10 w-full h-0.5 z-10 bg-white/10" />
+      <footer className="flex flex-col lg:flex-row items-center gap-8 justify-between py-10 ">
+        <p className="text-sm">
+          Made with <FontAwesomeIcon className="text-red-600" icon={faHeart} />{" "}
+          by{" "}
+          <a
+            className="hover:text-violet-400 duration-100"
+            href="https://github.com/ssparknt"
+          >
+            sinasparkn
+          </a>
+        </p>
+
         <span className="text-xs text-white/50 text-center">
           Copyright © 2023 MOONINK Inc. All rights reserved.
         </span>
-        <div className="flex gap-5">
+
+        <div className="flex flex-wrap gap-4">
           <a
-            href="#"
+            href="https://twitter.com/sinaproject007"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
             Twitter
           </a>
           <a
-            href="#"
+            href="https://instagram.com/sparknsina"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
             Instagram
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/ali-zare-a01550238/"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
             Linkedin
           </a>
           <a
-            href="#"
+            href="https://github.com/ssparknt/Web3-Shopping-App"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
             Github
