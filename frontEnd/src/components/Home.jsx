@@ -1,10 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCircleExclamation,
-  faAngleDown,
   faAngleUp,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTwitter,
+  faLinkedinIn,
+  faLinkedin,
+  faInstagram,
+  faGithubAlt,
+  faGithub,
+  faInstagramSquare,
+  faGitAlt,
+  faGitkraken,
+} from "@fortawesome/free-brands-svg-icons";
 import mooninkicon from "../assets/svg/ticonwhite.svg";
 import mooninktypeface from "../assets/svg/typefacewhite.svg";
 import bg from "../assets/svg/bg.svg";
@@ -32,7 +42,7 @@ const Home = () => {
     <div className="bg-maindarkpurple/70 h-auto text-white px-6 ">
       <header className="flex items-center justify-between py-6">
         <div className="flex gap-3">
-          <img src={mooninkicon} alt="mooninklogo" className="w-9" />
+          <img src={mooninkicon} alt="mooninklogo" className="w-9 rota" />
           <img
             src={mooninktypeface}
             alt="mooninktypeface"
@@ -46,16 +56,16 @@ const Home = () => {
       </header>
       <hr className="border-0 h-0.5 bg-white/10" />
       <main className="h-auto flex relative flex-col items-center justify-center gap-10">
-        <h1 className="font-extrabold mt-20 text-4xl sm:text-7xl text-center z-10">
+        <h1 className="font-bold mt-20 text-5xl sm:text-7xl text-center z-10">
           THE FIRST WEB3 <br />
           SHOPPING EXPERIENCE
         </h1>
-        <h2 className="text-2xl text-center text-white/80 z-10">
+        <h2 className="text-2xl text-center font-semibold text-white/90 z-10">
           Order and get rewarded in web3 Space!
         </h2>
 
         <Link to="/Shop">
-          <button class="button-77">Launch The App</button>
+          <button className="button-77">Launch The App</button>
         </Link>
         <img
           src={bg}
@@ -135,7 +145,7 @@ const Home = () => {
         Frequently asked qustions :
       </h4>
       <section className="mt-10 flex flex-col items-center gap-5 md:px-32">
-        <div className="flex w-full flex-col gap-5 md:w-3/4">
+        <div className="flex w-full flex-col gap-5 md:w-3/4 rounded-xl">
           <button
             onClick={Accordion1}
             className="text-start bg-violet-600/20 text-2xl font-bold border-2
@@ -146,7 +156,7 @@ const Home = () => {
             {clicked1 ? (
               <FontAwesomeIcon icon={faAngleUp} />
             ) : (
-              <FontAwesomeIcon icon={faAngleDown} />
+              <FontAwesomeIcon icon={faAngleUp} className="rotate-180" />
             )}
           </button>
           {clicked1 && (
@@ -157,7 +167,7 @@ const Home = () => {
             </p>
           )}
         </div>
-        <div className="flex w-full flex-col gap-5 md:w-3/4">
+        <div className="flex w-full flex-col gap-5 md:w-3/4 rounded-xl">
           <button
             onClick={Accordion2}
             className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2
@@ -168,7 +178,7 @@ const Home = () => {
             {clicked2 ? (
               <FontAwesomeIcon icon={faAngleUp} />
             ) : (
-              <FontAwesomeIcon icon={faAngleDown} />
+              <FontAwesomeIcon icon={faAngleUp} className="rotate-180" />
             )}
           </button>
           {clicked2 && (
@@ -182,7 +192,7 @@ const Home = () => {
             </p>
           )}
         </div>
-        <div className="flex w-full flex-col gap-5 md:w-3/4">
+        <div className="flex w-full flex-col gap-5 md:w-3/4 rounded-xl">
           <button
             onClick={Accordion3}
             className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2 
@@ -193,7 +203,7 @@ const Home = () => {
             {clicked3 ? (
               <FontAwesomeIcon icon={faAngleUp} />
             ) : (
-              <FontAwesomeIcon icon={faAngleDown} />
+              <FontAwesomeIcon icon={faAngleUp} className="rotate-180" />
             )}
           </button>
           {clicked3 && (
@@ -210,11 +220,13 @@ const Home = () => {
         </div>
       </section>
       <hr className="border-0 mt-10 w-full h-0.5 z-10 bg-white/10" />
-      <p className="text-center mt-5 text-red-500 flex justify-center items-center gap-3">
+      <div className="flex justify-center items-baseline sm:items-center text-red-500 gap-3 mt-5 ">
         <FontAwesomeIcon icon={faCircleExclamation} />
-        note that this is a testnet product and sending products is not
-        available!
-      </p>
+        <p>
+          note that this is a testnet product and sending products is not
+          available !
+        </p>
+      </div>
       <hr className="border-0 mt-5 w-full h-0.5 z-10 bg-white/10" />
       <footer className="flex flex-col lg:flex-row items-center gap-8 justify-between py-10 ">
         <p className="text-sm">
@@ -232,30 +244,33 @@ const Home = () => {
           Copyright © 2023 MOONINK Inc. All rights reserved.
         </span>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-10 lg:gap-5 text-2xl">
           <a
             href="https://twitter.com/sinaproject007"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
-            Twitter
+            <FontAwesomeIcon icon={faTwitter} />
           </a>
+
           <a
             href="https://instagram.com/sparknsina"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
-            Instagram
+            <FontAwesomeIcon icon={faInstagram} />
           </a>
+
           <a
             href="https://www.linkedin.com/in/ali-zare-a01550238/"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
-            Linkedin
+            <FontAwesomeIcon icon={faLinkedinIn} />
           </a>
+
           <a
             href="https://github.com/ssparknt/Web3-Shopping-App"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
-            Github
+            <FontAwesomeIcon icon={faGithub} />
           </a>
         </div>
       </footer>
