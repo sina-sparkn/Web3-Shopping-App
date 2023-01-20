@@ -60,7 +60,7 @@ const Home = () => {
           THE FIRST WEB3 <br />
           SHOPPING EXPERIENCE
         </h1>
-        <h2 className="text-2xl text-center font-semibold text-white/90 z-10">
+        <h2 className="text-3xl text-center font-medium text-slate-200 z-10">
           Order and get rewarded in web3 Space!
         </h2>
 

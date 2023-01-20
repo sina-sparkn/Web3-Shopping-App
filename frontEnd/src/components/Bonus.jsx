@@ -153,6 +153,7 @@ const Bonus = () => {
     return (
       <main className="px-16 mb-5 flex flex-col gap-12">
         <h1 className="font-bold text-3xl">Achievements :</h1>
+        <h2>{`Total purchases : ${SumofAllPurchaes} MINK`}</h2>
         <div className="flex flex-wrap justify-center gap-16 mb-12">
           {SumofAllPurchaes > achievement.FirstyFirst && (
             <div className="flex flex-col gap-5">
