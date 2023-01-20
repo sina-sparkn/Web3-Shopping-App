@@ -8,7 +8,7 @@ const CartSlicer = createSlice({
 
   reducers: {
     AddtoCart(state, action) {
-      state.push({
+      state.unshift({
         name: action.payload.name,
         price: action.payload.price,
         image: action.payload.image,

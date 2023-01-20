@@ -10,9 +10,10 @@ import {
   faBagShopping,
   faPowerOff,
   faHeart,
+  faBars,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import blockie from "../assets/image/download.png";
 
 const getEthereumObject = () => window.ethereum;
 
@@ -21,6 +22,7 @@ const ShopLayout = () => {
   const disconncectStatus = useSelector((state) => state.Disconnect);
   const CartCounted = useSelector((state) => state.CartCounter);
   const [Account, setAccount] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const disconnectFunc = () => {
     dispatch(DisconnectToggled(true));
   };
@@ -86,16 +88,55 @@ const ShopLayout = () => {
   const Last4Char = last4CharRegex.exec(Account);
   const displayAddress = First6Char[0] + "..." + Last4Char[0];
 
+  const menuClicked = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <>
-      <header className="w-full p-3 px-16 flex justify-between items-center">
+      <header className="w-full p-5 flex justify-between items-center">
         <Link to="/">
-          <div className="flex gap-4">
-            <img src={mooninklogo} alt="mooninklogo" className="w-7" />
-          </div>
+          <img src={mooninklogo} alt="mooninklogo" className="w-8" />
         </Link>
-        <div className="flex items-center gap-10 ">
-          <div className="flex items-center gap-5">
+
+        <FontAwesomeIcon
+          onClick={menuClicked}
+          icon={faBars}
+          className="text-2xl cursor-pointer z-0 sm:hidden"
+        />
+        {menuOpen && (
+          <nav className="absolute flex flex-col gap-5 top-0 right-0 bg-black/80 backdrop-blur h-screen p-5 z-10">
+            <FontAwesomeIcon
+              icon={faXmark}
+              className="text-3xl py-1.5 rounded-full cursor-pointer"
+              onClick={menuClicked}
+            />
+            <div>
+              {!Account || disconncectStatus ? (
+                <button
+                  onClick={connectToMetaMask}
+                  className="font-bold text-white ring-2 ring-white rounded-full py-2 px-4 hover:text-black hover:bg-white active:ring-0 duration-150"
+                >
+                  Connect MetaMask
+                </button>
+              ) : (
+                <div className="flex items-center gap-3">
+                  <button className="flex items-center gap-2 font-bold text-white ring-2 ring-white rounded-full py-2 px-4 hover:text-black hover:bg-white active:ring-0 cursor-default duration-150">
+                    {displayAddress}
+                  </button>
+                  <FontAwesomeIcon
+                    icon={faPowerOff}
+                    className="text-red-500 p-2 ring-2 ring-red-500 text-2xl rounded-full cursor-pointer hover:bg-red-500 hover:text-white duration-200"
+                    onClick={disconnectFunc}
+                  />
+                </div>
+              )}
+            </div>
+          </nav>
+        )}
+
+        <div className="items-center gap-4 hidden sm:flex">
+          <div className="flex items-center gap-4">
             <div className="relative cursor-pointer">
               <Link to="Cart">
                 <FontAwesomeIcon
@@ -121,30 +162,26 @@ const ShopLayout = () => {
           {!Account || disconncectStatus ? (
             <button
               onClick={connectToMetaMask}
-              className="font-bold text-white rounded-full p-2 px-10 bg-violet-700 hover:text-black hover:bg-white active:bg-violet-500 duration-200"
+              className="font-bold text-white ring-2 ring-white rounded-full py-2 px-4 hover:text-black hover:bg-white active:ring-0 duration-150"
             >
-              Connect MetaMask
+              Connect with MetaMask
             </button>
           ) : (
-            <div className="flex items-center gap-4">
-              <button className="font-bold text-white rounded-full p-2 px-6 cursor-default bg-violet-700 hover:text-black hover:bg-white duration-200">
+            <div className="flex items-center gap-3">
+              <button className="flex items-center gap-2 font-bold text-white ring-2 ring-white rounded-full py-2 px-4 hover:text-black hover:bg-white active:ring-0 cursor-default duration-150">
                 {displayAddress}
               </button>
-              <img
-                src={blockie}
-                className="w-9 h-9 bg-white rounded-full"
-              ></img>
               <FontAwesomeIcon
                 icon={faPowerOff}
-                className="text-red-600 bg-red-500/30 p-2 text-2xl rounded-full cursor-pointer hover:bg-red-500/40 duration-200"
+                className="text-red-500 p-2 ring-2 ring-red-500 text-2xl rounded-full cursor-pointer hover:bg-red-500 hover:text-white duration-200"
                 onClick={disconnectFunc}
               />
             </div>
           )}
         </div>
       </header>
-      <hr className="border-0 bg-white/10 h-0.5" />
-      <section className="flex py-5 gap-10 px-16 items-center">
+      <hr className="border-0 bg-white/10 h-0.5 hidden sm:block" />
+      <section className="hidden flex-wrap py-5 gap-10 px-16 items-center sm:flex">
         <Link
           to="/Shop"
           className="text-slate-300 hover:text-white duration-200"

@@ -15,6 +15,7 @@ import {
 
 const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
+  console.log(AddedProducts);
   const DisconnectStatus = useSelector((state) => state.Disconnect);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
