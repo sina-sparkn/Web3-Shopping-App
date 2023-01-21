@@ -16,15 +16,23 @@ const Cloting = () => {
   const mooninkprice = 0.328;
 
   return (
-    <div className="grid grid-cols-2 gap-3 px-5 py-7 bg-maindarkpurple/70">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-10 gap-3 p-5 bg-maindarkpurple/70">
       {AllProducts.map((item, index) => {
         return (
           <Link to={`${item.item}`}>
-            <div key={index} className="pb-3 rounded-xl ring-2 ring-white/50">
-              <img src={item.image} className="mb-3 rounded-t-xl" />
+            <div
+              key={index}
+              className="pb-3 flex flex-col gap-2 rounded-xl ring-2 overflow-hidden ring-white/50 hover:bg-violet-600/20 duration-500"
+            >
+              <div className="overflow-hidden">
+                <img
+                  src={item.image}
+                  className="mb-3 hover:scale-110 delay-500 rounded-t-xl w-full duration-700"
+                />
+              </div>
 
-              <div className="px-3 flex gap-5 flex-col">
-                <p className="text-xl">{item.item}</p>
+              <div className="px-3 flex gap-4 flex-col h-1/4">
+                <p className="text-xl font-semibold">{item.item}</p>
                 <span className="flex items-center text-xl gap-2">
                   {item.price}
                   <img className="w-5" src={MintLogo} alt="MintLogo" />

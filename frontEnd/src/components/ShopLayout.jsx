@@ -9,7 +9,7 @@ import mooninklogoType from "../assets/svg/typefacewhite.svg";
 import {
   faBagShopping,
   faPowerOff,
-  faHeart,
+  faStar,
   faBars,
   faXmark,
   faAngleRight,
@@ -99,14 +99,14 @@ const ShopLayout = () => {
   let classDiv;
   if (menuOpen) {
     classClose =
-      "absolute transition duration-400 transform ease-out translate-x-full flex flex-col items-end gap-7 top-0 right-0 h-full p-5 ";
+      "absolute transition duration-200 transform ease-out translate-x-full flex flex-col items-end gap-7 top-0 right-0 h-full p-5 ";
     classDiv =
-      "absolute top-0 right-0 backdrop-blur bg-black/80 h-full overflow-hidden ease-out w-full duration-300";
+      "absolute top-0 right-0 backdrop-blur bg-black/80 h-full overflow-hidden ease-out w-full duration-200";
   } else {
     classClose =
-      "absolute transition transform duration-300 ease-out translate-x-0 z-20 flex flex-col items-end gap-7 top-0 right-0 bg-black h-full w-full p-5 ";
+      "absolute transition transform duration-200 ease-out translate-x-0 z-20 flex flex-col items-end gap-7 top-0 right-0 bg-black h-full w-full p-5 ";
     classDiv =
-      "absolute bg-black/80 backdrop-blur top-0 right-0 h-256 z-20 ease-out overflow-hidden w-full duration-700 ";
+      "absolute bg-black/80 backdrop-blur top-0 right-0 h-256 z-20 ease-out overflow-hidden w-full duration-200 ";
   }
 
   const menuClicked = () => {
@@ -115,10 +115,10 @@ const ShopLayout = () => {
 
   return (
     <>
-      <header className="w-full bg-maindarkpurple/70 relative p-5 flex justify-between items-center">
+      <header className="w-full bg-maindarkpurple/70 relative px-5 py-3.5 flex justify-between items-center">
         <Link to="/" className="z-10 flex gap-2">
           <img src={mooninklogo} alt="mooninklogo" className="w-7" />
-          <img src={mooninklogoType} alt="mooninklogoType" className="w-28" />
+          <img src={mooninklogoType} alt="mooninklogo" className="w-28" />
         </Link>
 
         <FontAwesomeIcon
@@ -126,105 +126,62 @@ const ShopLayout = () => {
           icon={faBars}
           className="text-2xl cursor-pointer z-10 sm:hidden"
         />
-        <div className={classDiv}>
+
+        <section className={classDiv}>
           <nav className={classClose}>
             <FontAwesomeIcon
               icon={faXmark}
               className="text-3xl px-2.5 cursor-pointer"
               onClick={menuClicked}
             />
-            <div className="w-full mt-3">
-              {!Account || disconncectStatus ? (
-                <button
-                  onClick={connectToMetaMask}
-                  className="font-bold text-white ring-2 ring-white rounded-full py-2 px-4 hover:text-black hover:bg-white active:ring-0 duration-150"
-                >
-                  Connect MetaMask
-                </button>
-              ) : (
-                <div className="flex items-center justify-between gap-4">
-                  <button className="w-full font-bold bg-white text-black ring-2 ring-white rounded-full py-2 px-4 active:ring-0 cursor-default duration-150">
-                    {displayAddress}
-                  </button>
-                  <FontAwesomeIcon
-                    icon={faPowerOff}
-                    className="p-2 ring-2 ring-red-500 text-2xl rounded-full bg-red-500 text-white cursor-pointer duration-200"
-                    onClick={disconnectFunc}
-                  />
-                </div>
-              )}
-              <hr className="border-0 w-full bg-white mt-10 h-0.5 " />
-              <div className="flex mt-7 gap-5 justify-end">
-                <div onClick={menuClicked} className="relative cursor-pointer">
-                  <Link to="Cart">
-                    <FontAwesomeIcon
-                      icon={faBagShopping}
-                      className="text-2xl text-white p-4  rounded-full hover:bg-white hover:text-black duration-200"
-                    />
-                  </Link>
-                  <div className="bg-white text-black ring ring-black px-2 py-0.5 font-bold text-base rounded-full absolute top-0 -right-2">
-                    {CartCounted}
-                  </div>
-                </div>
-                <div onClick={menuClicked} className="relative cursor-pointer">
-                  <Link to="Bonus">
-                    <FontAwesomeIcon
-                      icon={faHeart}
-                      className="text-2xl text-white p-4 rounded-full hover:bg-white hover:text-black duration-200"
-                    />
-                  </Link>
-                  <div className="blob bg-red-500 w-3 h-3 absolute top-3 right-2 rounded-full"></div>
-                </div>
-              </div>
 
-              <div className="flex flex-col mt-7">
-                <Link
-                  to="/Shop"
-                  onClick={menuClicked}
-                  className="text-slate-300 flex items-center justify-center gap-2  py-5 border border-x-0 hover:text-white duration-200"
-                >
-                  Start
-                  <FontAwesomeIcon icon={faAngleRight} />
-                </Link>
-                <Link
-                  to="Tshirts"
-                  onClick={menuClicked}
-                  className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 hover:text-white duration-200"
-                >
-                  Tshirts
-                  <FontAwesomeIcon icon={faAngleRight} />
-                </Link>
-                <Link
-                  to="Accessories"
-                  onClick={menuClicked}
-                  className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 hover:text-white duration-200"
-                >
-                  Accessories
-                  <FontAwesomeIcon icon={faAngleRight} />
-                </Link>
-                <Link
-                  to="Watches"
-                  onClick={menuClicked}
-                  className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 hover:text-white duration-200"
-                >
-                  Watches
-                  <FontAwesomeIcon icon={faAngleRight} />
-                </Link>
-              </div>
+            <div className="w-full flex flex-col">
+              <Link
+                to="/Shop"
+                onClick={menuClicked}
+                className="text-slate-300 flex items-center justify-center gap-2  py-5 border border-x-0 hover:text-white duration-200"
+              >
+                Start
+                <FontAwesomeIcon icon={faAngleRight} />
+              </Link>
+              <Link
+                to="Tshirts"
+                onClick={menuClicked}
+                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 hover:text-white duration-200"
+              >
+                Tshirts
+                <FontAwesomeIcon icon={faAngleRight} />
+              </Link>
+              <Link
+                to="Accessories"
+                onClick={menuClicked}
+                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 hover:text-white duration-200"
+              >
+                Accessories
+                <FontAwesomeIcon icon={faAngleRight} />
+              </Link>
+              <Link
+                to="Watches"
+                onClick={menuClicked}
+                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 hover:text-white duration-200"
+              >
+                Watches
+                <FontAwesomeIcon icon={faAngleRight} />
+              </Link>
             </div>
           </nav>
-        </div>
+        </section>
 
-        <div className="items-center gap-4 hidden sm:flex z-10">
+        <section className="items-center gap-4 hidden sm:flex z-10">
           <div className="flex items-center gap-4">
             <div className="relative cursor-pointer">
               <Link to="Cart">
                 <FontAwesomeIcon
                   icon={faBagShopping}
-                  className="text-xl text-white p-2 rounded-full hover:bg-white hover:text-black duration-200"
+                  className="text-2xl text-white p-2.5 rounded-full hover:bg-violet-500 duration-200"
                 />
               </Link>
-              <div className="bg-white text-black ring ring-black px-1 font-bold text-xs rounded-full absolute top-1.5 left-7">
+              <div className="bg-white text-violet-900 ring ring-violet-500 px-1 font-bold text-xs rounded-full absolute top-3.5 left-7">
                 {CartCounted}
               </div>
             </div>
@@ -232,36 +189,80 @@ const ShopLayout = () => {
             <div className="relative cursor-pointer">
               <Link to="Bonus">
                 <FontAwesomeIcon
-                  icon={faHeart}
-                  className="text-xl text-white p-2 rounded-full hover:bg-white hover:text-black duration-200"
+                  icon={faStar}
+                  className="text-2xl text-white p-2.5  rounded-full hover:bg-violet-500 duration-200"
                 />
               </Link>
-              <div className="blob bg-red-500 w-2.5 h-2.5 absolute top-1.5 right-0.5 rounded-full"></div>
             </div>
           </div>
           {!Account || disconncectStatus ? (
             <button
               onClick={connectToMetaMask}
-              className="font-bold text-white ring-2 ring-white rounded-full py-2 px-4 hover:text-black hover:bg-white active:ring-0 duration-150"
+              className="font-bold text-white bg-violet-600 rounded-full hover:ring hover:ring-violet-600 py-3 px-6 duration-200"
             >
               Connect with MetaMask
             </button>
           ) : (
             <div className="flex items-center gap-3">
-              <button className="flex items-center gap-2 font-bold text-white ring-2 ring-white rounded-full py-2 px-4 hover:text-black hover:bg-white active:ring-0 cursor-default duration-150">
+              <button className="font-semibold text-white rounded-full p-3 cursor-default duration-150">
                 {displayAddress}
               </button>
               <FontAwesomeIcon
                 icon={faPowerOff}
-                className="text-red-500 p-2 ring-2 ring-red-500 text-2xl rounded-full cursor-pointer hover:bg-red-500 hover:text-white duration-200"
+                className="text-violet-500 p-2.5 text-2xl rounded-full cursor-pointer hover:bg-violet-500 hover:text-white duration-200"
                 onClick={disconnectFunc}
               />
             </div>
           )}
-        </div>
+        </section>
       </header>
-      <hr className="border-0 bg-white/10 h-0.5 hidden sm:block" />
-      <section className="hidden flex-wrap py-5 gap-10 px-16 items-center sm:flex">
+
+      <hr className="border-0 bg-violet-600/20 sm:hidden h-0.5" />
+      <section className="flex justify-between py-1.5 sm:hidden px-5">
+        <div className="flex gap-4">
+          <Link to="Cart">
+            <div className="relative cursor-pointer">
+              <FontAwesomeIcon
+                icon={faBagShopping}
+                className="text-xl text-white bg-violet-600 py-2.5 px-3 rounded-full duration-200"
+              />
+
+              <div className="bg-white text-violet-800 ring-2 ring-violet-600 px-1  font-bold text-sm rounded-full absolute top-0 -right-1.5">
+                {CartCounted}
+              </div>
+            </div>
+          </Link>
+          <div className="relative cursor-pointer">
+            <Link to="Bonus">
+              <FontAwesomeIcon
+                icon={faStar}
+                className="text-xl text-white bg-violet-600 p-2.5 rounded-full duration-200"
+              />
+            </Link>
+          </div>
+        </div>
+        {!Account || disconncectStatus ? (
+          <button
+            onClick={connectToMetaMask}
+            className="font-semibold text-white bg-violet-600 rounded-full px-4"
+          >
+            Connect with MetaMask
+          </button>
+        ) : (
+          <div className="flex items-center justify-between gap-4">
+            <button className="w-full font-bold rounded-full py-2">
+              {displayAddress}
+            </button>
+            <FontAwesomeIcon
+              icon={faPowerOff}
+              className="p-2 ring-2 ring-red-500 text-xl rounded-full bg-red-500 text-white cursor-pointer duration-200"
+              onClick={disconnectFunc}
+            />
+          </div>
+        )}
+      </section>
+      <hr className="border-0 bg-violet-600/20 h-0.5 hidden sm:block" />
+      <section className="hidden flex-wrap py-5 gap-10 px-5 items-center sm:flex">
         <Link
           to="/Shop"
           className="text-slate-300 hover:text-white duration-200"
@@ -288,11 +289,11 @@ const ShopLayout = () => {
         </Link>
       </section>
 
-      <hr className="border-0 bg-white/10 h-0.5" />
+      <hr className="border-0 bg-violet-600/30 h-0.5" />
 
       <Outlet />
 
-      <hr className="border-0 bg-white/10 h-0.5" />
+      <hr className="border-0 bg-violet-600/30 h-0.5" />
 
       <footer className="flex flex-col gap-7 items-center md:flex-row justify-between px-5 py-8">
         <img src={mooninklogoType} alt="mooninklogoType" className="w-28 " />
