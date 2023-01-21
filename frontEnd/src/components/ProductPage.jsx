@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { AddtoCart } from "../ReduxStore/features/CartSlicer";
 import { CartIncremented } from "../ReduxStore/features/CartCounterSlicer";
-import MinkLogo from "../assets/svg/Asset 2.svg";
+import MinkLogo from "../assets/svg/ticonwhite.svg";
 
 const ProductPage = () => {
   const { id, id2 } = useParams();
@@ -38,30 +38,36 @@ const ProductPage = () => {
     dispatch(CartIncremented(1));
   };
 
+  const mooninkprice = 0.328;
+
   return (
-    <div className="px-16 flex justify-between mb-10 mt-10">
+    <div className="p-5 flex flex-col md:flex-row">
       <img
         src={productDetails.image}
-        alt={`${id2} in ${id}`}
-        className="w-1/4 rounded-xl"
+        alt={id2}
+        className="rounded-2xl md:w-1/2 "
       />
-      <div className="w-3/4 flex flex-col justify-between items-center">
-        <p className="text-5xl font-semibold">{productDetails.item}</p>
-        <p className="text-3xl flex items-center gap-4">
-          {productDetails.price}
-          <img className="w-7" src={MinkLogo} alt="MinkLogo" />
-        </p>
-        <div className="flex w-1/2">
-          <button
-            onClick={() => {
-              AddItemToCart();
-              CartAddCounter();
-            }}
-            className="flex-grow py-4 rounded-full bg-white text-black text-lg hover:bg-violet-700 hover:text-white active:bg-violet-600 duration-200"
-          >
-            Add To Cart
-          </button>
+      <div className="pt-7 pb-2 flex flex-col grow md:pl-10 md:pr-5 gap-7">
+        <div className="flex md:flex-col md:gap-7 justify-between text-xl md:text-3xl">
+          <p className="font-semibold">{`${productDetails.item}`}</p>
+          <p className="flex items-center gap-4">
+            {productDetails.price}
+            <img className="w-7" src={MinkLogo} alt="MinkLogo" />
+            <span className="text-slate-400">
+              {`≈ $${Math.round(productDetails.price * mooninkprice)}`}
+            </span>
+          </p>
         </div>
+
+        <button
+          onClick={() => {
+            AddItemToCart();
+            CartAddCounter();
+          }}
+          className="w-full py-3 rounded-full ring-4 ring-violet-400/40 bg-violet-600 font-semibold hover:bg-violet-500 text-white text-xl active:ring-0 duration-200"
+        >
+          Add To Bag
+        </button>
       </div>
     </div>
   );

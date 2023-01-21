@@ -198,7 +198,7 @@ const ShopLayout = () => {
           {!Account || disconncectStatus ? (
             <button
               onClick={connectToMetaMask}
-              className="font-bold text-white bg-violet-600 rounded-full hover:ring hover:ring-violet-600 py-3 px-6 duration-200"
+              className="font-bold text-white bg-violet-600 rounded-full hover:ring hover:ring-violet-600/50 py-3 px-6 duration-200"
             >
               Connect with MetaMask
             </button>
@@ -218,16 +218,16 @@ const ShopLayout = () => {
       </header>
 
       <hr className="border-0 bg-violet-600/20 sm:hidden h-0.5" />
-      <section className="flex justify-between py-1.5 sm:hidden px-5">
+      <section className="flex justify-between py-3 sm:hidden px-5">
         <div className="flex gap-4">
           <Link to="Cart">
             <div className="relative cursor-pointer">
               <FontAwesomeIcon
                 icon={faBagShopping}
-                className="text-xl text-white bg-violet-600 py-2.5 px-3 rounded-full duration-200"
+                className="text-xl text-white bg-violet-500 py-2.5 px-3 rounded-full duration-200"
               />
 
-              <div className="bg-white text-violet-800 ring-2 ring-violet-600 px-1  font-bold text-sm rounded-full absolute top-0 -right-1.5">
+              <div className="bg-white text-violet-900 ring-2 ring-violet-600 px-1  font-bold text-sm rounded-full absolute top-0 -right-1.5">
                 {CartCounted}
               </div>
             </div>
@@ -236,7 +236,7 @@ const ShopLayout = () => {
             <Link to="Bonus">
               <FontAwesomeIcon
                 icon={faStar}
-                className="text-xl text-white bg-violet-600 p-2.5 rounded-full duration-200"
+                className="text-xl text-white bg-violet-500 p-2.5 rounded-full duration-200"
               />
             </Link>
           </div>
@@ -255,7 +255,7 @@ const ShopLayout = () => {
             </button>
             <FontAwesomeIcon
               icon={faPowerOff}
-              className="p-2 ring-2 ring-red-500 text-xl rounded-full bg-red-500 text-white cursor-pointer duration-200"
+              className="p-2 bg-violet-500 text-xl rounded-full cursor-pointer duration-200"
               onClick={disconnectFunc}
             />
           </div>
@@ -289,7 +289,7 @@ const ShopLayout = () => {
         </Link>
       </section>
 
-      <hr className="border-0 bg-violet-600/30 h-0.5" />
+      <hr className="border-0 bg-violet-500/20 h-0.5" />
 
       <Outlet />
 
