@@ -29,7 +29,7 @@ const ShopLayout = () => {
   const disconncectStatus = useSelector((state) => state.Disconnect);
   const CartCounted = useSelector((state) => state.CartCounter);
   const [Account, setAccount] = useState("");
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(true);
   const disconnectFunc = () => {
     dispatch(DisconnectToggled(true));
   };
@@ -115,7 +115,7 @@ const ShopLayout = () => {
 
   return (
     <>
-      <header className="w-full relative p-5 flex justify-between items-center">
+      <header className="w-full bg-maindarkpurple/70 relative p-5 flex justify-between items-center">
         <Link to="/" className="z-10 flex gap-2">
           <img src={mooninklogo} alt="mooninklogo" className="w-7" />
           <img src={mooninklogoType} alt="mooninklogoType" className="w-28" />
@@ -288,13 +288,13 @@ const ShopLayout = () => {
         </Link>
       </section>
 
-      <hr className="border-0 bg-white/10 h-0.5 mb-5" />
+      <hr className="border-0 bg-white/10 h-0.5" />
 
       <Outlet />
 
-      <hr className="border-0 bg-white/10 h-0.5 mb-5" />
+      <hr className="border-0 bg-white/10 h-0.5" />
 
-      <footer className="flex flex-col gap-7 items-center md:flex-row justify-between px-5 pb-7 pt-3">
+      <footer className="flex flex-col gap-7 items-center md:flex-row justify-between px-5 py-8">
         <img src={mooninklogoType} alt="mooninklogoType" className="w-28 " />
         <p className="text-xs text-white/50">
           Copyright © 2023 MOONINK Inc. All rights reserved.
