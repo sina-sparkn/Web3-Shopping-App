@@ -7,13 +7,8 @@ import {
 import {
   faTwitter,
   faLinkedinIn,
-  faLinkedin,
   faInstagram,
-  faGithubAlt,
   faGithub,
-  faInstagramSquare,
-  faGitAlt,
-  faGitkraken,
 } from "@fortawesome/free-brands-svg-icons";
 import mooninkicon from "../assets/svg/ticonwhite.svg";
 import mooninktypeface from "../assets/svg/typefacewhite.svg";

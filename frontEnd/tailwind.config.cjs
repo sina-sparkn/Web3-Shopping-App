@@ -14,6 +14,10 @@ module.exports = {
         achgold: "#EAAD18",
         maindarkpurple: "#1C003A",
       },
+      spacing: {
+        128: "32rem",
+        256: "54rem",
+      },
     },
   },
   plugins: [
