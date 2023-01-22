@@ -44,6 +44,7 @@ const Bonus = () => {
   };
 
   let SumofAllPurchaes = Number(totalPurchase) / 1000;
+  console.log(typeof SumofAllPurchaes);
 
   const achievement = {
     FirstyFirst: 0,
@@ -149,26 +150,41 @@ const Bonus = () => {
     gettotal().catch(console.error);
   }, []);
 
-  if (account && !disconnectStatus) {
+  if (account && !disconnectStatus && !SumofAllPurchaes) {
     return (
-      <main className="px-16 mb-5 flex flex-col gap-12">
-        <h1 className="font-bold text-3xl">Achievements :</h1>
-        <h2>{`Total purchases : ${SumofAllPurchaes} MINK`}</h2>
-        <div className="flex flex-wrap justify-center gap-16 mb-12">
+      <div className="h-full p-5">
+        <h1 className="font-bold text-4xl">Achievements</h1>
+        <hr className="border-0 h-0.5 bg-violet-500/20 mt-5" />
+        <section className="flex capitalize text-center h-full text-3xl items-center justify-center">
+          You're not eligible yet!
+        </section>
+      </div>
+    );
+  } else if (account && !disconnectStatus) {
+    return (
+      <main className="p-5 flex flex-col bg-maindarkpurple/70 gap-7">
+        <h1 className="font-bold text-4xl">Achievements</h1>
+        <hr className="border-0 h-0.5 bg-violet-500/20" />
+        <div className="flex justify-between">
+          <span className="text-xl">{`Total Purchases`}</span>
+          <span className="text-xl">{`${SumofAllPurchaes} MINK`}</span>
+        </div>
+        <hr className="border-0 h-0.5 bg-violet-500/20" />
+        <div className="grid p-5 sm:p-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {SumofAllPurchaes > achievement.FirstyFirst && (
             <div className="flex flex-col gap-5">
               <img src={firstyfirst} alt="FIRSTYFIRST" className="w-full" />
               {!minted.ff ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 py-4 bg-achpurple rounded-full hover:bg-white hover:text-black duration-200 "
+                  className="px-4 py-3 bg-achpurple rounded-full text-xl hover:bg-white hover:text-black duration-200 "
                 >
                   MINT FIRSTYFIRST
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 py-4 bg-gray-600 text-black rounded-full cursor-not-allowed "
+                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
                 >
                   You've Claimed it!
                 </button>
@@ -181,14 +197,14 @@ const Bonus = () => {
               {!minted.bw ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 py-4 bg-achblue rounded-full hover:bg-white hover:text-black duration-200 "
+                  className="px-4 py-3 bg-achblue rounded-full text-xl hover:bg-white hover:text-black duration-200 "
                 >
                   MINT BRIGHTWAY
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 py-4 bg-gray-600 text-black rounded-full cursor-not-allowed "
+                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
                 >
                   You've Claimed it!
                 </button>
@@ -202,14 +218,14 @@ const Bonus = () => {
               {!minted.ko ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 py-4 bg-achpink rounded-full hover:bg-white hover:text-black duration-200"
+                  className="px-4 py-3 bg-achpink rounded-full text-xl hover:bg-white hover:text-black duration-200"
                 >
                   MINT KO!
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 py-4 bg-gray-600 text-black rounded-full cursor-not-allowed "
+                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
                 >
                   You've Claimed it!
                 </button>
@@ -223,14 +239,14 @@ const Bonus = () => {
               {!minted.mr ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 py-4 bg-achred rounded-full hover:bg-white hover:text-black duration-200"
+                  className="px-4 py-3 bg-achred rounded-full text-xl hover:bg-white hover:text-black duration-200"
                 >
                   MINT MASTER
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 py-4 bg-gray-600 text-black rounded-full cursor-not-allowed "
+                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
                 >
                   You've Claimed it!
                 </button>
@@ -244,14 +260,14 @@ const Bonus = () => {
               {!minted.ld ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 py-4 bg-achgold rounded-full hover:bg-white hover:text-black duration-200"
+                  className="px-4 py-3 bg-achgold rounded-full text-xl hover:bg-white hover:text-black duration-200"
                 >
                   MINT LEGEND
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 py-4 bg-gray-600 text-black rounded-full cursor-not-allowed "
+                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
                 >
                   You've Claimed it!
                 </button>
@@ -263,9 +279,13 @@ const Bonus = () => {
     );
   } else {
     return (
-      <section className="h-full flex items-center justify-center text-4xl font-semibold">
-        connect your metamask
-      </section>
+      <div className="h-full p-5">
+        <h1 className="font-bold text-4xl">Achievements</h1>
+        <hr className="border-0 h-0.5 bg-violet-500/20 mt-5" />
+        <section className="flex capitalize text-center h-full text-3xl items-center justify-center">
+          connect your metamask
+        </section>
+      </div>
     );
   }
 };
