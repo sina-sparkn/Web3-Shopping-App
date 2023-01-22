@@ -54,7 +54,7 @@ const ProductPage = () => {
             {productDetails.price}
             <img className="w-7" src={MinkLogo} alt="MinkLogo" />
             <span className="text-slate-400">
-              {`≈ $${Math.round(productDetails.price * mooninkprice)}`}
+              {`≈ $${Math.floor(productDetails.price * mooninkprice)}`}
             </span>
           </p>
         </div>

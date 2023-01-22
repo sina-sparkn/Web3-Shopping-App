@@ -1,7 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
 import { ethers } from "ethers";
-import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import abi from "../utils/MINKtoken.json";
 import {
@@ -15,10 +13,10 @@ import {
 
 const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
-  console.log(AddedProducts);
   const DisconnectStatus = useSelector((state) => state.Disconnect);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const account = useSelector((state) => state.Account);
 
   let TotalPrice = 0;
   let AllItems = "";
@@ -75,40 +73,78 @@ const Cart = () => {
     dispatch(RemoveFromCart({ name: ItemName }));
   };
 
+  const mooninkprice = 0.328;
+
   if (TotalPrice === 0) {
     return (
-      <div className="flex h-3/4 text-3xl items-center justify-center">
-        There's nothing here!
+      <div className="flex capitalize text-center h-full text-3xl items-center justify-center">
+        your shopping bag is empty!
       </div>
     );
   } else {
     return (
-      <div className="px-16 flex mb-10">
-        <section className="w-1/4 flex flex-col gap-4 justify-items-center h-screen overflow-scroll">
+      <div className="p-5 flex bg-maindarkpurple/70 flex-col">
+        <div className="flex justify-between pb-5 font-semibold text-lg">
+          <h2>YOUR SHOPPING BAG</h2>
+          <span>{`[ ${AddedProducts.length} ]`}</span>
+        </div>
+        <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
           {AddedProducts.map((item, index) => {
             return (
-              <div key={index} className="pr-3 relative">
-                <img src={item.image} alt={item.name} />
-                <div className="flex items-center justify-between relative">
+              <div key={index} className="w-full flex flex-col overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="h-full rounded-lg"
+                />
+                <div className="py-5 flex flex-col gap-3">
                   <p>{item.name}</p>
-                  <p>{item.price} ETH</p>
+                  <p className="flex items-center gap-2">
+                    {item.price} MINK
+                    <span className="text-slate-300">{`≈ $${Math.floor(
+                      item.price * mooninkprice
+                    )}`}</span>
+                  </p>
+
+                  <span
+                    className="cursor-pointer underline underline-offset-2 text-base"
+                    onClick={() => removeItem(item.name)}
+                  >
+                    remove
+                  </span>
                 </div>
-                <FontAwesomeIcon
-                  onClick={() => removeItem(item.name)}
-                  icon={faCircleXmark}
-                  className="absolute top-1.5 right-5 text-red-600 text-2xl cursor-pointer hover:text-red-500"
-                ></FontAwesomeIcon>
               </div>
             );
           })}
         </section>
-        <section className="w-3/4 flex items-center gap-10 flex-col">
-          <p>{`Total price : ${TotalPrice} MINK`}</p>
+        <hr className="border-0 h-0.5 bg-white/10 mt-5" />
+        <section className="flex gap-9 pt-10 flex-col">
+          <p className="text-xl font-semibold">YOUR ORDER SUMMARY</p>
+
+          <section className="flex flex-col tracking-wide gap-2.5 text-sm">
+            <div className="flex justify-between">
+              <p>SUBTOTAL</p>
+              <p>{`${TotalPrice} MINK ≈ $${Math.floor(
+                TotalPrice * mooninkprice
+              )}`}</p>
+            </div>
+            <div className="flex justify-between">
+              <p>SHIPPING</p>
+              <p>FREE</p>
+            </div>
+            <div className="flex justify-between">
+              <p>TOTAL (VAT INCLUDED)</p>
+              <p>{`${TotalPrice - 0} MINK ≈ $${Math.floor(
+                TotalPrice * mooninkprice - 0
+              )}`}</p>
+            </div>
+          </section>
+
           {(() => {
-            if (!DisconnectStatus) {
+            if (!DisconnectStatus && account) {
               if (loading) {
                 return (
-                  <button className="px-7 flex items-center justify-center gap-3 py-3 rounded-full text-white bg-violet-600 hover:bg-white hover:text-black duration-200">
+                  <button className="px-7 flex text-center text-xl font-semibold items-center justify-center gap-3 py-3 rounded-full bg-violet-600 ">
                     Pending
                     <span className="loader"></span>
                   </button>
@@ -117,9 +153,9 @@ const Cart = () => {
                 return (
                   <button
                     onClick={Checkout}
-                    className="px-7 py-3 rounded-full text-white bg-violet-600 hover:bg-white hover:text-black duration-200"
+                    className="px-7 py-3 capitalize rounded-full text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40 hover:bg-white hover:text-black active:ring-0 duration-200"
                   >
-                    Checkout with metamask
+                    Checkout with metaMask
                   </button>
                 );
               }
@@ -127,7 +163,7 @@ const Cart = () => {
               return (
                 <button
                   disabled
-                  className="px-7 py-3 rounded-full text-black bg-gray-600 cursor-not-allowed"
+                  className="px-7 py-3 capitalize rounded-full text-black bg-gray-600 cursor-not-allowed"
                 >
                   Connect your MetaMask to procced
                 </button>

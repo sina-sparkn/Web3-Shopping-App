@@ -36,7 +36,7 @@ const Cloting = () => {
                 <span className="flex items-center text-xl gap-2">
                   {item.price}
                   <img className="w-5" src={MintLogo} alt="MintLogo" />
-                  <span className="text-white/50 text-base">{`≈ $${Math.round(
+                  <span className="text-white/50 text-base">{`≈ $${Math.floor(
                     item.price * mooninkprice
                   )}`}</span>
                 </span>
