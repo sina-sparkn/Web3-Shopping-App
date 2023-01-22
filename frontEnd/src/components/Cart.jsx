@@ -107,7 +107,7 @@ const Cart = () => {
                   </p>
 
                   <span
-                    className="cursor-pointer underline underline-offset-2 text-base"
+                    className="cursor-pointer underline sm:w-min underline-offset-2 text-base hover:no-underline"
                     onClick={() => removeItem(item.name)}
                   >
                     remove
