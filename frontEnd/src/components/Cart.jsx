@@ -84,10 +84,11 @@ const Cart = () => {
   } else {
     return (
       <div className="p-5 flex bg-maindarkpurple/70 flex-col">
-        <div className="flex justify-between pb-5 font-semibold text-lg">
+        <div className="flex justify-between pb-5 font-semibold text-lg md:text-2xl">
           <h2>YOUR SHOPPING BAG</h2>
           <span>{`[ ${AddedProducts.length} ]`}</span>
         </div>
+
         <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
           {AddedProducts.map((item, index) => {
             return (
