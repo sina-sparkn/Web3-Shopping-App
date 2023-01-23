@@ -7,6 +7,7 @@ import WatchesSlicer from "./features/WatchesSlicer";
 import CartSlicer from "./features/CartSlicer";
 import CartCounterSlicer from "./features/CartCounterSlicer";
 import IsAccountSlicer from "./features/IsAccountSlicer";
+
 //persist redux
 import storage from "redux-persist/lib/storage";
 import { persistReducer } from "redux-persist";

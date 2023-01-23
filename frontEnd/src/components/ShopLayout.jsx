@@ -28,8 +28,10 @@ const ShopLayout = () => {
   const dispatch = useDispatch();
   const disconncectStatus = useSelector((state) => state.Disconnect);
   const CartCounted = useSelector((state) => state.CartCounter);
+
   const [Account, setAccount] = useState("");
   const [menuOpen, setMenuOpen] = useState(true);
+
   const disconnectFunc = () => {
     dispatch(DisconnectToggled(true));
   };
@@ -86,6 +88,7 @@ const ShopLayout = () => {
         setAccount(account);
       }
     };
+
     getAccount().catch(console.error);
   }, []);
 

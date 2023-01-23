@@ -19,11 +19,8 @@ const Cloting = () => {
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-10 gap-3 p-5 bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
       {AllProducts.map((item, index) => {
         return (
-          <Link to={`${item.item}`}>
-            <div
-              key={index}
-              className="pb-3 flex flex-col gap-2 rounded-xl ring-2 overflow-hidden ring-white/50 hover:bg-violet-600/20 duration-500"
-            >
+          <Link key={index} to={`${item.item}`}>
+            <div className="pb-3 flex flex-col gap-2 rounded-xl ring-2 overflow-hidden ring-white/50 hover:bg-violet-600/20 duration-500">
               <div className="overflow-hidden">
                 <img
                   src={item.image}
