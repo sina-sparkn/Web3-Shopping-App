@@ -6,6 +6,7 @@ import Start from "./Start";
 import ProductPage from "./ProductPage";
 import Cart from "./Cart";
 import Bonus from "./Bonus";
+import Faucet from "./Faucet";
 
 const Shop = () => {
   return (
@@ -17,6 +18,7 @@ const Shop = () => {
           <Route path=":id/:id2" element={<ProductPage />}></Route>
           <Route path="/Cart" element={<Cart />}></Route>
           <Route path="/Bonus" element={<Bonus />}></Route>
+          <Route path="/Faucet" element={<Faucet />}></Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>

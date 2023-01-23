@@ -13,6 +13,7 @@ import {
   faBars,
   faXmark,
   faAngleRight,
+  faFaucet,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faTwitter,
@@ -200,6 +201,13 @@ const ShopLayout = () => {
                 <span className="tooltiptext">achievements</span>
               </Link>
             </div>
+
+            <Link to="Faucet">
+              <FontAwesomeIcon
+                icon={faFaucet}
+                className="text-2xl text-white p-2.5  rounded-full hover:bg-violet-500 duration-200"
+              />
+            </Link>
           </div>
           {!Account || disconncectStatus ? (
             <button
@@ -246,10 +254,17 @@ const ShopLayout = () => {
             <Link to="Bonus">
               <FontAwesomeIcon
                 icon={faStar}
-                className="text-xl text-white bg-violet-500 p-2.5 rounded-full duration-200"
+                className="text-xl text-white bg-violet-500 p-2.5 rounded-full"
               />
             </Link>
           </div>
+
+          <Link to="Faucet">
+            <FontAwesomeIcon
+              icon={faFaucet}
+              className="text-xl text-white bg-violet-500 p-2.5 rounded-full "
+            />
+          </Link>
         </div>
         {!Account || disconncectStatus ? (
           <button
