@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import MINKabi from "../utils/MINKtoken.json";
 import { useState } from "react";
-import env from "../../env.json";
+import env from "../../details.json";
 
 const Faucet = () => {
   const [receiver, SetReceiver] = useState("");
