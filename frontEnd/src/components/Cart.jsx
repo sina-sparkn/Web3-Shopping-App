@@ -145,7 +145,10 @@ const Cart = () => {
             if (!DisconnectStatus && account) {
               if (loading) {
                 return (
-                  <button className="px-7 flex text-center text-xl font-semibold items-center justify-center gap-3 py-3 rounded-full bg-violet-600 ">
+                  <button
+                    disabled
+                    className="px-7 py-3 flex justify-center items-center gap-3 capitalize rounded-full text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40"
+                  >
                     Pending
                     <span className="loader"></span>
                   </button>
@@ -154,7 +157,7 @@ const Cart = () => {
                 return (
                   <button
                     onClick={Checkout}
-                    className="px-7 py-3 capitalize rounded-full text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40 hover:bg-white hover:text-black active:ring-0 duration-200"
+                    className="px-7 py-3 capitalize rounded-full text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40 hover:bg-violet-500 active:ring-0 duration-200"
                   >
                     Checkout with metaMask
                   </button>

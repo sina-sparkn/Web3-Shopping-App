@@ -8,6 +8,9 @@ import master from "../assets/svg/achievement/master.svg";
 import legend from "../assets/svg/achievement/legend.svg";
 import { useSelector } from "react-redux";
 import NFTAbi from "../utils/MoonInkMedals.json";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUpLong } from "@fortawesome/free-solid-svg-icons";
+import dash from "../assets/svg/illustrations/dash.svg";
 
 const Bonus = () => {
   const account = useSelector((state) => state.Account);
@@ -150,7 +153,7 @@ const Bonus = () => {
     gettotal().catch(console.error);
   }, []);
 
-  if (account && !disconnectStatus && !SumofAllPurchaes) {
+  if (account && !disconnectStatus && SumofAllPurchaes === 0) {
     return (
       <div className="h-full bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple p-5">
         <h1 className="font-bold text-4xl">Achievements</h1>
@@ -171,62 +174,22 @@ const Bonus = () => {
         </div>
         <hr className="border-0 h-0.5 bg-violet-500/20" />
         <div className="grid p-5 sm:p-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-          {SumofAllPurchaes > achievement.FirstyFirst && (
-            <div className="flex flex-col gap-5">
-              <img src={firstyfirst} alt="FIRSTYFIRST" className="w-full" />
-              {!minted.ff ? (
-                <button
-                  onClick={() => Mint()}
-                  className="px-4 py-3 bg-achpurple rounded-full text-xl hover:bg-white hover:text-black duration-200 "
-                >
-                  MINT FIRSTYFIRST
-                </button>
-              ) : (
-                <button
-                  disabled
-                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
-                >
-                  You've Claimed it!
-                </button>
-              )}
-            </div>
-          )}
-          {SumofAllPurchaes >= achievement.BrightWay && (
-            <div className="flex flex-col gap-5">
-              <img src={brightway} alt="FIRSTYFIRST" className="w-full" />
-              {!minted.bw ? (
-                <button
-                  onClick={() => Mint()}
-                  className="px-4 py-3 bg-achblue rounded-full text-xl hover:bg-white hover:text-black duration-200 "
-                >
-                  MINT BRIGHTWAY
-                </button>
-              ) : (
-                <button
-                  disabled
-                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
-                >
-                  You've Claimed it!
-                </button>
-              )}
-            </div>
-          )}
-
-          {SumofAllPurchaes >= achievement.KO && (
+          {SumofAllPurchaes >= achievement.Legend && (
             <div className="flex flex-col gap-5 ">
-              <img src={ko} alt="FIRSTYFIRST" className="w-full" />
-              {!minted.ko ? (
+              <img src={legend} alt="FIRSTYFIRST" className="w-full" />
+              {!minted.ld ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 py-3 bg-achpink rounded-full text-xl hover:bg-white hover:text-black duration-200"
+                  className="px-4 font-semibold tracking-wide py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200"
                 >
-                  MINT KO!
+                  MINT LEGEND
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
+                  className="px-4 font-semibold tracking-wide py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
                 >
+                  {" "}
                   You've Claimed it!
                 </button>
               )}
@@ -239,36 +202,82 @@ const Bonus = () => {
               {!minted.mr ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 py-3 bg-achred rounded-full text-xl hover:bg-white hover:text-black duration-200"
+                  className="px-4 font-semibold tracking-wide py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200"
                 >
                   MINT MASTER
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
+                  className="px-4 font-semibold tracking-wide py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
                 >
+                  {" "}
                   You've Claimed it!
                 </button>
               )}
             </div>
           )}
 
-          {SumofAllPurchaes >= achievement.Legend && (
+          {SumofAllPurchaes >= achievement.KO && (
             <div className="flex flex-col gap-5 ">
-              <img src={legend} alt="FIRSTYFIRST" className="w-full" />
-              {!minted.ld ? (
+              <img src={ko} alt="FIRSTYFIRST" className="w-full" />
+              {!minted.ko ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 py-3 bg-achgold rounded-full text-xl hover:bg-white hover:text-black duration-200"
+                  className="px-4 font-semibold tracking-wide py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200"
                 >
-                  MINT LEGEND
+                  MINT KO!
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 py-3 bg-gray-600 text-black rounded-full text-xl cursor-not-allowed "
+                  className="px-4 font-semibold tracking-wide py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
                 >
+                  {""}
+                  You've Claimed it!
+                </button>
+              )}
+            </div>
+          )}
+
+          {SumofAllPurchaes >= achievement.BrightWay && (
+            <div className="flex flex-col gap-5">
+              <img src={brightway} alt="FIRSTYFIRST" className="w-full" />
+              {!minted.bw ? (
+                <button
+                  onClick={() => Mint()}
+                  className="px-4 font-semibold tracking-wide py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 "
+                >
+                  MINT BRIGHTWAY
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="px-4 font-semibold tracking-wide py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                >
+                  {" "}
+                  You've Claimed it!
+                </button>
+              )}
+            </div>
+          )}
+
+          {SumofAllPurchaes > achievement.FirstyFirst && (
+            <div className="flex flex-col items-center gap-5 w-full">
+              <img src={firstyfirst} alt="FIRSTYFIRST" className="w-full" />
+              {!minted.ff ? (
+                <button
+                  onClick={() => Mint()}
+                  className="px-4 font-semibold tracking-wide py-3 w-full bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 "
+                >
+                  MINT FIRSTYFIRST
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="px-4 font-semibold tracking-wide py-3 w-full bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                >
+                  {" "}
                   You've Claimed it!
                 </button>
               )}
