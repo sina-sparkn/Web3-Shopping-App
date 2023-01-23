@@ -236,7 +236,7 @@ const ShopLayout = () => {
       </header>
 
       <hr className="border-0 bg-violet-600/20 sm:hidden h-0.5" />
-      <section className="flex justify-between py-3 sm:hidden px-5">
+      <section className="flex justify-between flex-wrap py-3 sm:hidden px-5">
         <div className="flex gap-4">
           <Link to="Cart">
             <div className="relative cursor-pointer">
