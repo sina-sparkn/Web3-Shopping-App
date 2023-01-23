@@ -187,12 +187,14 @@ const ShopLayout = () => {
               </div>
             </div>
 
-            <div className="relative cursor-pointer">
+            <div className="relative tooltip cursor-pointer">
               <Link to="Bonus">
                 <FontAwesomeIcon
                   icon={faStar}
                   className="text-2xl text-white p-2.5  rounded-full hover:bg-violet-500 duration-200"
                 />
+                <span className="bg-green-500 ring ring-black w-2.5 h-2.5 absolute top-1 left-10 rounded-full"></span>
+                <span className="tooltiptext">achievements</span>
               </Link>
             </div>
           </div>
@@ -208,11 +210,15 @@ const ShopLayout = () => {
               <button className="font-semibold text-white rounded-full p-3 cursor-default duration-150">
                 {displayAddress}
               </button>
-              <FontAwesomeIcon
-                icon={faPowerOff}
-                className="text-violet-500 p-2.5 text-2xl rounded-full cursor-pointer hover:bg-violet-500 hover:text-white duration-200"
-                onClick={disconnectFunc}
-              />
+
+              <div className="tooltip ">
+                <FontAwesomeIcon
+                  icon={faPowerOff}
+                  className="text-violet-500 relative p-2.5 text-2xl rounded-full cursor-pointer hover:bg-violet-500 hover:text-white duration-200"
+                  onClick={disconnectFunc}
+                />
+                <span className="tooltiptext">disconnect</span>
+              </div>
             </div>
           )}
         </section>
@@ -233,7 +239,7 @@ const ShopLayout = () => {
               </div>
             </div>
           </Link>
-          <div className="relative cursor-pointer">
+          <div className="relative">
             <Link to="Bonus">
               <FontAwesomeIcon
                 icon={faStar}
@@ -256,7 +262,7 @@ const ShopLayout = () => {
             </button>
             <FontAwesomeIcon
               icon={faPowerOff}
-              className="p-2 bg-violet-500 text-xl rounded-full cursor-pointer duration-200"
+              className="p-2.5 bg-violet-500 text-xl rounded-full cursor-pointer duration-200"
               onClick={disconnectFunc}
             />
           </div>

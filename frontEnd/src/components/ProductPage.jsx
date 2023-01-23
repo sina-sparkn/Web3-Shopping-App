@@ -52,7 +52,7 @@ const ProductPage = () => {
 
   const testSleep = async () => {
     setAddedtobag(true);
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 2.5; i++) {
       await sleep(1000);
     }
     setAddedtobag(false);
@@ -61,7 +61,7 @@ const ProductPage = () => {
   const mooninkprice = 0.328;
 
   return (
-    <div className="p-5 flex flex-col md:flex-row">
+    <div className="p-5 flex flex-col md:flex-row bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
       <img
         src={productDetails.image}
         alt={id2}

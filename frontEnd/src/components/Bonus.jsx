@@ -8,9 +8,6 @@ import master from "../assets/svg/achievement/master.svg";
 import legend from "../assets/svg/achievement/legend.svg";
 import { useSelector } from "react-redux";
 import NFTAbi from "../utils/MoonInkMedals.json";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowUpLong } from "@fortawesome/free-solid-svg-icons";
-import dash from "../assets/svg/illustrations/dash.svg";
 
 const Bonus = () => {
   const account = useSelector((state) => state.Account);
@@ -47,7 +44,6 @@ const Bonus = () => {
   };
 
   let SumofAllPurchaes = Number(totalPurchase) / 1000;
-  console.log(typeof SumofAllPurchaes);
 
   const achievement = {
     FirstyFirst: 0,
@@ -176,20 +172,19 @@ const Bonus = () => {
         <div className="grid p-5 sm:p-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {SumofAllPurchaes >= achievement.Legend && (
             <div className="flex flex-col gap-5 ">
-              <img src={legend} alt="FIRSTYFIRST" className="w-full" />
+              <img src={legend} className="w-full" />
               {!minted.ld ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 font-semibold tracking-wide py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200"
+                  className="px-4 font-semibold  py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200"
                 >
                   MINT LEGEND
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 font-semibold tracking-wide py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                  className="px-4 font-semibold  py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
                 >
-                  {" "}
                   You've Claimed it!
                 </button>
               )}
@@ -202,14 +197,14 @@ const Bonus = () => {
               {!minted.mr ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 font-semibold tracking-wide py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200"
+                  className="px-4 font-semibold  py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200"
                 >
                   MINT MASTER
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 font-semibold tracking-wide py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                  className="px-4 font-semibold  py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
                 >
                   {" "}
                   You've Claimed it!
@@ -224,14 +219,14 @@ const Bonus = () => {
               {!minted.ko ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 font-semibold tracking-wide py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200"
+                  className="px-4 font-semibold  py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200"
                 >
                   MINT KO!
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 font-semibold tracking-wide py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                  className="px-4 font-semibold  py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
                 >
                   {""}
                   You've Claimed it!
@@ -246,14 +241,14 @@ const Bonus = () => {
               {!minted.bw ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 font-semibold tracking-wide py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 "
+                  className="px-4 font-semibold  py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 "
                 >
                   MINT BRIGHTWAY
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 font-semibold tracking-wide py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                  className="px-4 font-semibold  py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
                 >
                   {" "}
                   You've Claimed it!
@@ -268,14 +263,14 @@ const Bonus = () => {
               {!minted.ff ? (
                 <button
                   onClick={() => Mint()}
-                  className="px-4 font-semibold tracking-wide py-3 w-full bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 "
+                  className="px-4 font-semibold  py-3 w-full bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 "
                 >
                   MINT FIRSTYFIRST
                 </button>
               ) : (
                 <button
                   disabled
-                  className="px-4 font-semibold tracking-wide py-3 w-full bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                  className="px-4 font-semibold  py-3 w-full bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
                 >
                   {" "}
                   You've Claimed it!

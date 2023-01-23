@@ -24,15 +24,12 @@ body,
 }
 
 ::-webkit-scrollbar-track {
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(181, 181, 181);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: white;
+  border-radius: 50px;
+  background: rgba(144, 59, 218, 0.368);
 }
 
 .loader {
@@ -183,4 +180,39 @@ body,
 .button-77:disabled {
   cursor: default;
   opacity: 0.24;
+}
+
+.tooltip {
+  position: relative;
+  border-radius: 100%;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  background-color: rgb(53, 53, 53);
+  color: white;
+  text-align: center;
+  border-radius: 10px;
+  border: 2px solid rgb(75, 75, 75);
+  position: absolute;
+  z-index: 1;
+  padding: 0 7px;
+  top: 120%;
+  left: 20%;
+  margin-left: -60px;
+}
+
+.tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 65%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent rgb(75, 75, 75) transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
