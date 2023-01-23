@@ -77,7 +77,7 @@ const Cart = () => {
 
   if (TotalPrice === 0) {
     return (
-      <div className="flex capitalize text-center h-full text-3xl items-center justify-center">
+      <div className="flex capitalize text-center bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple h-full text-3xl items-center justify-center">
         your shopping bag is empty!
       </div>
     );

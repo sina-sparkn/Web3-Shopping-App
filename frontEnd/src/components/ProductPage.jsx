@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { AddtoCart } from "../ReduxStore/features/CartSlicer";
 import { CartIncremented } from "../ReduxStore/features/CartCounterSlicer";
 import MinkLogo from "../assets/svg/ticonwhite.svg";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const ProductPage = () => {
   const { id, id2 } = useParams();
@@ -22,6 +25,8 @@ const ProductPage = () => {
     );
   }
 
+  const [addedtobag, setAddedtobag] = useState(false);
+
   const dispatch = useDispatch();
 
   const AddItemToCart = () => {
@@ -32,10 +37,25 @@ const ProductPage = () => {
         image: productDetails.image,
       })
     );
+    testSleep();
   };
 
   const CartAddCounter = () => {
     dispatch(CartIncremented(1));
+  };
+
+  const sleep = async (milliseconds) => {
+    await new Promise((resolve) => {
+      return setTimeout(resolve, milliseconds);
+    });
+  };
+
+  const testSleep = async () => {
+    setAddedtobag(true);
+    for (let i = 0; i < 4; i++) {
+      await sleep(1000);
+    }
+    setAddedtobag(false);
   };
 
   const mooninkprice = 0.328;
@@ -59,15 +79,24 @@ const ProductPage = () => {
           </p>
         </div>
 
-        <button
-          onClick={() => {
-            AddItemToCart();
-            CartAddCounter();
-          }}
-          className="w-full py-3 rounded-full ring-4 ring-violet-400/40 bg-violet-600 font-semibold hover:bg-violet-500 text-white text-xl active:ring-0 duration-200"
-        >
-          Add To Bag
-        </button>
+        {!addedtobag ? (
+          <button
+            onClick={() => {
+              AddItemToCart();
+              CartAddCounter();
+            }}
+            className="w-full py-3 rounded-full ring-4 ring-violet-400/40 bg-violet-600 font-semibold hover:bg-violet-500 text-white text-xl active:ring-0 duration-200"
+          >
+            <span>Add to Bag</span>
+          </button>
+        ) : (
+          <button className="w-full ping py-3 rounded-full ring-4 ring-green-500/40 bg-green-600 hover:bg-green-500 font-semibold text-white text-xl duration-200">
+            <div className="flex items-center justify-center gap-2.5">
+              <span>Item Added to your bag</span>
+              <FontAwesomeIcon icon={faCheckCircle} className="rounded-full" />
+            </div>
+          </button>
+        )}
       </div>
     </div>
   );
