@@ -152,7 +152,7 @@ const Bonus = () => {
 
   if (account && !disconnectStatus && !SumofAllPurchaes) {
     return (
-      <div className="h-full p-5">
+      <div className="h-full bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple p-5">
         <h1 className="font-bold text-4xl">Achievements</h1>
         <hr className="border-0 h-0.5 bg-violet-500/20 mt-5" />
         <section className="flex capitalize text-center h-full text-3xl items-center justify-center">
@@ -162,7 +162,7 @@ const Bonus = () => {
     );
   } else if (account && !disconnectStatus) {
     return (
-      <main className="p-5 flex flex-col bg-maindarkpurple/70 gap-7">
+      <main className="p-5 flex flex-col bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple gap-7">
         <h1 className="font-bold text-4xl">Achievements</h1>
         <hr className="border-0 h-0.5 bg-violet-500/20" />
         <div className="flex justify-between">
@@ -279,7 +279,7 @@ const Bonus = () => {
     );
   } else {
     return (
-      <div className="h-full p-5">
+      <div className="h-full p-5 bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
         <h1 className="font-bold text-4xl">Achievements</h1>
         <hr className="border-0 h-0.5 bg-violet-500/20 mt-5" />
         <section className="flex capitalize text-center h-full text-3xl items-center justify-center">

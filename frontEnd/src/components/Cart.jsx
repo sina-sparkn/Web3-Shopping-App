@@ -83,10 +83,10 @@ const Cart = () => {
     );
   } else {
     return (
-      <div className="p-5 flex bg-maindarkpurple/70 flex-col">
-        <div className="flex justify-between pb-5 font-semibold text-lg md:text-2xl">
+      <div className="p-5 flex bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple flex-col">
+        <div className="flex justify-between gap-5 pb-5 font-semibold text-lg md:text-2xl">
           <h2>YOUR SHOPPING BAG</h2>
-          <span>{`[ ${AddedProducts.length} ]`}</span>
+          <span className="bg-violet-500/40 text-center rounded-full px-3">{`${AddedProducts.length}`}</span>
         </div>
 
         <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
@@ -164,9 +164,9 @@ const Cart = () => {
               return (
                 <button
                   disabled
-                  className="px-7 py-3 capitalize rounded-full text-black bg-gray-600 cursor-not-allowed"
+                  className="px-7 text-xl py-3 capitalize rounded-full text-black bg-gray-600 cursor-not-allowed"
                 >
-                  Connect your MetaMask to procced
+                  Connect your Metamask to procced
                 </button>
               );
             }

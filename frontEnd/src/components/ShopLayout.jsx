@@ -97,16 +97,17 @@ const ShopLayout = () => {
 
   let classClose;
   let classDiv;
+
   if (menuOpen) {
     classClose =
-      "absolute transition duration-200 transform ease-out translate-x-full flex flex-col items-end gap-7 top-0 right-0 h-full p-5 ";
+      "duration-200 ease-out translate-x-full flex flex-col items-end gap-7 h-full p-5 ";
     classDiv =
-      "absolute top-0 right-0 backdrop-blur bg-black/80 h-full overflow-hidden ease-out w-full duration-200";
+      "absolute top-0 right-0 bg-black h-full w-full overflow-hidden ease-out duration-300";
   } else {
     classClose =
-      "absolute transition transform duration-200 ease-out translate-x-0 z-20 flex flex-col items-end gap-7 top-0 right-0 bg-black h-full w-full p-5 ";
+      "duration-200 ease-out translate-x-0 z-20 flex flex-col items-end gap-7 top-0 right-0 bg-black h-screen p-5 ";
     classDiv =
-      "absolute bg-black/80 backdrop-blur top-0 right-0 h-256 z-20 ease-out overflow-hidden w-full duration-200 ";
+      "fixed top-0 right-0 h-screen w-full bg-black z-20 ease-out overflow-hidden duration-300";
   }
 
   const menuClicked = () => {
@@ -198,7 +199,7 @@ const ShopLayout = () => {
           {!Account || disconncectStatus ? (
             <button
               onClick={connectToMetaMask}
-              className="font-bold text-white bg-violet-600 rounded-full hover:ring hover:ring-violet-600/50 py-3 px-6 duration-200"
+              className="font-bold text-white bg-violet-500 rounded-full hover:ring hover:ring-violet-600/50 py-3 px-6 duration-200"
             >
               Connect with MetaMask
             </button>
@@ -244,7 +245,7 @@ const ShopLayout = () => {
         {!Account || disconncectStatus ? (
           <button
             onClick={connectToMetaMask}
-            className="font-semibold text-white bg-violet-600 rounded-full px-4"
+            className="font-semibold text-white bg-violet-500 rounded-full px-4"
           >
             Connect with MetaMask
           </button>
@@ -293,9 +294,9 @@ const ShopLayout = () => {
 
       <Outlet />
 
-      <hr className="border-0 bg-violet-600/30 h-0.5" />
+      <hr className="border-0 bg-violet-600/40 h-0.5" />
 
-      <footer className="flex flex-col gap-7 items-center md:flex-row justify-between px-5 py-8">
+      <footer className="flex flex-col gap-7 bg-maindarkpurple items-center md:flex-row justify-between px-5 py-8">
         <img src={mooninklogoType} alt="mooninklogoType" className="w-28 " />
         <p className="text-xs text-white/50">
           Copyright © 2023 MOONINK Inc. All rights reserved.
