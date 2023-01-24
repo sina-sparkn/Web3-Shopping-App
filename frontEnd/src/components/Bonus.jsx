@@ -14,8 +14,10 @@ const Bonus = () => {
   const disconnectStatus = useSelector((state) => state.Disconnect);
   const MINKcontractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42";
   const contractABI = MINKabi.abi;
+
   const [totalPurchase, setTotalPurchase] = useState(0);
   const [minted, setMinted] = useState({});
+  const [loading, setLoading] = useState([false, false, false, false, false]);
 
   const TotalPurchase = async () => {
     try {
@@ -56,10 +58,21 @@ const Bonus = () => {
   const SoulBoundsContract = "0x748D5504958D86A0E18682aeED90f7EB45238B0F";
   const SoulBoundsContractAbi = NFTAbi.abi;
 
-  const Mint = async () => {
+  const Mint = async (id) => {
     try {
       const { ethereum } = window;
       if (ethereum && ethereum.networkVersion === "5") {
+        if (id === 5) {
+          setLoading([false, false, false, false, true]);
+        } else if (id === 4) {
+          setLoading([false, false, false, true, false]);
+        } else if (id === 3) {
+          setLoading([false, false, true, false, false]);
+        } else if (id === 2) {
+          setLoading([false, true, false, false, false]);
+        } else if (id === 1) {
+          setLoading([true, false, false, false, false]);
+        }
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const SoulBound = new ethers.Contract(
@@ -72,12 +85,14 @@ const Bonus = () => {
         console.log("minting...");
         await mint.wait();
         console.log("minted--");
+        setLoading([false, false, false, false, false]);
       } else {
         console.error(
           "Ethereum object does not found! or the test network you are connected with is not goerli!"
         );
       }
     } catch (error) {
+      setLoading([false, false, false, false, false]);
       console.error(error);
     }
   };
@@ -173,109 +188,185 @@ const Bonus = () => {
           {SumofAllPurchaes >= achievement.Legend && (
             <div className="flex flex-col gap-5 ">
               <img src={legend} className="w-full" />
-              {!minted.ld ? (
-                <button
-                  onClick={() => Mint()}
-                  className="px-4 font-semibold  py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200"
-                >
-                  MINT LEGEND
-                </button>
-              ) : (
-                <button
-                  disabled
-                  className="px-4 font-semibold  py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
-                >
-                  You've Claimed it!
-                </button>
-              )}
+              {(() => {
+                if (!minted.ld) {
+                  if (!loading[4]) {
+                    return (
+                      <button
+                        onClick={() => Mint(5)}
+                        className="px-4 w-full uppercase font-semibold  py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200 "
+                      >
+                        free MINT Legend
+                      </button>
+                    );
+                  } else {
+                    return (
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200 ">
+                        MINTING
+                        <span className="loader"></span>
+                      </button>
+                    );
+                  }
+                } else {
+                  return (
+                    <button
+                      disabled
+                      className="px-4 font-semibold w-full py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                    >
+                      {" "}
+                      You've Claimed it!
+                    </button>
+                  );
+                }
+              })()}
             </div>
           )}
 
           {SumofAllPurchaes >= achievement.Master && (
             <div className="flex flex-col gap-5 ">
               <img src={master} alt="FIRSTYFIRST" className="w-full" />
-              {!minted.mr ? (
-                <button
-                  onClick={() => Mint()}
-                  className="px-4 font-semibold  py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200"
-                >
-                  MINT MASTER
-                </button>
-              ) : (
-                <button
-                  disabled
-                  className="px-4 font-semibold  py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
-                >
-                  {" "}
-                  You've Claimed it!
-                </button>
-              )}
+              {(() => {
+                if (!minted.mr) {
+                  if (!loading[3]) {
+                    return (
+                      <button
+                        onClick={() => Mint(4)}
+                        className="px-4 w-full uppercase font-semibold  py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200 "
+                      >
+                        free MINT master
+                      </button>
+                    );
+                  } else {
+                    return (
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200 ">
+                        MINTING
+                        <span className="loader"></span>
+                      </button>
+                    );
+                  }
+                } else {
+                  return (
+                    <button
+                      disabled
+                      className="px-4 font-semibold w-full py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                    >
+                      {" "}
+                      You've Claimed it!
+                    </button>
+                  );
+                }
+              })()}
             </div>
           )}
 
           {SumofAllPurchaes >= achievement.KO && (
             <div className="flex flex-col gap-5 ">
               <img src={ko} alt="FIRSTYFIRST" className="w-full" />
-              {!minted.ko ? (
-                <button
-                  onClick={() => Mint()}
-                  className="px-4 font-semibold  py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200"
-                >
-                  MINT KO!
-                </button>
-              ) : (
-                <button
-                  disabled
-                  className="px-4 font-semibold  py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
-                >
-                  {""}
-                  You've Claimed it!
-                </button>
-              )}
+              {(() => {
+                if (!minted.ko) {
+                  if (!loading[2]) {
+                    return (
+                      <button
+                        onClick={() => Mint(3)}
+                        className="px-4 w-full uppercase font-semibold  py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200 "
+                      >
+                        free MINT KO!
+                      </button>
+                    );
+                  } else {
+                    return (
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200 ">
+                        MINTING
+                        <span className="loader"></span>
+                      </button>
+                    );
+                  }
+                } else {
+                  return (
+                    <button
+                      disabled
+                      className="px-4 font-semibold w-full py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                    >
+                      {" "}
+                      You've Claimed it!
+                    </button>
+                  );
+                }
+              })()}
             </div>
           )}
 
           {SumofAllPurchaes >= achievement.BrightWay && (
             <div className="flex flex-col gap-5">
               <img src={brightway} alt="FIRSTYFIRST" className="w-full" />
-              {!minted.bw ? (
-                <button
-                  onClick={() => Mint()}
-                  className="px-4 font-semibold  py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 "
-                >
-                  MINT BRIGHTWAY
-                </button>
-              ) : (
-                <button
-                  disabled
-                  className="px-4 font-semibold  py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
-                >
-                  {" "}
-                  You've Claimed it!
-                </button>
-              )}
+              {(() => {
+                if (!minted.bw) {
+                  if (!loading[1]) {
+                    return (
+                      <button
+                        onClick={() => Mint(2)}
+                        className="px-4 font-semibold  py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 "
+                      >
+                        free MINT BRIGHTWAY
+                      </button>
+                    );
+                  } else {
+                    return (
+                      <button className="px-4 font-semibold flex items-center justify-center gap-3 py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 ">
+                        MINTING
+                        <span className="loader"></span>
+                      </button>
+                    );
+                  }
+                } else {
+                  return (
+                    <button
+                      disabled
+                      className="px-4 font-semibold  py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                    >
+                      {" "}
+                      You've Claimed it!
+                    </button>
+                  );
+                }
+              })()}
             </div>
           )}
 
           {SumofAllPurchaes > achievement.FirstyFirst && (
-            <div className="flex flex-col items-center gap-5 w-full">
+            <div className="flex flex-col items-center gap-5">
               <img src={firstyfirst} alt="FIRSTYFIRST" className="w-full" />
-              {!minted.ff ? (
-                <button
-                  onClick={() => Mint()}
-                  className="px-4 font-semibold  py-3 w-full bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 "
-                >
-                  MINT FIRSTYFIRST
-                </button>
-              ) : (
-                <button
-                  disabled
-                  className="px-4 font-semibold  py-3 w-full bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
-                >
-                  {" "}
-                  You've Claimed it!
-                </button>
-              )}
+              {(() => {
+                if (!minted.ff) {
+                  if (!loading[0]) {
+                    return (
+                      <button
+                        onClick={() => Mint(1)}
+                        className="px-4 w-full uppercase font-semibold  py-3 bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 "
+                      >
+                        free MINT FirstyFirst
+                      </button>
+                    );
+                  } else {
+                    return (
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 ">
+                        MINTING
+                        <span className="loader"></span>
+                      </button>
+                    );
+                  }
+                } else {
+                  return (
+                    <button
+                      disabled
+                      className="px-4 font-semibold w-full py-3 bg-gray-600 text-black rounded-full ring-4 ring-gray-500/50 text-xl cursor-notring-0 "
+                    >
+                      {" "}
+                      You've Claimed it!
+                    </button>
+                  );
+                }
+              })()}
             </div>
           )}
         </div>

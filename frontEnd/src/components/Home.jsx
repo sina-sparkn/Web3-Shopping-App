@@ -91,14 +91,7 @@ const Home = () => {
               >
                 $MINK
               </a>{" "}
-              token use the{" "}
-              <a
-                href="#"
-                className="text-white font-bold underline underline-offset-2"
-              >
-                Faucet
-              </a>{" "}
-              to get Started.
+              token.
             </p>
           </div>
 
