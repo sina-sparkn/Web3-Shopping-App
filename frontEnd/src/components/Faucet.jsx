@@ -15,6 +15,16 @@ const Faucet = () => {
         Faucet
       </h3>
       <hr className="w-full border-0 bg-violet-500/30 h-0.5" />
+      <p className="text-xl leading-8">
+        I couldn't add faucet functionality to this component. <br /> I had
+        similar problem like{" "}
+        <a
+          className="underline underline-offset-2 text-violet-400"
+          href="https://stackoverflow.com/questions/75172554/environment-variables-with-vite-react-ts-and-vercel"
+        >
+          this one.
+        </a>
+      </p>
     </main>
   );
 };
