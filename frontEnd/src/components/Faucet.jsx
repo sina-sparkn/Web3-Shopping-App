@@ -1,7 +1,6 @@
 import { ethers } from "ethers";
 import MINKabi from "../utils/MINKtoken.json";
 import { useState } from "react";
-import env from "../../details.json";
 
 const Faucet = () => {
   const [receiver, SetReceiver] = useState("");
@@ -9,12 +8,12 @@ const Faucet = () => {
   const [txdetails, setTxdetails] = useState({});
 
   const provider = new ethers.providers.JsonRpcProvider(
-    env.REACT_APP_TESTNET_QUICKNODE_KEY
+    import.meta.env.VITE_TESTNET_QUICKNODE_KEY
   );
 
   const MINKContractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"; //Chainlink TokenAddress
 
-  const privatekey = env.REACT_APP_PRIVATE_KEY;
+  const privatekey = import.meta.env.VITE_PRIVATE_KEY;
   const wallet = new ethers.Wallet(privatekey, provider);
   const contract = new ethers.Contract(
     MINKContractAddress,
@@ -31,6 +30,9 @@ const Faucet = () => {
     });
     setLoading(false);
   }
+
+  const walletAddrRegex = /0x.{40}/;
+
   return (
     <main className="p-5 h-full flex flex-col gap-5 items-start bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
       <h3 className="text-3xl font-semibold ">
@@ -43,7 +45,7 @@ const Faucet = () => {
         Faucet
       </h3>
       <hr className="w-full border-0 bg-violet-500/30 h-0.5" />
-      <div className="w-full flex flex-col items-start gap-5 lg:px-20">
+      <div className="w-full flex flex-col items-start gap-5">
         <p className="text-lg md:text-2xl font-semibold tracking-wide">
           Enter your goerli wallet address :
         </p>
@@ -51,28 +53,42 @@ const Faucet = () => {
           <input
             type="text"
             placeholder="Enter Your Wallet Address (0x...)"
-            className="py-4 px-5 w-full rounded-full font-semibold caret-violet-600 text-black outline-none"
+            className="py-4 px-5 font-base w-full rounded-2xl caret-violet-600 text-black outline-none focus:ring focus:ring-violet-500 duration-300"
             value={receiver}
             onChange={(e) => {
               SetReceiver(e.target.value);
             }}
           />
-          {!loading ? (
-            <button
-              onClick={main}
-              className="py-4 sm:px-10 min-w-max font-semibold bg-violet-500 ring-4 ring-violet-500/50 hover:ring-0 rounded-full duration-200"
-            >
-              Send testnet MINK token
-            </button>
-          ) : (
-            <button
-              onClick={main}
-              className="py-4 flex items-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-500 ring-4 ring-violet-500/50 hover:ring-0 rounded-full duration-200"
-            >
-              Sending
-              <span className="loader"></span>
-            </button>
-          )}
+          {(() => {
+            if (!walletAddrRegex.test(receiver)) {
+              return (
+                <button
+                  disabled
+                  className="py-4 sm:px-10 min-w-max font-semibold bg-gray-500 text-gray-800 rounded-2xl "
+                >
+                  Enter your wallet address
+                </button>
+              );
+            } else {
+              if (!loading) {
+                return (
+                  <button
+                    onClick={main}
+                    className="py-3 sm:px-10 min-w-max font-semibold bg-violet-500 hover:ring hover:ring-violet-500/40 active:ring-0 rounded-2xl duration-300"
+                  >
+                    Send testnet MINK token
+                  </button>
+                );
+              } else {
+                return (
+                  <button className="py-4 flex items-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-500 ring-4 ring-violet-500/50 hover:ring-0 rounded-2xl duration-200">
+                    Sending
+                    <span className="loader"></span>
+                  </button>
+                );
+              }
+            }
+          })()}
         </div>
 
         <hr className="w-full mt-2 border-0 bg-violet-500/30 h-0.5" />

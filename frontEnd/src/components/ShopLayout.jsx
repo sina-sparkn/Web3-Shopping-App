@@ -198,16 +198,20 @@ const ShopLayout = () => {
                   className="text-2xl text-white p-2.5  rounded-full hover:bg-violet-500 duration-200"
                 />
                 <span className="bg-green-500 ring ring-black w-2.5 h-2.5 absolute top-1 left-10 rounded-full"></span>
-                <span className="tooltiptext">achievements</span>
+                <span className="tooltiptext bonuspositioning">
+                  achievements
+                </span>
               </Link>
             </div>
-
-            <Link to="Faucet">
-              <FontAwesomeIcon
-                icon={faFaucet}
-                className="text-2xl text-white p-2.5  rounded-full hover:bg-violet-500 duration-200"
-              />
-            </Link>
+            <div className="tooltip">
+              <Link to="Faucet">
+                <FontAwesomeIcon
+                  icon={faFaucet}
+                  className="text-2xl text-white p-2.5  rounded-full hover:bg-violet-500 duration-200"
+                />
+                <span className="tooltiptext Faucetpositioning">Faucet</span>
+              </Link>
+            </div>
           </div>
           {!Account || disconncectStatus ? (
             <button
@@ -228,7 +232,9 @@ const ShopLayout = () => {
                   className="text-violet-500 relative p-2.5 text-2xl rounded-full cursor-pointer hover:bg-violet-500 hover:text-white duration-200"
                   onClick={disconnectFunc}
                 />
-                <span className="tooltiptext">disconnect</span>
+                <span className="tooltiptext disconnetpositioning">
+                  disconnect
+                </span>
               </div>
             </div>
           )}
@@ -236,8 +242,8 @@ const ShopLayout = () => {
       </header>
 
       <hr className="border-0 bg-violet-600/20 sm:hidden h-0.5" />
-      <section className="flex justify-between flex-wrap py-3 sm:hidden px-5">
-        <div className="flex gap-4">
+      <section className="flex justify-between py-2 sm:hidden px-4">
+        <div className="flex gap-2.5">
           <Link to="Cart">
             <div className="relative cursor-pointer">
               <FontAwesomeIcon
@@ -269,12 +275,12 @@ const ShopLayout = () => {
         {!Account || disconncectStatus ? (
           <button
             onClick={connectToMetaMask}
-            className="font-semibold text-white bg-violet-500 rounded-full px-4"
+            className="text-white bg-violet-500 rounded-full px-4"
           >
-            Connect with MetaMask
+            Connect MetaMask
           </button>
         ) : (
-          <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center justify-between gap-3">
             <button className="w-full font-bold rounded-full py-2">
               {displayAddress}
             </button>

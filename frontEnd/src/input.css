@@ -189,17 +189,30 @@ body,
 
 .tooltiptext {
   visibility: hidden;
-  background-color: rgb(53, 53, 53);
+  /* background-color: rgb(53, 53, 53); */
   color: white;
   text-align: center;
   border-radius: 10px;
-  border: 2px solid rgb(75, 75, 75);
+  border: 2px solid rgb(33, 33, 33);
   position: absolute;
   z-index: 1;
   padding: 0 7px;
-  top: 120%;
-  left: 20%;
   margin-left: -60px;
+}
+
+.Faucetpositioning {
+  top: 120%;
+  left: 80%;
+}
+
+.bonuspositioning {
+  top: 120%;
+  left: 0%;
+}
+
+.disconnetpositioning {
+  top: 120%;
+  left: 25%;
 }
 
 .tooltiptext::after {
@@ -210,7 +223,7 @@ body,
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: transparent transparent rgb(75, 75, 75) transparent;
+  border-color: transparent transparent rgb(33, 33, 33) transparent;
 }
 
 .tooltip:hover .tooltiptext {
