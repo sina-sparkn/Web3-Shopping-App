@@ -1,11 +1,13 @@
 import { ethers } from "ethers";
 import MINKabi from "../utils/MINKtoken.json";
 import { useState } from "react";
+import { useEffect } from "react";
 
 const Faucet = () => {
   const [receiver, SetReceiver] = useState("");
   const [loading, setLoading] = useState(false);
   const [txdetails, setTxdetails] = useState({});
+  const [haveMink, SetHaveMink] = useState(false);
 
   const provider = new ethers.providers.JsonRpcProvider(
     import.meta.env.VITE_TESTNET_QUICKNODE_KEY
@@ -21,15 +23,35 @@ const Faucet = () => {
     wallet
   );
 
-  const amountToSend = "1";
+  const checkwalletbalance = async () => {
+    try {
+      balance = await contract.balanceOf(receiver);
+      if (balance / 1000 >= 10) {
+        SetHaveMink(true);
+      } else {
+        SetHaveMink(false);
+      }
+    } catch (error) {}
+  };
+
+  const amountToSend = "200";
 
   async function main() {
-    setLoading(true);
-    contract.transfer(receiver, amountToSend * 1000).then(function (tx) {
-      setTxdetails(tx);
-    });
-    setLoading(false);
+    try {
+      setLoading(true);
+      contract.transfer(receiver, amountToSend * 1000).then(function (tx) {
+        setTxdetails(tx);
+        setLoading(false);
+      });
+    } catch (error) {
+      console.error(error);
+    }
   }
+
+  let balance;
+  useEffect(() => {
+    checkwalletbalance();
+  }, [receiver]);
 
   const walletAddrRegex = /0x.{40}/;
 
@@ -70,22 +92,33 @@ const Faucet = () => {
                 </button>
               );
             } else {
-              if (!loading) {
+              if (haveMink) {
                 return (
                   <button
-                    onClick={main}
-                    className="py-3 sm:px-10 min-w-max font-semibold bg-violet-500 hover:ring hover:ring-violet-500/40 active:ring-0 rounded-2xl duration-300"
+                    disabled
+                    className="py-4 sm:px-10 min-w-max font-semibold bg-red-500 rounded-2xl duration-300"
                   >
-                    Send testnet MINK token
+                    You Have More Than 10 MINK!
                   </button>
                 );
               } else {
-                return (
-                  <button className="py-4 flex items-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-500 ring-4 ring-violet-500/50 hover:ring-0 rounded-2xl duration-200">
-                    Sending
-                    <span className="loader"></span>
-                  </button>
-                );
+                if (!loading) {
+                  return (
+                    <button
+                      onClick={main}
+                      className="py-4 sm:px-10 min-w-max font-semibold bg-violet-600 hover:ring hover:ring-violet-500/40 active:ring-0 rounded-2xl duration-300"
+                    >
+                      Send testnet MINK token
+                    </button>
+                  );
+                } else {
+                  return (
+                    <button className="py-4 flex items-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-500 rounded-2xl duration-200">
+                      Sending
+                      <span className="loader"></span>
+                    </button>
+                  );
+                }
               }
             }
           })()}
