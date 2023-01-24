@@ -89,16 +89,14 @@ body,
   /* display: inline-block; */
   flex-direction: row;
   flex-shrink: 0;
-  font-family: Eina01, sans-serif;
-  font-size: 1.2rem;
-  font-weight: 800;
+  font-size: 1.3rem;
   justify-content: center;
   line-height: 24px;
   margin: 0;
   min-height: 64px;
   outline: none;
   overflow: visible;
-  padding: 19px 36px;
+  padding: 19px 65px;
   pointer-events: auto;
   position: relative;
   text-align: center;
@@ -111,12 +109,6 @@ body,
   width: auto;
   word-break: keep-all;
   z-index: 10;
-}
-
-@media (min-width: 768px) {
-  .button-77 {
-    padding: 19px 32px;
-  }
 }
 
 .button-77:before,

@@ -55,12 +55,12 @@ const Home = () => {
           THE FIRST WEB3 <br />
           SHOPPING EXPERIENCE
         </h1>
-        <h2 className="text-3xl text-center font-medium text-slate-200 z-10">
+        <h2 className="text-2xl text-center font-base text-slate-200 z-10">
           Order and get rewarded in web3 Space!
         </h2>
 
         <Link to="/Shop">
-          <button className="button-77">Launch The App</button>
+          <button className="button-77 font-semibold">Launch The App</button>
         </Link>
         <img
           src={bg}
@@ -136,8 +136,8 @@ const Home = () => {
         <div className="flex w-full flex-col gap-5 md:w-3/4 rounded-xl">
           <button
             onClick={Accordion1}
-            className="text-start bg-violet-600/20 text-2xl font-bold border-2
-            border-violet-600/40 px-5 py-3 flex items-center justify-between gap-3 rounded-xl 
+            className="text-start bg-violet-600/20 text-2xl font-semibold border-2
+            border-violet-600/40 px-5 py-4 flex items-center justify-between gap-3 rounded-2xl
             hover:bg-violet-600/30 duration-100"
           >
             What are SoulBound Tokens
@@ -158,8 +158,8 @@ const Home = () => {
         <div className="flex w-full flex-col gap-5 md:w-3/4 rounded-xl">
           <button
             onClick={Accordion2}
-            className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2
-            border-violet-600/40 flex items-center justify-between gap-3 rounded-xl 
+            className="text-start bg-violet-600/20 text-2xl font-semibold px-5 py-4 border-2
+            border-violet-600/40 flex items-center justify-between gap-3 rounded-2xl 
             hover:bg-violet-600/30 duration-100"
           >
             What is MINK Token
@@ -183,8 +183,8 @@ const Home = () => {
         <div className="flex w-full flex-col gap-5 md:w-3/4 rounded-xl">
           <button
             onClick={Accordion3}
-            className="text-start bg-violet-600/20 text-2xl font-bold px-5 py-3 border-2 
-            border-violet-600/40 flex items-center justify-between gap-3 rounded-xl
+            className="text-start bg-violet-600/20 text-2xl font-semibold px-5 py-4 border-2 
+            border-violet-600/40 flex items-center justify-between gap-3 rounded-2xl
             hover:bg-violet-600/30 duration-100"
           >
             What is MINK token Contract

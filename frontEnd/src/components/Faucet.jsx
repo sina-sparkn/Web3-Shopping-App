@@ -11,7 +11,7 @@ const Faucet = () => {
     import.meta.env.VITE_TESTNET_QUICKNODE_KEY
   );
 
-  const MINKContractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"; //Chainlink TokenAddress
+  const MINKContractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42";
 
   const privatekey = import.meta.env.VITE_PRIVATE_KEY;
   const wallet = new ethers.Wallet(privatekey, provider);
