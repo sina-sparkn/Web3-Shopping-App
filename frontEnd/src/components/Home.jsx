@@ -91,7 +91,14 @@ const Home = () => {
               >
                 $MINK
               </a>{" "}
-              token.
+              token. use{" "}
+              <Link
+                className="text-white underline underline-offset-2 font-semibold"
+                to="Shop/Faucet"
+              >
+                The Faucet
+              </Link>{" "}
+              to get started!
             </p>
           </div>
 
