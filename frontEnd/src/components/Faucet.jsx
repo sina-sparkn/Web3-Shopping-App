@@ -78,7 +78,7 @@ const Faucet = () => {
   return (
     <main className="p-5 h-full flex flex-col gap-5 items-start bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
       <div className="w-full flex justify-between items-center">
-        <h3 className="text-3xl font-semibold ">
+        <h3 className="text-3xl font-semibold">
           <a
             className="underline underline-offset-4 hover:no-underline"
             href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
@@ -90,7 +90,7 @@ const Faucet = () => {
         {!copied ? (
           <button
             onClick={copy}
-            className="w-full hidden md:flex md:w-auto items-center justify-center gap-2.5 bg-violet-600 hover:ring hover:ring-violet-500/50 px-8 py-3 rounded-full font-semibold active:ring-0 duration-200"
+            className="w-full hidden md:flex md:w-auto items-center justify-center gap-2.5 bg-violet-600/60 hover:ring hover:ring-violet-500/50 px-8 py-3 rounded-2xl font-semibold active:ring-0 duration-200"
           >
             MINK Contract Address
             <svg
@@ -110,7 +110,7 @@ const Faucet = () => {
             </svg>
           </button>
         ) : (
-          <button className="hidden md:flex w-full md:w-auto items-center justify-center gap-2.5 bg-green-600 px-8 py-3 rounded-full font-semibold duration-200">
+          <button className="hidden md:flex w-full md:w-auto items-center justify-center gap-2.5 bg-green-600 px-8 py-3 rounded-2xl font-semibold duration-200">
             Copied to Clipboard!
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -134,7 +134,7 @@ const Faucet = () => {
       {!copied ? (
         <button
           onClick={copy}
-          className="flex w-full md:hidden items-center justify-center gap-3 bg-violet-600 hover:ring hover:ring-violet-500/50 py-3 rounded-full font-semibold active:ring-0 duration-200"
+          className="flex w-full md:hidden items-center justify-center gap-3 bg-violet-600/60 hover:ring hover:ring-violet-500/50 py-3 rounded-2xl font-semibold active:ring-0 duration-200"
         >
           MINK Contract Address
           <svg
@@ -154,7 +154,7 @@ const Faucet = () => {
           </svg>
         </button>
       ) : (
-        <button className="flex w-full md:hidden md:max-w-min items-center justify-center gap-3 bg-green-600 px-6 py-3 rounded-full font-semibold duration-200">
+        <button className="flex w-full md:hidden md:max-w-min items-center justify-center gap-3 bg-green-600 px-6 py-3 rounded-2xl font-semibold duration-200">
           Copied to Clipboard!
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -215,7 +215,7 @@ const Faucet = () => {
                       onClick={main}
                       className="py-4 sm:px-10 min-w-max font-semibold bg-violet-600 hover:ring hover:ring-violet-500/40 active:ring-0 rounded-2xl duration-300"
                     >
-                      Send testnet MINK token
+                      Send Testnet MINK Token
                     </button>
                   );
                 } else {
