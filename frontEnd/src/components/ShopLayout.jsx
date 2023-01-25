@@ -126,17 +126,28 @@ const ShopLayout = () => {
           <img src={mooninklogoType} alt="mooninklogo" className="w-28" />
         </Link>
 
-        <FontAwesomeIcon
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
           onClick={menuClicked}
-          icon={faBars}
-          className="text-2xl cursor-pointer z-10 sm:hidden"
-        />
+          className="icon icon-tabler icon-tabler-menu text-2xl cursor-pointer z-10 sm:hidden"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          strokeWidth="2.5"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M4 8l16 0m-16 8l16 0"></path>
+        </svg>
 
         <section className={classDiv}>
           <nav className={classClose}>
             <FontAwesomeIcon
               icon={faXmark}
-              className="text-3xl px-2.5 cursor-pointer"
+              className="text-3xl cursor-pointer"
               onClick={menuClicked}
             />
 
@@ -242,8 +253,8 @@ const ShopLayout = () => {
       </header>
 
       <hr className="border-0 bg-violet-600/20 sm:hidden h-0.5" />
-      <section className="flex justify-between py-2 sm:hidden px-4">
-        <div className="flex gap-2.5">
+      <section className="flex justify-between pt-1.5 pb-0.5 sm:hidden px-4">
+        <div className="flex gap-x-2.5">
           <Link to="Cart">
             <div className="relative cursor-pointer">
               <FontAwesomeIcon

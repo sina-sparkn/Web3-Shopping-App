@@ -16,7 +16,7 @@ const Cloting = () => {
   const mooninkprice = 0.328;
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-10 gap-3 p-5 bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
+    <div className="grid  grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-10 gap-3 p-5 bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
       {AllProducts.map((item, index) => {
         return (
           <Link key={index} to={`${item.item}`}>

@@ -8,6 +8,7 @@ const Faucet = () => {
   const [loading, setLoading] = useState(false);
   const [txdetails, setTxdetails] = useState({});
   const [haveMink, SetHaveMink] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const provider = new ethers.providers.JsonRpcProvider(
     import.meta.env.VITE_TESTNET_QUICKNODE_KEY
@@ -55,18 +56,124 @@ const Faucet = () => {
 
   const walletAddrRegex = /0x.{40}/;
 
+  const copy = async () => {
+    testSleep();
+    await navigator.clipboard.writeText(MINKContractAddress);
+  };
+
+  const sleep = async (milliseconds) => {
+    await new Promise((resolve) => {
+      return setTimeout(resolve, milliseconds);
+    });
+  };
+
+  const testSleep = async () => {
+    setCopied(true);
+    for (let i = 0; i < 1.2; i++) {
+      await sleep(1000);
+    }
+    setCopied(false);
+  };
+
   return (
     <main className="p-5 h-full flex flex-col gap-5 items-start bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
-      <h3 className="text-3xl font-semibold ">
-        <a
-          className="underline underline-offset-4 hover:no-underline"
-          href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
-        >
-          MINK
-        </a>{" "}
-        Faucet
-      </h3>
+      <div className="w-full flex justify-between items-center">
+        <h3 className="text-3xl font-semibold ">
+          <a
+            className="underline underline-offset-4 hover:no-underline"
+            href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
+          >
+            MINK
+          </a>{" "}
+          Faucet
+        </h3>
+        {!copied ? (
+          <button
+            onClick={copy}
+            className="w-full hidden md:flex md:w-auto items-center justify-center gap-2.5 bg-violet-600 hover:ring hover:ring-violet-500/50 px-8 py-3 rounded-full font-semibold active:ring-0 duration-200"
+          >
+            MINK Contract Address
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-copy"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2zm8 -2v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+            </svg>
+          </button>
+        ) : (
+          <button className="hidden md:flex w-full md:w-auto items-center justify-center gap-2.5 bg-green-600 px-8 py-3 rounded-full font-semibold duration-200">
+            Copied to Clipboard!
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-circle-check"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0m6 0l2 2l4 -4"></path>
+            </svg>
+          </button>
+        )}
+      </div>
       <hr className="w-full border-0 bg-violet-500/30 h-0.5" />
+      {!copied ? (
+        <button
+          onClick={copy}
+          className="flex w-full md:hidden items-center justify-center gap-3 bg-violet-600 hover:ring hover:ring-violet-500/50 py-3 rounded-full font-semibold active:ring-0 duration-200"
+        >
+          MINK Contract Address
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-copy"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2zm8 -2v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+          </svg>
+        </button>
+      ) : (
+        <button className="flex w-full md:hidden md:max-w-min items-center justify-center gap-3 bg-green-600 px-6 py-3 rounded-full font-semibold duration-200">
+          Copied to Clipboard!
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-circle-check"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0m6 0l2 2l4 -4"></path>
+          </svg>
+        </button>
+      )}
+      <hr className="w-full border-0 md:hidden bg-violet-500/30 h-0.5" />
       <div className="w-full flex flex-col items-start gap-5">
         <p className="text-lg md:text-2xl font-semibold tracking-wide">
           Enter your goerli wallet address :
