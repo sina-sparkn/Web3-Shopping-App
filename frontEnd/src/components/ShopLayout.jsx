@@ -253,16 +253,16 @@ const ShopLayout = () => {
       </header>
 
       <hr className="border-0 bg-violet-600/20 sm:hidden h-0.5" />
-      <section className="flex justify-between pt-1.5 pb-0.5 sm:hidden px-4">
+      <section className="flex justify-between py-2 sm:hidden px-4">
         <div className="flex gap-x-2.5">
           <Link to="Cart">
             <div className="relative cursor-pointer">
               <FontAwesomeIcon
                 icon={faBagShopping}
-                className="text-xl text-white bg-violet-500 py-2.5 px-3 rounded-full duration-200"
+                className="text-lg text-white bg-violet-500 p-2.5 rounded-full duration-200"
               />
 
-              <div className="bg-white text-violet-900 ring-2 ring-violet-600 px-1  font-bold text-sm rounded-full absolute top-0 -right-1.5">
+              <div className="bg-white text-violet-900 ring-2 ring-violet-600 px-1 font-bold text-sm rounded-full absolute top-0 -right-1.5">
                 {CartCounted}
               </div>
             </div>
@@ -271,7 +271,7 @@ const ShopLayout = () => {
             <Link to="Bonus">
               <FontAwesomeIcon
                 icon={faStar}
-                className="text-xl text-white bg-violet-500 p-2.5 rounded-full"
+                className="text-lg text-white bg-violet-500 py-2.5 px-2 rounded-full"
               />
             </Link>
           </div>
@@ -279,20 +279,20 @@ const ShopLayout = () => {
           <Link to="Faucet">
             <FontAwesomeIcon
               icon={faFaucet}
-              className="text-xl text-white bg-violet-500 p-2.5 rounded-full "
+              className="text-lg text-white bg-violet-500 py-2.5 px-2 rounded-full "
             />
           </Link>
         </div>
         {!Account || disconncectStatus ? (
           <button
             onClick={connectToMetaMask}
-            className="text-white bg-violet-500 rounded-full px-4"
+            className="text-white font-semibold bg-violet-500 rounded-full px-4"
           >
             Connect MetaMask
           </button>
         ) : (
           <div className="flex items-center justify-between gap-3">
-            <button className="w-full font-bold rounded-full py-2">
+            <button className="w-full font-semibold rounded-full py-2">
               {displayAddress}
             </button>
             <FontAwesomeIcon

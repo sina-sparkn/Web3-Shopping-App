@@ -22,6 +22,7 @@ const Bonus = () => {
   const TotalPurchase = async () => {
     try {
       const { ethereum } = window;
+
       if (ethereum) {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
@@ -85,7 +86,37 @@ const Bonus = () => {
         console.log("minting...");
         await mint.wait();
         console.log("minted--");
+
         setLoading([false, false, false, false, false]);
+
+        let mintStatus;
+        let mintedResults = [];
+
+        for (let i = 1; i <= 5; i++) {
+          mintStatus = await SoulBound.getminted(ethereum.selectedAddress, i);
+          mintedResults.push(mintStatus);
+        }
+
+        const mintedStatus = {
+          ff: mintedResults[0],
+          bw: mintedResults[1],
+          ko: mintedResults[2],
+          mr: mintedResults[3],
+          ld: mintedResults[4],
+        };
+
+        if (
+          mintedResults[0] ||
+          mintedResults[1] ||
+          mintedResults[2] ||
+          mintedResults[3] ||
+          mintedResults[4] !== null
+        ) {
+          setMinted((minted) => ({
+            ...minted,
+            ...mintedStatus,
+          }));
+        }
       } else {
         console.error(
           "Ethereum object does not found! or the test network you are connected with is not goerli!"

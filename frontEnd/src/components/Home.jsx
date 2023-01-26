@@ -93,7 +93,7 @@ const Home = () => {
               </a>{" "}
               token. use{" "}
               <Link
-                className="text-white underline underline-offset-2 font-semibold"
+                className="text-white underline underline-offset-2 font-semibold "
                 to="Shop/Faucet"
               >
                 The Faucet

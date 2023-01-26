@@ -33,14 +33,14 @@ body,
 }
 
 .loader {
-  width: 16px;
-  height: 16px;
-  border: 3px solid #fff;
-  border-bottom-color: transparent;
+  width: 17px;
+  height: 17px;
+  border: 3.5px solid rgba(255, 255, 255, 0.342);
+  border-bottom-color: rgb(255, 255, 255);
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
-  animation: rotation 1.5s linear infinite;
+  animation: rotation 1s linear infinite;
 }
 
 @keyframes rotation {

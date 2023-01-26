@@ -90,7 +90,7 @@ const Faucet = () => {
         {!copied ? (
           <button
             onClick={copy}
-            className="w-full hidden md:flex md:w-auto items-center justify-center gap-2.5 bg-violet-600/60 hover:ring hover:ring-violet-500/50 px-8 py-3 rounded-2xl font-semibold active:ring-0 duration-200"
+            className="w-full hidden md:flex md:w-auto items-center justify-center gap-2.5 bg-violet-600/70 hover:bg-violet-600/80 px-8 py-3 rounded-2xl font-semibold active:bg-violet-600 duration-200"
           >
             MINK Contract Address
             <svg
