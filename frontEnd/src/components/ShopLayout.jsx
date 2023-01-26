@@ -10,7 +10,6 @@ import {
   faBagShopping,
   faPowerOff,
   faStar,
-  faBars,
   faXmark,
   faAngleRight,
   faFaucet,
