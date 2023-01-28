@@ -23,10 +23,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Web3Button } from "@web3modal/react";
 import { useWeb3ModalTheme } from "@web3modal/react";
+import { useAccount, useConnect } from "wagmi";
 
 const getEthereumObject = () => window.ethereum;
 
 const ShopLayout = () => {
+  const { address, isConnected } = useAccount();
+  const { error } = useConnect();
+
   const dispatch = useDispatch();
   const disconncectStatus = useSelector((state) => state.Disconnect);
   const CartCounted = useSelector((state) => state.CartCounter);
@@ -78,14 +82,35 @@ const ShopLayout = () => {
     }
   };
 
+  const connectBtnClicked = () => {
+    setAccount(address);
+  };
+
+  if (isConnected) {
+    dispatch(ChangeAccountTrue(true));
+    dispatch(DisconnectToggled(false));
+  } else {
+    dispatch(DisconnectToggled(true));
+    dispatch(ChangeAccountTrue(false));
+  }
+
+  console.log(isConnected);
   useEffect(() => {
     const getAccount = async () => {
-      const account = await findMetaMaskAccounts();
-      dispatch(ChangeAccountTrue(account));
-      if (account !== null) {
-        setAccount(account);
+      // const account = await findMetaMaskAccounts();
+      // dispatch(ChangeAccountTrue(account));
+      // if (account !== null) {
+      //   setAccount(account);
+      // }
+      setAccount[address];
+
+      if (address) {
+        dispatch(ChangeAccountTrue(true));
+        dispatch(DisconnectToggled(false));
+      } else if (address === undefined) {
+        dispatch(DisconnectToggled(true));
+        dispatch(ChangeAccountTrue(false));
       }
-      setAccount(account);
     };
 
     getAccount().catch(console.error);
@@ -258,7 +283,7 @@ const ShopLayout = () => {
             icon="false"
             label="Connect Wallet Goerli"
             balance="false"
-            onClick={connectToMetaMask}
+            onClick={connectBtnClicked}
           />
         </section>
       </header>
@@ -317,7 +342,7 @@ const ShopLayout = () => {
           icon="false"
           label="Connect Wallet Goerli"
           balance="false"
-          onClick={connectToMetaMask}
+          onClick={connectBtnClicked}
         />
       </section>
       <hr className="border-0 bg-violet-600/20 h-0.5 hidden sm:block" />
