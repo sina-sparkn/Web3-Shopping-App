@@ -232,7 +232,7 @@ const ShopLayout = () => {
               </Link>
             </div>
           </div>
-          {!Account || disconncectStatus ? (
+          {/* {!Account || disconncectStatus ? (
             <button
               onClick={connectToMetaMask}
               className="font-bold text-white bg-violet-500 rounded-full hover:ring hover:ring-violet-600/50 py-3 px-6 duration-200"
@@ -256,7 +256,12 @@ const ShopLayout = () => {
                 </span>
               </div>
             </div>
-          )}
+          )} */}
+          <Web3Button
+            icon="false"
+            label="Connect Wallet Goerli"
+            balance="false"
+          />
         </section>
       </header>
 
@@ -310,7 +315,11 @@ const ShopLayout = () => {
             />
           </div>
         )} */}
-        <Web3Button icon="false" label="Connect Wallet" balance="false" />
+        <Web3Button
+          icon="false"
+          label="Connect Wallet Goerli"
+          balance="false"
+        />
       </section>
       <hr className="border-0 bg-violet-600/20 h-0.5 hidden sm:block" />
       <section className="hidden flex-wrap py-5 gap-10 px-5 items-center sm:flex">
