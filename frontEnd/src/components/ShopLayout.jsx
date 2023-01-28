@@ -21,6 +21,8 @@ import {
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Web3Button } from "@web3modal/react";
+import { useWeb3ModalTheme } from "@web3modal/react";
 
 const getEthereumObject = () => window.ethereum;
 
@@ -116,6 +118,13 @@ const ShopLayout = () => {
   const menuClicked = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const { setTheme } = useWeb3ModalTheme();
+  setTheme({
+    themeColor: "purple",
+    themeMode: "dark",
+    themeBackground: "gradient",
+  });
 
   return (
     <>
@@ -282,7 +291,7 @@ const ShopLayout = () => {
             />
           </Link>
         </div>
-        {!Account || disconncectStatus ? (
+        {/* {!Account || disconncectStatus ? (
           <button
             onClick={connectToMetaMask}
             className="text-white font-semibold bg-violet-500 rounded-full px-4"
@@ -300,7 +309,8 @@ const ShopLayout = () => {
               onClick={disconnectFunc}
             />
           </div>
-        )}
+        )} */}
+        <Web3Button icon="false" label="Connect Wallet" balance="false" />
       </section>
       <hr className="border-0 bg-violet-600/20 h-0.5 hidden sm:block" />
       <section className="hidden flex-wrap py-5 gap-10 px-5 items-center sm:flex">
