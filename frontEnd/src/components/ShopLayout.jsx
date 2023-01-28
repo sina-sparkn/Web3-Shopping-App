@@ -261,6 +261,7 @@ const ShopLayout = () => {
             icon="false"
             label="Connect Wallet Goerli"
             balance="false"
+            onClick={connectToMetaMask}
           />
         </section>
       </header>
@@ -319,6 +320,7 @@ const ShopLayout = () => {
           icon="false"
           label="Connect Wallet Goerli"
           balance="false"
+          onClick={connectToMetaMask}
         />
       </section>
       <hr className="border-0 bg-violet-600/20 h-0.5 hidden sm:block" />
