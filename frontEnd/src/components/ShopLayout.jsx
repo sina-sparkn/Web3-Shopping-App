@@ -63,10 +63,6 @@ const ShopLayout = () => {
   const connectToMetaMask = async () => {
     try {
       const ethereum = getEthereumObject();
-      if (!ethereum) {
-        alert("Get MetaMask!");
-        return;
-      }
 
       const accounts = await ethereum.request({
         method: "eth_requestAccounts",
@@ -89,6 +85,7 @@ const ShopLayout = () => {
       if (account !== null) {
         setAccount(account);
       }
+      setAccount(account);
     };
 
     getAccount().catch(console.error);
