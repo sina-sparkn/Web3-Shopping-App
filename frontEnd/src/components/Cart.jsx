@@ -146,7 +146,7 @@ const Cart = () => {
 
   const testSleep = async () => {
     setSuccess(true);
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 7; i++) {
       await sleep(1000);
     }
     setSuccess(false);
@@ -167,7 +167,9 @@ const Cart = () => {
         <div className="py-7 px-12 bg-green-500 text-2xl rounded-2xl font-semibold">
           purchase done!
         </div>
-        <div>{contractWrite.data.hash}</div>
+        <a href={`https://goerli.etherscan.io/tx/${contractWrite.data.hash}`}>
+          Transaction
+        </a>
       </div>
     );
   } else {
