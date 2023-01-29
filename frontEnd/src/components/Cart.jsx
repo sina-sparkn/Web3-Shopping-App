@@ -163,7 +163,7 @@ const Cart = () => {
 
   if (success) {
     return (
-      <div className="absolute w-screen h-full bg-black flex items-center justify-center">
+      <div className="absolute w-screen h-full bg-black flex flex-col gap-5 items-center justify-center">
         <div className="py-7 px-12 bg-green-500 text-2xl rounded-2xl font-semibold">
           purchase done!
         </div>
