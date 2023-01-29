@@ -336,7 +336,7 @@ const Bonus = () => {
                     return (
                       <button
                         onClick={() => Mint(2)}
-                        className="px-4 font-semibold  py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 "
+                        className="px-4 font-semibold uppercase py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 "
                       >
                         free MINT BRIGHTWAY
                       </button>

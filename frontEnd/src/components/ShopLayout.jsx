@@ -94,7 +94,6 @@ const ShopLayout = () => {
     dispatch(ChangeAccountTrue(false));
   }
 
-  console.log(isConnected);
   useEffect(() => {
     const getAccount = async () => {
       // const account = await findMetaMaskAccounts();
@@ -145,7 +144,7 @@ const ShopLayout = () => {
   setTheme({
     themeColor: "purple",
     themeMode: "dark",
-    themeBackground: "gradient",
+    themeBackground: "themeColor",
   });
 
   return (
@@ -281,7 +280,7 @@ const ShopLayout = () => {
           )} */}
           <Web3Button
             icon="false"
-            label="Connect Wallet Goerli"
+            label="Connect Wallet"
             balance="false"
             onClick={connectBtnClicked}
           />
@@ -340,7 +339,7 @@ const ShopLayout = () => {
         )} */}
         <Web3Button
           icon="false"
-          label="Connect Wallet Goerli"
+          label="Connect Wallet"
           balance="false"
           onClick={connectBtnClicked}
         />

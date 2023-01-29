@@ -10,13 +10,24 @@ import {
   CleanCart,
   CartDecremented,
 } from "../ReduxStore/features/CartCounterSlicer";
+import {
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+  useContractEvent,
+} from "wagmi";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
-  const DisconnectStatus = useSelector((state) => state.Disconnect);
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
   const account = useSelector((state) => state.Account);
+  const DisconnectStatus = useSelector((state) => state.Disconnect);
+
+  const dispatch = useDispatch();
+
+  const [success, setSuccess] = useState(false);
+  const [lastPurchaseDetails, setLastPurchaseDetails] = useState({});
 
   let TotalPrice = 0;
   let AllItems = "";
@@ -32,39 +43,91 @@ const Cart = () => {
   const contractABI = abi.abi;
   const to = "0x465DEA85d09025A97a44eCd49e5DcA469c0ef723";
 
-  const Checkout = async () => {
-    try {
-      const { ethereum } = window;
-      setLoading(true);
-      if (ethereum && ethereum.networkVersion === "5") {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const minkToken = new ethers.Contract(
-          contractAddress,
-          contractABI,
-          signer
-        );
-        const PayOut = await minkToken.purchase(
-          to,
-          AllItems,
-          TotalPrice * 1000
-        );
-        console.log("paying...");
-        await PayOut.wait();
-        console.log("Done!--", PayOut.hash);
+  const { config } = usePrepareContractWrite({
+    address: contractAddress,
+    abi: contractABI,
+    functionName: "purchase",
+    args: [to, AllItems, TotalPrice * 1000],
+  });
+  const contractWrite = useContractWrite(config);
 
-        setLoading(false);
-        dispatch(RemoveAllCart());
-        dispatch(CleanCart());
-      } else {
-        console.error(
-          "Ethereum object does not found! or the test network you are connected with is not goerli!"
-        );
-        setLoading(false);
+  const WaitForTransaction = useWaitForTransaction({
+    hash: contractWrite.data?.hash,
+  });
+
+  useContractEvent({
+    address: contractAddress,
+    abi: contractABI,
+    eventName: "purchaseDetails",
+    listener(purchases, from, to, purchaseStatus) {
+      const details = {
+        Purchases: purchases,
+        From: from,
+        To: to,
+        PurchaseStatus: purchaseStatus,
+      };
+      setLastPurchaseDetails((lastPurchaseDetails) => ({
+        ...lastPurchaseDetails,
+        ...details,
+      }));
+    },
+  });
+
+  // const Checkout = async () => {
+  //   try {
+  //     const { ethereum } = window;
+  //     setLoading(true);
+  //     if (ethereum && ethereum.networkVersion === "5") {
+  //       const provider = new ethers.providers.Web3Provider(ethereum);
+  //       const signer = provider.getSigner();
+  //       const minkToken = new ethers.Contract(
+  //         contractAddress,
+  //         contractABI,
+  //         signer
+  //       );
+  //       const PayOut = await minkToken.purchase(
+  //         to,
+  //         AllItems,
+  //         TotalPrice * 1000
+  //       );
+  //       console.log("paying...");
+  //       await PayOut.wait();
+  //       console.log("Done!--", PayOut.hash);
+
+  //       setLoading(false);
+  //       dispatch(RemoveAllCart());
+  //       dispatch(CleanCart());
+  //     } else {
+  //       console.error(
+  //         "Ethereum object does not found! or the test network you are connected with is not goerli!"
+  //       );
+  //       setLoading(false);
+  //     }
+  //   } catch (error) {
+  //     setLoading(false);
+  //     console.error(error);
+  //   }
+  // };
+
+  useEffect(() => {
+    checkResults();
+  }, [lastPurchaseDetails]);
+
+  const checkOut = async () => {
+    contractWrite.writeAsync().catch(() => {
+      if (contractWrite.isError) {
+        console.log(contractWrite.error);
       }
-    } catch (error) {
-      setLoading(false);
-      console.error(error);
+    });
+  };
+
+  const checkResults = () => {
+    if (Object.keys(lastPurchaseDetails).length === 0) {
+      window.setTimeout(checkResults, 1000);
+    } else {
+      dispatch(RemoveAllCart());
+      dispatch(CleanCart());
+      testSleep();
     }
   };
 
@@ -75,21 +138,59 @@ const Cart = () => {
 
   const mooninkprice = 0.328;
 
+  const sleep = async (milliseconds) => {
+    await new Promise((resolve) => {
+      return setTimeout(resolve, milliseconds);
+    });
+  };
+
+  const testSleep = async () => {
+    setSuccess(true);
+    for (let i = 0; i < 5; i++) {
+      await sleep(1000);
+    }
+    setSuccess(false);
+  };
+
+  let mainbodyClass = "";
   if (TotalPrice === 0) {
+    mainbodyClass =
+      "p-5 flex h-full bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple flex-col";
+  } else {
+    mainbodyClass =
+      "p-5 flex bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple flex-col";
+  }
+
+  if (success) {
     return (
-      <div className="flex capitalize text-center bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple h-full text-3xl items-center justify-center">
-        your shopping bag is empty!
+      <div className="absolute w-screen h-full bg-black flex items-center justify-center">
+        <div className="py-7 px-12 bg-green-500 text-2xl rounded-2xl font-semibold">
+          purchase done!
+        </div>
+        <div>{contractWrite.data.hash}</div>
       </div>
     );
   } else {
     return (
-      <div className="p-5 flex bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple flex-col">
+      <div className={mainbodyClass}>
         <div className="flex justify-between gap-5 pb-5 font-semibold text-lg md:text-2xl">
           <h2>YOUR SHOPPING BAG</h2>
           <span className="bg-violet-500/40 text-center rounded-full px-3">{`${AddedProducts.length}`}</span>
         </div>
 
         <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
+          {TotalPrice === 0 && (
+            <div className="flex flex-col gap-5 mt-5">
+              <div className="flex items-center justify-start">
+                <p className="text-base">Your Shopping bag is empty</p>
+              </div>
+              <Link to="../../Tshirts">
+                <button className="rounded-xl text-sm p-2.5 bg-violet-600">
+                  Continue Shopping
+                </button>
+              </Link>
+            </div>
+          )}
           {AddedProducts.map((item, index) => {
             return (
               <div key={index} className="w-full flex flex-col overflow-hidden">
@@ -143,23 +244,52 @@ const Cart = () => {
 
           {(() => {
             if (!DisconnectStatus && account) {
-              if (loading) {
+              if (TotalPrice === 0) {
                 return (
                   <button
                     disabled
-                    className="px-7 py-3 flex justify-center items-center gap-3 capitalize rounded-full text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40"
+                    className="px-7 text-xl py-3 capitalize rounded-xl text-black bg-gray-600 cursor-not-allowed"
                   >
-                    Pending
+                    Your Shopping Bag is Empty!
+                  </button>
+                );
+              }
+              if (contractWrite.isLoading) {
+                return (
+                  <button
+                    disabled
+                    className="px-7 py-3 flex justify-center items-center gap-3 capitalize rounded-xl text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40"
+                  >
+                    confirm transaction on your wallet
                     <span className="loader"></span>
+                  </button>
+                );
+              } else if (WaitForTransaction.isLoading) {
+                return (
+                  <button
+                    disabled
+                    className="px-7 py-3 flex justify-center items-center gap-3 capitalize rounded-xl text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40"
+                  >
+                    wait for transaction
+                    <span className="loader"></span>
+                  </button>
+                );
+              } else if (WaitForTransaction.isSuccess) {
+                return (
+                  <button
+                    disabled
+                    className="px-7 py-3 flex justify-center items-center gap-3 capitalize rounded-xl text-xl text-center font-semibold text-white bg-green-500 ring-4 ring-green-500/50"
+                  >
+                    success!
                   </button>
                 );
               } else {
                 return (
                   <button
-                    onClick={Checkout}
-                    className="px-7 py-3 capitalize rounded-full text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40 hover:bg-violet-500 active:ring-0 duration-200"
+                    onClick={checkOut}
+                    className="px-7 py-3 capitalize rounded-xl text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40 hover:bg-violet-500 active:ring-0 duration-200"
                   >
-                    Checkout with metaMask
+                    Checkout with your wallet
                   </button>
                 );
               }
@@ -167,9 +297,9 @@ const Cart = () => {
               return (
                 <button
                   disabled
-                  className="px-7 text-xl py-3 capitalize rounded-full text-black bg-gray-600 cursor-not-allowed"
+                  className="px-7 text-xl py-3 capitalize rounded-xl text-black bg-gray-600 cursor-not-allowed"
                 >
-                  Connect your Metamask to procced
+                  Connect your Wallet
                 </button>
               );
             }
