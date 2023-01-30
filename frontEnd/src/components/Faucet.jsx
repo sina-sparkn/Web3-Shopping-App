@@ -39,6 +39,7 @@ const Faucet = () => {
       }
     } catch (error) {
       setLoading(false);
+      console.error(error);
     }
   };
 
@@ -78,7 +79,7 @@ const Faucet = () => {
 
   const testSleep = async () => {
     setCopied(true);
-    for (let i = 0; i < 1.2; i++) {
+    for (let i = 0; i < 2; i++) {
       await sleep(1000);
     }
     setCopied(false);
@@ -99,7 +100,7 @@ const Faucet = () => {
         {!copied ? (
           <button
             onClick={copy}
-            className="w-full hidden md:flex md:w-auto items-center justify-center gap-2.5 bg-violet-500/70 hover:bg-violet-500/80 px-8 py-3 rounded-2xl font-semibold active:bg-violet-500 duration-200"
+            className="w-full hidden md:flex md:w-auto items-center justify-center gap-2 bg-violet-500/70 hover:bg-violet-500/80 px-8 py-3 rounded-xl font-semibold active:bg-violet-500 duration-200"
           >
             MINK Contract Address
             <svg
@@ -119,8 +120,8 @@ const Faucet = () => {
             </svg>
           </button>
         ) : (
-          <button className="hidden md:flex w-full md:w-auto items-center justify-center gap-2.5 bg-green-600 px-8 py-3 rounded-2xl font-semibold duration-200">
-            Copied to Clipboard!
+          <button className="hidden md:flex w-full md:w-auto items-center justify-center gap-2 bg-green-600 px-8 py-3 rounded-xl font-semibold duration-200">
+            Copied to Clipboard
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-circle-check"
@@ -143,7 +144,7 @@ const Faucet = () => {
       {!copied ? (
         <button
           onClick={copy}
-          className="flex w-full md:hidden items-center justify-center gap-3 bg-violet-500/80 active:bg-violet-500 py-3 rounded-2xl font-semibold active:ring-0 duration-200"
+          className="flex w-full md:hidden items-center justify-center gap-2 bg-violet-500/80 active:bg-violet-500 py-3 rounded-xl font-semibold active:ring-0 duration-200"
         >
           MINK Contract Address
           <svg
@@ -163,8 +164,8 @@ const Faucet = () => {
           </svg>
         </button>
       ) : (
-        <button className="flex w-full md:hidden md:max-w-min items-center justify-center gap-3 bg-green-600 px-6 py-3 rounded-2xl font-semibold duration-200">
-          Copied to Clipboard!
+        <button className="flex w-full md:hidden md:max-w-min items-center justify-center gap-2 bg-green-600 px-6 py-3 rounded-xl font-semibold duration-200">
+          Copied to Clipboard
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-circle-check"
@@ -202,7 +203,7 @@ const Faucet = () => {
               return (
                 <button
                   disabled
-                  className="py-4 sm:px-10 min-w-max font-semibold bg-gray-500 text-gray-800 rounded-2xl "
+                  className="py-4 sm:px-10 min-w-max font-semibold bg-gray-500 text-gray-800 rounded-xl "
                 >
                   Enter your wallet address
                 </button>
@@ -210,30 +211,32 @@ const Faucet = () => {
             } else {
               if (loading) {
                 return (
-                  <button className="py-4 flex items-center justify-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-600 rounded-2xl duration-200">
+                  <button className="py-4 flex items-center justify-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-600 rounded-xl duration-200">
                     Please Wait
                     <span className="loader"></span>
                   </button>
                 );
-              } else if (haveMink) {
-                return (
-                  <button
-                    disabled
-                    className="py-4 flex items-center justify-center gap-2 sm:px-10 min-w-max font-semibold bg-gray-500 text-gray-800 rounded-2xl duration-200"
-                  >
-                    Send Testnet MINK Token
-                  </button>
-                );
               } else {
-                return (
-                  <button
-                    onClick={sendMink}
-                    className="py-4 sm:px-10 flex items-center justify-center gap-2 min-w-max font-semibold bg-violet-600 hover:ring hover:ring-violet-500/40 active:ring-0 rounded-2xl duration-300"
-                  >
-                    Send Testnet MINK Token
-                    <FontAwesomeIcon icon={faAngleRight} />
-                  </button>
-                );
+                if (haveMink) {
+                  return (
+                    <button
+                      disabled
+                      className="py-4 flex items-center justify-center gap-2 sm:px-10 min-w-max font-semibold bg-gray-500 text-gray-800 rounded-xl duration-200"
+                    >
+                      Send Testnet MINK Token
+                    </button>
+                  );
+                } else {
+                  return (
+                    <button
+                      onClick={sendMink}
+                      className="py-4 sm:px-10 flex items-center justify-center gap-2 min-w-max font-semibold bg-violet-600 hover:ring hover:ring-violet-500/40 active:ring-0 rounded-xl duration-300"
+                    >
+                      Send Testnet MINK Token
+                      <FontAwesomeIcon icon={faAngleRight} />
+                    </button>
+                  );
+                }
               }
             }
           })()}
