@@ -22,64 +22,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Web3Button } from "@web3modal/react";
 import { useWeb3ModalTheme } from "@web3modal/react";
-import { useAccount, useConnect } from "wagmi";
-
-const getEthereumObject = () => window.ethereum;
+import { useAccount } from "wagmi";
 
 const ShopLayout = () => {
   const { address, isConnected } = useAccount();
-  const { error } = useConnect();
 
   const dispatch = useDispatch();
-  const disconncectStatus = useSelector((state) => state.Disconnect);
   const CartCounted = useSelector((state) => state.CartCounter);
 
-  const [Account, setAccount] = useState("");
   const [menuOpen, setMenuOpen] = useState(true);
-
-  const disconnectFunc = () => {
-    dispatch(DisconnectToggled(true));
-  };
-
-  async function findMetaMaskAccounts() {
-    try {
-      const ethereum = getEthereumObject();
-      if (!ethereum) {
-        console.error("Install MetaMask!");
-        return null;
-      }
-      const accounts = await ethereum.request({ method: "eth_accounts" });
-      if (accounts.length !== 0) {
-        const account = accounts[0];
-        console.log("Found an authorized account:", account);
-        return account;
-      } else {
-        console.error("No authorized account found");
-        return null;
-      }
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-  }
-
-  const connectToMetaMask = async () => {
-    try {
-      const ethereum = getEthereumObject();
-
-      const accounts = await ethereum.request({
-        method: "eth_requestAccounts",
-      });
-
-      dispatch(DisconnectToggled(false));
-      dispatch(ChangeAccountTrue(true));
-
-      console.log(`connected to account : ${accounts[0]}`);
-      setAccount(accounts[0]);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   const connectBtnClicked = () => {
     setAccount(address);
@@ -95,13 +46,6 @@ const ShopLayout = () => {
 
   useEffect(() => {
     const getAccount = async () => {
-      // const account = await findMetaMaskAccounts();
-      // dispatch(ChangeAccountTrue(account));
-      // if (account !== null) {
-      //   setAccount(account);
-      // }
-      setAccount[address];
-
       if (address) {
         dispatch(ChangeAccountTrue(true));
         dispatch(DisconnectToggled(false));
@@ -113,12 +57,6 @@ const ShopLayout = () => {
 
     getAccount().catch(console.error);
   }, []);
-
-  const first6CharRegex = /^.{0,6}/;
-  const last4CharRegex = /.{0,4}$/;
-  const First6Char = first6CharRegex.exec(Account);
-  const Last4Char = last4CharRegex.exec(Account);
-  const displayAddress = First6Char[0] + "..." + Last4Char[0];
 
   let classClose;
   let classDiv;
@@ -218,14 +156,15 @@ const ShopLayout = () => {
 
         <section className="items-center gap-4 hidden sm:flex z-10">
           <div className="flex items-center gap-4">
-            <div className="relative cursor-pointer">
+            <div className="relative tooltip cursor-pointer">
               <Link to="Cart">
                 <FontAwesomeIcon
                   icon={faBagShopping}
-                  className="text-2xl text-white p-2.5 rounded-full hover:bg-violet-500 duration-200"
+                  className="text-2xl text-white p-2.5 rounded-xl hover:bg-violet-500 duration-200"
                 />
               </Link>
-              <div className="bg-white text-violet-900 ring ring-violet-500 px-1 font-bold text-xs rounded-full absolute top-3.5 left-7">
+              <span className="tooltiptext bagpositioning">Bag</span>
+              <div className="text-black bg-white px-1 ring ring-violet-500 font-bold text-xs rounded-full absolute top-4 left-7">
                 {CartCounted}
               </div>
             </div>
@@ -234,11 +173,11 @@ const ShopLayout = () => {
               <Link to="Bonus">
                 <FontAwesomeIcon
                   icon={faStar}
-                  className="text-2xl text-white p-2.5  rounded-full hover:bg-violet-500 duration-200"
+                  className="text-2xl text-white p-2.5 rounded-xl hover:bg-violet-500 duration-200"
                 />
-                <span className="bg-green-500 ring ring-black w-2.5 h-2.5 absolute top-1 left-10 rounded-full"></span>
+
                 <span className="tooltiptext bonuspositioning">
-                  achievements
+                  Achievements
                 </span>
               </Link>
             </div>
@@ -246,37 +185,13 @@ const ShopLayout = () => {
               <Link to="Faucet">
                 <FontAwesomeIcon
                   icon={faFaucet}
-                  className="text-2xl text-white p-2.5  rounded-full hover:bg-violet-500 duration-200"
+                  className="text-2xl text-white p-2.5 rounded-xl hover:bg-violet-500 duration-200"
                 />
                 <span className="tooltiptext Faucetpositioning">Faucet</span>
               </Link>
             </div>
           </div>
-          {/* {!Account || disconncectStatus ? (
-            <button
-              onClick={connectToMetaMask}
-              className="font-bold text-white bg-violet-500 rounded-full hover:ring hover:ring-violet-600/50 py-3 px-6 duration-200"
-            >
-              Connect with MetaMask
-            </button>
-          ) : (
-            <div className="flex items-center gap-3">
-              <button className="font-semibold text-white rounded-full p-3 cursor-default duration-150">
-                {displayAddress}
-              </button>
 
-              <div className="tooltip ">
-                <FontAwesomeIcon
-                  icon={faPowerOff}
-                  className="text-violet-500 relative p-2.5 text-2xl rounded-full cursor-pointer hover:bg-violet-500 hover:text-white duration-200"
-                  onClick={disconnectFunc}
-                />
-                <span className="tooltiptext disconnetpositioning">
-                  disconnect
-                </span>
-              </div>
-            </div>
-          )} */}
           <Web3Button
             icon="false"
             label="Connect Wallet"
@@ -288,7 +203,7 @@ const ShopLayout = () => {
 
       <hr className="border-0 bg-violet-600/20 sm:hidden h-0.5" />
       <section className="flex justify-between py-2 sm:hidden px-4">
-        <div className="flex gap-x-2.5">
+        <div className="flex gap-x-2">
           <Link to="Cart">
             <div className="relative cursor-pointer">
               <FontAwesomeIcon
@@ -317,25 +232,7 @@ const ShopLayout = () => {
             />
           </Link>
         </div>
-        {/* {!Account || disconncectStatus ? (
-          <button
-            onClick={connectToMetaMask}
-            className="text-white font-semibold bg-violet-500 rounded-full px-4"
-          >
-            Connect MetaMask
-          </button>
-        ) : (
-          <div className="flex items-center justify-between gap-3">
-            <button className="w-full font-semibold rounded-full py-2">
-              {displayAddress}
-            </button>
-            <FontAwesomeIcon
-              icon={faPowerOff}
-              className="p-2.5 bg-violet-500 text-xl rounded-full cursor-pointer duration-200"
-              onClick={disconnectFunc}
-            />
-          </div>
-        )} */}
+
         <Web3Button
           icon="false"
           label="Connect Wallet"

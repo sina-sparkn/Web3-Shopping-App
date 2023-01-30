@@ -208,7 +208,23 @@ const Faucet = () => {
                 </button>
               );
             } else {
-              if (!loading) {
+              if (loading) {
+                return (
+                  <button className="py-4 flex items-center justify-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-600 rounded-2xl duration-200">
+                    Please Wait
+                    <span className="loader"></span>
+                  </button>
+                );
+              } else if (haveMink) {
+                return (
+                  <button
+                    disabled
+                    className="py-4 flex items-center justify-center gap-2 sm:px-10 min-w-max font-semibold bg-gray-500 text-gray-800 rounded-2xl duration-200"
+                  >
+                    Send Testnet MINK Token
+                  </button>
+                );
+              } else {
                 return (
                   <button
                     onClick={sendMink}
@@ -218,13 +234,6 @@ const Faucet = () => {
                     <FontAwesomeIcon icon={faAngleRight} />
                   </button>
                 );
-              } else {
-                return (
-                  <button className="py-4 flex items-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-500 rounded-2xl duration-200">
-                    Please Wait
-                    <span className="loader"></span>
-                  </button>
-                );
               }
             }
           })()}
@@ -232,7 +241,7 @@ const Faucet = () => {
 
         <hr className="w-full mt-2 border-0 bg-violet-500/30 h-0.5" />
         {haveMink && (
-          <span className="text-orange-500 flex gap-2 items-center">
+          <span className="text-orange-500 flex gap-2 items-baseline">
             <FontAwesomeIcon icon={faWarning} />
             Wallets with less than 10 MINK can use the faucet!
           </span>

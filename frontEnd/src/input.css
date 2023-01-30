@@ -181,7 +181,7 @@ body,
 
 .tooltiptext {
   visibility: hidden;
-  /* background-color: rgb(53, 53, 53); */
+  background-color: rgb(0, 0, 0);
   color: white;
   text-align: center;
   border-radius: 10px;
@@ -202,9 +202,9 @@ body,
   left: 0%;
 }
 
-.disconnetpositioning {
+.bagpositioning {
   top: 120%;
-  left: 25%;
+  right: 10%;
 }
 
 .tooltiptext::after {
