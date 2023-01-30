@@ -110,7 +110,7 @@ const Cart = () => {
 
   const testSleep = async () => {
     setSuccess(true);
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 10; i++) {
       await sleep(1000);
     }
     setSuccess(false);
@@ -127,16 +127,18 @@ const Cart = () => {
 
   let successcontainer;
   let successmessage;
+  let trxhash = "#";
   if (!success) {
     successcontainer =
-      "fixed w-0 h-0 delay-300 overflow-hidden bottom-5 right-5";
+      "fixed w-0 h-0 delay-500 overflow-hidden bottom-5 right-5";
     successmessage =
       "translate-x-full w-full capitalize font-semibold tracking-wide h-full flex items-center justify-center text-lg bg-green-500 rounded-xl duration-300";
   } else {
     successcontainer =
-      "fixed w-48 h-16 overflow-hidden rounded-xl bottom-5 right-5";
+      "fixed w-48 h-20 overflow-hidden rounded-lg bottom-5 right-5";
     successmessage =
-      "translate-x-0 w-full capitalize font-semibold cursor-default tracking-wide h-full flex items-center justify-center text-lg bg-green-500 rounded-xl duration-300";
+      "translate-x-0 w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded-lg duration-300";
+    trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data.hash}`;
   }
 
   return (
@@ -148,7 +150,16 @@ const Cart = () => {
 
       <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
         <div className={successcontainer}>
-          <div className={successmessage}>purchase done!</div>
+          <div className={successmessage}>
+            purchase done!
+            <hr className="w-11/12 border-0 h-0.5 bg-white/50 border-white/70" />
+            <a
+              href={trxhash}
+              class="underline underline-offset-2 hover:no-underline font-normal text-base"
+            >
+              Etherscan
+            </a>
+          </div>
         </div>
 
         {TotalPrice === 0 && (

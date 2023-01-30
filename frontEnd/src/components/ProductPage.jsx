@@ -85,12 +85,12 @@ const ProductPage = () => {
               AddItemToCart();
               CartAddCounter();
             }}
-            className="w-full py-3 rounded-full ring-4 ring-violet-400/40 bg-violet-600 font-semibold hover:bg-violet-500 text-white text-xl active:ring-0 duration-200"
+            className="w-full py-3 rounded-2xl ring-4 ring-violet-400/40 bg-violet-600 font-semibold hover:bg-violet-500 text-white text-xl active:ring-0 duration-200"
           >
             <span>Add to Bag</span>
           </button>
         ) : (
-          <button className="w-full ping py-3 rounded-full ring-4 ring-green-500/40 bg-green-600 hover:bg-green-500 font-semibold text-white text-xl duration-200">
+          <button className="w-full ping py-3 rounded-2xl ring-4 ring-green-500/40 bg-green-600 hover:bg-green-500 font-semibold text-white text-xl duration-200">
             <div className="flex items-center justify-center gap-2.5">
               <span>Item Added to your bag</span>
               <FontAwesomeIcon icon={faCheckCircle} className="rounded-full" />
