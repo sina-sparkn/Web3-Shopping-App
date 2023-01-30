@@ -8,7 +8,6 @@ import mooninklogo from "../assets/svg/ticonwhite.svg";
 import mooninklogoType from "../assets/svg/typefacewhite.svg";
 import {
   faBagShopping,
-  faPowerOff,
   faStar,
   faXmark,
   faAngleRight,
@@ -294,10 +293,10 @@ const ShopLayout = () => {
             <div className="relative cursor-pointer">
               <FontAwesomeIcon
                 icon={faBagShopping}
-                className="text-lg text-white bg-violet-500 p-2.5 rounded-full duration-200"
+                className="text-lg text-white bg-violet-500 p-2.5 rounded-lg duration-200"
               />
 
-              <div className="bg-white text-violet-900 ring-2 ring-violet-600 px-1 font-bold text-sm rounded-full absolute top-0 -right-1.5">
+              <div className="text-black px-1 font-semibold text-sm bg-white rounded-md absolute top-8 left-2.5">
                 {CartCounted}
               </div>
             </div>
@@ -306,7 +305,7 @@ const ShopLayout = () => {
             <Link to="Bonus">
               <FontAwesomeIcon
                 icon={faStar}
-                className="text-lg text-white bg-violet-500 py-2.5 px-2 rounded-full"
+                className="text-lg text-white bg-violet-500 py-2.5 px-2 rounded-lg"
               />
             </Link>
           </div>
@@ -314,7 +313,7 @@ const ShopLayout = () => {
           <Link to="Faucet">
             <FontAwesomeIcon
               icon={faFaucet}
-              className="text-lg text-white bg-violet-500 py-2.5 px-2 rounded-full "
+              className="text-lg text-white bg-violet-500 p-2.5 rounded-lg "
             />
           </Link>
         </div>

@@ -2,6 +2,8 @@ import { ethers } from "ethers";
 import MINKabi from "../utils/MINKtoken.json";
 import { useState } from "react";
 import { useEffect } from "react";
+import { faWarning, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Faucet = () => {
   const [receiver, SetReceiver] = useState("");
@@ -26,24 +28,31 @@ const Faucet = () => {
 
   const checkwalletbalance = async () => {
     try {
+      setLoading(true);
       balance = await contract.balanceOf(receiver);
       if (balance / 1000 >= 10) {
         SetHaveMink(true);
+        setLoading(false);
       } else {
         SetHaveMink(false);
+        setLoading(false);
       }
-    } catch (error) {}
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   const amountToSend = "200";
 
-  async function main() {
+  async function sendMink() {
     try {
-      setLoading(true);
-      contract.transfer(receiver, amountToSend * 1000).then(function (tx) {
-        setTxdetails(tx);
-        setLoading(false);
-      });
+      if (!haveMink) {
+        setLoading(true);
+        contract.transfer(receiver, amountToSend * 1000).then(function (tx) {
+          setTxdetails(tx);
+          setLoading(false);
+        });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -90,7 +99,7 @@ const Faucet = () => {
         {!copied ? (
           <button
             onClick={copy}
-            className="w-full hidden md:flex md:w-auto items-center justify-center gap-2.5 bg-violet-600/70 hover:bg-violet-600/80 px-8 py-3 rounded-2xl font-semibold active:bg-violet-600 duration-200"
+            className="w-full hidden md:flex md:w-auto items-center justify-center gap-2.5 bg-violet-500/70 hover:bg-violet-500/80 px-8 py-3 rounded-2xl font-semibold active:bg-violet-500 duration-200"
           >
             MINK Contract Address
             <svg
@@ -134,7 +143,7 @@ const Faucet = () => {
       {!copied ? (
         <button
           onClick={copy}
-          className="flex w-full md:hidden items-center justify-center gap-3 bg-violet-600/60 hover:ring hover:ring-violet-500/50 py-3 rounded-2xl font-semibold active:ring-0 duration-200"
+          className="flex w-full md:hidden items-center justify-center gap-3 bg-violet-500/80 active:bg-violet-500 py-3 rounded-2xl font-semibold active:ring-0 duration-200"
         >
           MINK Contract Address
           <svg
@@ -199,41 +208,38 @@ const Faucet = () => {
                 </button>
               );
             } else {
-              if (haveMink) {
+              if (!loading) {
                 return (
                   <button
-                    disabled
-                    className="py-4 sm:px-10 min-w-max font-semibold bg-red-500 rounded-2xl duration-300"
+                    onClick={sendMink}
+                    className="py-4 sm:px-10 flex items-center justify-center gap-2 min-w-max font-semibold bg-violet-600 hover:ring hover:ring-violet-500/40 active:ring-0 rounded-2xl duration-300"
                   >
-                    You Have More Than 10 MINK!
+                    Send Testnet MINK Token
+                    <FontAwesomeIcon icon={faAngleRight} />
                   </button>
                 );
               } else {
-                if (!loading) {
-                  return (
-                    <button
-                      onClick={main}
-                      className="py-4 sm:px-10 min-w-max font-semibold bg-violet-600 hover:ring hover:ring-violet-500/40 active:ring-0 rounded-2xl duration-300"
-                    >
-                      Send Testnet MINK Token
-                    </button>
-                  );
-                } else {
-                  return (
-                    <button className="py-4 flex items-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-500 rounded-2xl duration-200">
-                      Sending
-                      <span className="loader"></span>
-                    </button>
-                  );
-                }
+                return (
+                  <button className="py-4 flex items-center gap-2 sm:px-10 min-w-max font-semibold bg-violet-500 rounded-2xl duration-200">
+                    Please Wait
+                    <span className="loader"></span>
+                  </button>
+                );
               }
             }
           })()}
         </div>
 
         <hr className="w-full mt-2 border-0 bg-violet-500/30 h-0.5" />
+        {haveMink && (
+          <span className="text-orange-500 flex gap-2 items-center">
+            <FontAwesomeIcon icon={faWarning} />
+            Wallets with less than 10 MINK can use the faucet!
+          </span>
+        )}
+
         {txdetails.hash !== undefined && (
-          <div className="w-full flex flex-col gap-4 truncate ring-2 ring-violet-500 rounded-2xl">
+          <div className="w-full flex flex-col gap-4 truncate ring-2 ring-green-500 rounded-2xl">
             <p className="text-lg p-4 bg-violet-500/20 font-semibold">
               Your Lastest Transaction :
             </p>
