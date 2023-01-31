@@ -14,6 +14,8 @@ import {
   usePrepareContractWrite,
   useWaitForTransaction,
   useContractEvent,
+  useBalance,
+  useAccount,
 } from "wagmi";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -43,6 +45,12 @@ const Cart = () => {
   const contractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42";
   const contractABI = abi.abi;
   const to = "0x465DEA85d09025A97a44eCd49e5DcA469c0ef723";
+
+  const Account = useAccount();
+  const Balance = useBalance({
+    address: Account.address,
+    token: contractAddress,
+  });
 
   const { config } = usePrepareContractWrite({
     address: contractAddress,
@@ -116,6 +124,7 @@ const Cart = () => {
       await sleep(1000);
       setCounter(12 - i);
     }
+
     setSuccess(false);
   };
 
@@ -133,6 +142,14 @@ const Cart = () => {
   let trxhash = "#";
   let counterBar = "";
 
+  if (counter === 0) {
+    counterBar = `w-0`;
+  } else if (counter === 12) {
+    counterBar = `w-full`;
+  } else {
+    counterBar = `w-${counter}/12`;
+  }
+
   if (!success) {
     successcontainer =
       "fixed w-0 h-0 delay-300 overflow-hidden bottom-5 right-5";
@@ -146,14 +163,6 @@ const Cart = () => {
     trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data.hash}`;
   }
 
-  if (counter === 0) {
-    counterBar = `w-0`;
-  } else if (counter === 12) {
-    counterBar = `w-full`;
-  } else {
-    counterBar = `w-${counter}/12`;
-  }
-  console.log(counterBar);
   return (
     <div className={mainbodyClass}>
       <div className="flex ease-in drop justify-between items-center gap-5  pb-5 font-semibold text-lg md:text-2xl">
@@ -248,11 +257,25 @@ const Cart = () => {
                 return (
                   <button
                     disabled
-                    className="px-7 text-xl py-3 capitalize rounded-xl text-black bg-gray-600 cursor-not-allowed"
+                    className="px-7 text-xl py-3 capitalize rounded-xl text-gray-800 bg-gray-600 cursor-not-allowed"
                   >
                     Your Shopping Bag is Empty!
                   </button>
                 );
+              }
+              if (Balance.data) {
+                if (Balance.data.value / 1000 < TotalPrice) {
+                  return (
+                    <button
+                      disabled
+                      className="px-7 py-3 flex justify-center items-center gap-3 capitalize rounded-xl text-xl text-center font-semibold text-gray-800 bg-gray-600 cursor-not-allowed"
+                    >
+                      {`you need ${
+                        TotalPrice - Balance.data?.value / 1000
+                      } more MINKs`}
+                    </button>
+                  );
+                }
               }
               if (contractWrite.isLoading) {
                 return (
@@ -297,7 +320,7 @@ const Cart = () => {
               return (
                 <button
                   disabled
-                  className="px-7 text-xl py-3 capitalize rounded-xl text-black bg-gray-600 cursor-not-allowed"
+                  className="px-7 text-xl py-3 font-semibold capitalize rounded-xl text-gray-800 bg-gray-600 cursor-not-allowed"
                 >
                   Connect your Wallet
                 </button>

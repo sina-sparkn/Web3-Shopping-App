@@ -44,7 +44,7 @@ const Faucet = () => {
     }
   };
 
-  const amountToSend = "1";
+  const amountToSend = "200";
 
   async function sendMink() {
     try {
