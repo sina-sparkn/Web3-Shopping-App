@@ -23,6 +23,7 @@ const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
   const account = useSelector((state) => state.Account);
   const DisconnectStatus = useSelector((state) => state.Disconnect);
+  const [counter, setCounter] = useState(12);
 
   const dispatch = useDispatch();
 
@@ -110,8 +111,10 @@ const Cart = () => {
 
   const testSleep = async () => {
     setSuccess(true);
-    for (let i = 0; i < 10; i++) {
+
+    for (let i = 1; i <= 12; i++) {
       await sleep(1000);
+      setCounter(12 - i);
     }
     setSuccess(false);
   };
@@ -128,22 +131,32 @@ const Cart = () => {
   let successcontainer;
   let successmessage;
   let trxhash = "#";
+  let counterBar = "";
+
   if (!success) {
     successcontainer =
       "fixed w-0 h-0 delay-300 overflow-hidden bottom-5 right-5";
     successmessage =
-      "translate-x-full w-full blur capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded duration-300";
+      "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded duration-300";
   } else {
     successcontainer =
-      "fixed w-60 h-24 overflow-hidden rounded-xl bottom-5 right-5";
+      "fixed w-62 h-24 overflow-hidden rounded-xl bottom-5 right-5";
     successmessage =
-      "translate-x-0 w-full capitalize blur-0 font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded-xl duration-300";
-    // trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data.hash}`;
+      "translate-x-0 w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded-xl duration-300";
+    trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data.hash}`;
   }
 
+  if (counter === 0) {
+    counterBar = `w-0`;
+  } else if (counter === 12) {
+    counterBar = `w-full`;
+  } else {
+    counterBar = `w-${counter}/12`;
+  }
+  console.log(counterBar);
   return (
     <div className={mainbodyClass}>
-      <div className="flex  ease-in drop justify-between items-center gap-5  pb-5 font-semibold text-lg md:text-2xl">
+      <div className="flex ease-in drop justify-between items-center gap-5  pb-5 font-semibold text-lg md:text-2xl">
         <h2>YOUR SHOPPING BAG</h2>
         <span className="bg-violet-500/50 rounded-lg py-0.5 px-2.5 text-base">{`${AddedProducts.length}`}</span>
       </div>
@@ -151,14 +164,17 @@ const Cart = () => {
       <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
         <div className={successcontainer}>
           <div className={successmessage}>
-            purchase done!
+            <span className="mt-2">purchase done!</span>
             <a
               href={trxhash}
-              class="flex items-center gap-x-2 bg-green-600 font-medium mt-1 p-2 px-14 rounded-lg hover:no-underline text-base"
+              className="flex items-center gap-x-2 bg-green-600 mb-1 font-medium mt-1 p-2 px-14 rounded-lg hover:no-underline text-base"
             >
               <img src={EtherscanIcon} className="w-5" />
               Etherscan
             </a>
+            <div className="w-full">
+              <div className={`bg-white ${counterBar} h-1 duration-200`}></div>
+            </div>
           </div>
         </div>
 

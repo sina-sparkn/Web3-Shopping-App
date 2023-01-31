@@ -15,6 +15,7 @@ module.exports = {
         maindarkpurple: "#1C003A",
       },
       spacing: {
+        62: "15.5rem",
         128: "32rem",
         256: "54rem",
       },
