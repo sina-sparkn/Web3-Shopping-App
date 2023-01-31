@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from "react-redux";
-import { ethers } from "ethers";
 import { useState } from "react";
 import abi from "../utils/MINKtoken.json";
 import {
@@ -18,6 +17,7 @@ import {
 } from "wagmi";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import EtherscanIcon from "../assets/svg/etherscan-logo-light-circle.svg";
 
 const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
@@ -130,15 +130,15 @@ const Cart = () => {
   let trxhash = "#";
   if (!success) {
     successcontainer =
-      "fixed w-0 h-0 delay-500 overflow-hidden bottom-5 right-5";
+      "fixed w-0 h-0 delay-300 overflow-hidden bottom-5 right-5";
     successmessage =
-      "translate-x-full w-full capitalize font-semibold tracking-wide h-full flex items-center justify-center text-lg bg-green-500 rounded-xl duration-300";
+      "translate-x-full w-full blur capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded duration-300";
   } else {
     successcontainer =
-      "fixed w-48 h-20 overflow-hidden rounded-lg bottom-5 right-5";
+      "fixed w-60 h-24 overflow-hidden rounded-xl bottom-5 right-5";
     successmessage =
-      "translate-x-0 w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded-lg duration-300";
-    trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data.hash}`;
+      "translate-x-0 w-full capitalize blur-0 font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded-xl duration-300";
+    // trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data.hash}`;
   }
 
   return (
@@ -152,11 +152,11 @@ const Cart = () => {
         <div className={successcontainer}>
           <div className={successmessage}>
             purchase done!
-            <hr className="w-11/12 border-0 h-0.5 bg-white/50 border-white/70" />
             <a
               href={trxhash}
-              class="underline underline-offset-2 hover:no-underline font-normal text-base"
+              class="flex items-center gap-x-2 bg-green-600 font-medium mt-1 p-2 px-14 rounded-lg hover:no-underline text-base"
             >
+              <img src={EtherscanIcon} className="w-5" />
               Etherscan
             </a>
           </div>
@@ -180,11 +180,11 @@ const Cart = () => {
               <img
                 src={item.image}
                 alt={item.name}
-                className="h-full rounded-lg"
+                className="h-full rounded-xl"
               />
-              <div className="py-5 flex flex-col gap-3">
+              <div className="py-5 font-semibold flex flex-col gap-3">
                 <p>{item.name}</p>
-                <p className="flex items-center gap-2">
+                <p className="flex items-center gap-2 font-medium">
                   {item.price} MINK
                   <span className="text-slate-300">{`≈ $${Math.floor(
                     item.price * mooninkprice
@@ -192,7 +192,7 @@ const Cart = () => {
                 </p>
 
                 <span
-                  className="cursor-pointer underline sm:w-min underline-offset-2 text-base hover:no-underline"
+                  className="cursor-pointer font-normal underline w-min underline-offset-2 text-base hover:no-underline"
                   onClick={() => removeItem(item.name)}
                 >
                   remove

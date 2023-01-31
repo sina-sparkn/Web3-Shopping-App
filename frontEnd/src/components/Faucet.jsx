@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { faWarning, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EtherScanIcon from "../assets/svg/etherscan-logo-light-circle.svg";
 
 const Faucet = () => {
   const [receiver, SetReceiver] = useState("");
@@ -43,7 +44,7 @@ const Faucet = () => {
     }
   };
 
-  const amountToSend = "200";
+  const amountToSend = "1";
 
   async function sendMink() {
     try {
@@ -251,16 +252,21 @@ const Faucet = () => {
         )}
 
         {txdetails.hash !== undefined && (
-          <div className="w-full flex flex-col gap-4 truncate ring-2 ring-green-500 rounded-2xl">
-            <p className="text-lg p-4 bg-violet-500/20 font-semibold">
-              Your Lastest Transaction :
+          <div className="w-full flex flex-col truncate ring ring-green-500 rounded-2xl">
+            <p className="text-lg p-4 flex justify-center capitalize bg-green-500/30 font-semibold">
+              <div className="border-2 border-t-0 border-x-0 border-green-500/40 grow h-1/2 mr-5"></div>{" "}
+              Your MINK tokens Is on it's way{" "}
+              <div className="border-2 border-t-0 border-x-0 border-green-500/40 grow h-1/2 ml-5"></div>
             </p>
-            <a
-              className="truncate px-4 pb-4 underline underline-offset-2"
-              href={`https://goerli.etherscan.io/tx/${txdetails.hash}`}
-            >
-              {txdetails.hash}
-            </a>
+            <div className="truncate flex items-center justify-center gap-2.5 px-5 py-3.5">
+              <img src={EtherScanIcon} className="w-5" />
+              <a
+                className="truncate underline text-white/90 underline-offset-2"
+                href={`https://goerli.etherscan.io/tx/${txdetails.hash}`}
+              >
+                {txdetails.hash}
+              </a>
+            </div>
           </div>
         )}
       </div>
