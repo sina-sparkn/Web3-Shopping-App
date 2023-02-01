@@ -13,7 +13,6 @@ import {
   useContractReads,
   useContractWrite,
   usePrepareContractWrite,
-  useWaitForTransaction,
   useContractEvent,
 } from "wagmi";
 
@@ -28,6 +27,8 @@ const Bonus = () => {
   const [totalPurchase, setTotalPurchase] = useState(0);
   const [minted, setMinted] = useState({});
   const [loading, setLoading] = useState([false, false, false, false, false]);
+  const [minting, setMinting] = useState([false, false, false, false, false]);
+  const [lastMintDetails, setLastMintDetails] = useState({});
 
   const SoulBoundTokenContract = {
     address: SoulBoundsContract,
@@ -40,6 +41,7 @@ const Bonus = () => {
   };
 
   const Account = useAccount();
+
   const ContractRead = useContractReads({
     contracts: [
       {
@@ -83,18 +85,37 @@ const Bonus = () => {
 
   const ContractWrite = useContractWrite(config);
 
-  const WaitForTransaction = useWaitForTransaction({
-    hash: ContractWrite.data?.hash,
-  });
-
   useContractEvent({
     address: SoulBoundsContract,
     abi: NFTAbi.abi,
     eventName: "TransferSingle",
     listener(operator, from, to, id, value) {
-      console.log(operator, from, to, id, value);
+      const mintDetails = {
+        Operator: operator,
+        From: from,
+        To: to,
+        Id: id,
+        Value: value,
+      };
+      setLastMintDetails((lastMintDetails) => ({
+        ...lastMintDetails,
+        ...mintDetails,
+      }));
     },
   });
+
+  useEffect(() => {
+    checkResults();
+  }, [lastMintDetails]);
+
+  const checkResults = () => {
+    if (Object.keys(lastMintDetails).length === 0) {
+      window.setTimeout(checkResults, 1000);
+    } else {
+      setMinting([false, false, false, false, false]);
+      console.log(lastMintDetails);
+    }
+  };
 
   // const TotalPurchase = async () => {
   //   try {
@@ -123,8 +144,6 @@ const Bonus = () => {
   //   }
   // };
 
-  let SumofAllPurchaes = totalPurchase / 1000;
-
   const achievement = {
     FirstyFirst: 0,
     BrightWay: 100,
@@ -133,74 +152,74 @@ const Bonus = () => {
     Legend: 1700,
   };
 
-  const Mint = async (id) => {
-    try {
-      const { ethereum } = window;
-      if (ethereum && ethereum.networkVersion === "5") {
-        if (id === 5) {
-          setLoading([false, false, false, false, true]);
-        } else if (id === 4) {
-          setLoading([false, false, false, true, false]);
-        } else if (id === 3) {
-          setLoading([false, false, true, false, false]);
-        } else if (id === 2) {
-          setLoading([false, true, false, false, false]);
-        } else if (id === 1) {
-          setLoading([true, false, false, false, false]);
-        }
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const SoulBound = new ethers.Contract(
-          SoulBoundsContract,
-          SoulBoundsContractAbi,
-          signer
-        );
+  // const Mint = async (id) => {
+  //   try {
+  //     const { ethereum } = window;
+  //     if (ethereum && ethereum.networkVersion === "5") {
+  //       if (id === 5) {
+  //         setLoading([false, false, false, false, true]);
+  //       } else if (id === 4) {
+  //         setLoading([false, false, false, true, false]);
+  //       } else if (id === 3) {
+  //         setLoading([false, false, true, false, false]);
+  //       } else if (id === 2) {
+  //         setLoading([false, true, false, false, false]);
+  //       } else if (id === 1) {
+  //         setLoading([true, false, false, false, false]);
+  //       }
+  //       const provider = new ethers.providers.Web3Provider(ethereum);
+  //       const signer = provider.getSigner();
+  //       const SoulBound = new ethers.Contract(
+  //         SoulBoundsContract,
+  //         SoulBoundsContractAbi,
+  //         signer
+  //       );
 
-        const mint = await SoulBound.mintReward();
-        console.log("minting...");
-        await mint.wait();
-        console.log("minted--");
+  //       const mint = await SoulBound.mintReward();
+  //       console.log("minting...");
+  //       await mint.wait();
+  //       console.log("minted--");
 
-        setLoading([false, false, false, false, false]);
+  //       setLoading([false, false, false, false, false]);
 
-        let mintStatus;
-        let mintedResults = [];
+  //       let mintStatus;
+  //       let mintedResults = [];
 
-        for (let i = 1; i <= 5; i++) {
-          mintStatus = await SoulBound.getminted(ethereum.selectedAddress, i);
-          mintedResults.push(mintStatus);
-        }
+  //       for (let i = 1; i <= 5; i++) {
+  //         mintStatus = await SoulBound.getminted(ethereum.selectedAddress, i);
+  //         mintedResults.push(mintStatus);
+  //       }
 
-        const mintedStatus = {
-          ff: mintedResults[0],
-          bw: mintedResults[1],
-          ko: mintedResults[2],
-          mr: mintedResults[3],
-          ld: mintedResults[4],
-        };
+  //       const mintedStatus = {
+  //         ff: mintedResults[0],
+  //         bw: mintedResults[1],
+  //         ko: mintedResults[2],
+  //         mr: mintedResults[3],
+  //         ld: mintedResults[4],
+  //       };
 
-        if (
-          mintedResults[0] ||
-          mintedResults[1] ||
-          mintedResults[2] ||
-          mintedResults[3] ||
-          mintedResults[4] !== null
-        ) {
-          setMinted((minted) => ({
-            ...minted,
-            ...mintedStatus,
-          }));
-        }
-      } else {
-        console.error(
-          "Ethereum object does not found! or the test network you are connected with is not goerli!"
-        );
-      }
-    } catch (error) {
-      setLoading([false, false, false, false, false]);
-      console.error(error);
-    }
-  };
+  //       if (
+  //         mintedResults[0] ||
+  //         mintedResults[1] ||
+  //         mintedResults[2] ||
+  //         mintedResults[3] ||
+  //         mintedResults[4] !== null
+  //       ) {
+  //         setMinted((minted) => ({
+  //           ...minted,
+  //           ...mintedStatus,
+  //         }));
+  //       }
+  //     } else {
+  //       console.error(
+  //         "Ethereum object does not found! or the test network you are connected with is not goerli!"
+  //       );
+  //     }
+  //   } catch (error) {
+  //     setLoading([false, false, false, false, false]);
+  //     console.error(error);
+  //   }
+  // };
 
   const MintSoulBound = async (id) => {
     if (id === 5) {
@@ -217,10 +236,22 @@ const Bonus = () => {
 
     ContractWrite.writeAsync()
       .then(() => {
-        console.log(ContractWrite.data.hash + ContractWrite.isSuccess);
+        setLoading([false, false, false, false, false]);
+        if (id === 5) {
+          setMinting([false, false, false, false, true]);
+        } else if (id === 4) {
+          setMinting([false, false, false, true, false]);
+        } else if (id === 3) {
+          setMinting([false, false, true, false, false]);
+        } else if (id === 2) {
+          setMinting([false, true, false, false, false]);
+        } else if (id === 1) {
+          setMinting([true, false, false, false, false]);
+        }
       })
       .catch(() => {
         setLoading([false, false, false, false, false]);
+        setMinting([false, false, false, false, false]);
       });
   };
 
@@ -261,41 +292,39 @@ const Bonus = () => {
     //     setTotalPurchase(total);
     //   }
     // };
+    if (account && !disconnectStatus) {
+      setTotalPurchase(ContractRead.data[0] / 1000);
+      const updateminted = async () => {
+        const Minted = ContractRead.data;
 
-    setTotalPurchase(ContractRead.data[0]);
+        const mintedStatus = {
+          ff: Minted[1],
+          bw: Minted[2],
+          ko: Minted[3],
+          mr: Minted[4],
+          ld: Minted[5],
+        };
 
-    const updateminted = async () => {
-      const Minted = ContractRead.data;
-
-      const mintedStatus = {
-        ff: Minted[1],
-        bw: Minted[2],
-        ko: Minted[3],
-        mr: Minted[4],
-        ld: Minted[5],
+        if (
+          Minted[1] ||
+          Minted[2] ||
+          Minted[3] ||
+          Minted[4] ||
+          Minted[5] !== null
+        ) {
+          setMinted((minted) => ({
+            ...minted,
+            ...mintedStatus,
+          }));
+        }
       };
 
-      if (
-        Minted[1] ||
-        Minted[2] ||
-        Minted[3] ||
-        Minted[4] ||
-        Minted[5] !== null
-      ) {
-        setMinted((minted) => ({
-          ...minted,
-          ...mintedStatus,
-        }));
-      }
-    };
-
-    updateminted().catch(console.error);
+      updateminted().catch(console.error);
+    }
     // gettotal().catch(console.error);
   }, []);
 
-  console.log(minted);
-
-  if (account && !disconnectStatus && SumofAllPurchaes === 0) {
+  if (account && !disconnectStatus && totalPurchase === 0) {
     return (
       <div className="h-full bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple p-5">
         <h1 className="font-bold text-4xl">Achievements</h1>
@@ -312,31 +341,37 @@ const Bonus = () => {
         <hr className="border-0 h-0.5 bg-violet-500/20" />
         <div className="flex justify-between">
           <span className="text-xl">{`Total Purchases`}</span>
-          <span className="text-xl">{`${SumofAllPurchaes} MINK`}</span>
+          <span className="text-xl">{`${totalPurchase} MINK`}</span>
         </div>
         <hr className="border-0 h-0.5 bg-violet-500/20" />
         <div className="grid p-5 sm:p-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-          {SumofAllPurchaes >= achievement.Legend && (
+          {totalPurchase >= achievement.Legend && (
             <div className="flex flex-col gap-5 ">
               <img src={legend} className="w-full" />
               {(() => {
                 if (!minted.ld) {
-                  if (!loading[4]) {
+                  if (loading[4]) {
                     return (
-                      <button
-                        onClick={() => Mint(5)}
-                        className="px-4 w-full uppercase font-semibold  py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200 "
-                      >
-                        free MINT Legend
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200 ">
+                        Confirm the Transaction
                       </button>
                     );
-                  } else {
+                  } else if (minting[4]) {
                     return (
                       <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200 ">
                         MINTING
                         <span className="loader"></span>
                       </button>
                     );
+                  } else {
+                    return (
+                      <button
+                        onClick={() => MintSoulBound(5)}
+                        className="px-4 w-full uppercase font-semibold  py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200 "
+                      >
+                        free MINT legend
+                      </button>
+                    );
                   }
                 } else {
                   return (
@@ -353,27 +388,33 @@ const Bonus = () => {
             </div>
           )}
 
-          {SumofAllPurchaes >= achievement.Master && (
+          {totalPurchase >= achievement.Master && (
             <div className="flex flex-col gap-5 ">
               <img src={master} alt="FIRSTYFIRST" className="w-full" />
               {(() => {
                 if (!minted.mr) {
-                  if (!loading[3]) {
+                  if (loading[3]) {
                     return (
-                      <button
-                        onClick={() => Mint(4)}
-                        className="px-4 w-full uppercase font-semibold  py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200 "
-                      >
-                        free MINT master
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200 ">
+                        Confirm the Transaction
                       </button>
                     );
-                  } else {
+                  } else if (minting[3]) {
                     return (
                       <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200 ">
                         MINTING
                         <span className="loader"></span>
                       </button>
                     );
+                  } else {
+                    return (
+                      <button
+                        onClick={() => MintSoulBound(4)}
+                        className="px-4 w-full uppercase font-semibold  py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200 "
+                      >
+                        free MINT master
+                      </button>
+                    );
                   }
                 } else {
                   return (
@@ -390,27 +431,33 @@ const Bonus = () => {
             </div>
           )}
 
-          {SumofAllPurchaes >= achievement.KO && (
+          {totalPurchase >= achievement.KO && (
             <div className="flex flex-col gap-5 ">
               <img src={ko} alt="FIRSTYFIRST" className="w-full" />
               {(() => {
                 if (!minted.ko) {
-                  if (!loading[2]) {
+                  if (loading[2]) {
                     return (
-                      <button
-                        onClick={() => Mint(3)}
-                        className="px-4 w-full uppercase font-semibold  py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200 "
-                      >
-                        free MINT KO!
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200 ">
+                        Confirm the Transaction
                       </button>
                     );
-                  } else {
+                  } else if (minting[2]) {
                     return (
                       <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200 ">
                         MINTING
                         <span className="loader"></span>
                       </button>
                     );
+                  } else {
+                    return (
+                      <button
+                        onClick={() => MintSoulBound(3)}
+                        className="px-4 w-full uppercase font-semibold  py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200 "
+                      >
+                        free MINT KO!
+                      </button>
+                    );
                   }
                 } else {
                   return (
@@ -427,25 +474,31 @@ const Bonus = () => {
             </div>
           )}
 
-          {SumofAllPurchaes >= achievement.BrightWay && (
+          {totalPurchase >= achievement.BrightWay && (
             <div className="flex flex-col gap-5">
               <img src={brightway} alt="FIRSTYFIRST" className="w-full" />
               {(() => {
                 if (!minted.bw) {
-                  if (!loading[1]) {
+                  if (loading[1]) {
                     return (
-                      <button
-                        onClick={() => Mint(2)}
-                        className="px-4 font-semibold uppercase py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 "
-                      >
-                        free MINT BRIGHTWAY
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 ">
+                        Confirm the Transaction
+                      </button>
+                    );
+                  } else if (minting[1]) {
+                    return (
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 ">
+                        MINTING
+                        <span className="loader"></span>
                       </button>
                     );
                   } else {
                     return (
-                      <button className="px-4 font-semibold flex items-center justify-center gap-3 py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 ">
-                        MINTING
-                        <span className="loader"></span>
+                      <button
+                        onClick={() => MintSoulBound(2)}
+                        className="px-4 w-full uppercase font-semibold  py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 "
+                      >
+                        free MINT brightway
                       </button>
                     );
                   }
@@ -464,25 +517,31 @@ const Bonus = () => {
             </div>
           )}
 
-          {SumofAllPurchaes > achievement.FirstyFirst && (
+          {totalPurchase > achievement.FirstyFirst && (
             <div className="flex flex-col items-center gap-5">
               <img src={firstyfirst} alt="FIRSTYFIRST" className="w-full" />
               {(() => {
                 if (!minted.ff) {
-                  if (!loading[0]) {
+                  if (loading[0]) {
+                    return (
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 ">
+                        Confirm the Transaction
+                      </button>
+                    );
+                  } else if (minting[0]) {
+                    return (
+                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 ">
+                        MINTING
+                        <span className="loader"></span>
+                      </button>
+                    );
+                  } else {
                     return (
                       <button
                         onClick={() => MintSoulBound(1)}
                         className="px-4 w-full uppercase font-semibold  py-3 bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 "
                       >
-                        free MINT FirstyFirst
-                      </button>
-                    );
-                  } else {
-                    return (
-                      <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 ">
-                        MINTING
-                        <span className="loader"></span>
+                        free MINT firstyfirst
                       </button>
                     );
                   }

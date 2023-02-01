@@ -33,10 +33,6 @@ const ShopLayout = () => {
 
   const [menuOpen, setMenuOpen] = useState(true);
 
-  const connectBtnClicked = () => {
-    setAccount(address);
-  };
-
   if (isConnected) {
     dispatch(ChangeAccountTrue(true));
     dispatch(DisconnectToggled(false));
@@ -193,12 +189,7 @@ const ShopLayout = () => {
             </div>
           </div>
 
-          <Web3Button
-            icon="false"
-            label="Connect Wallet"
-            balance="false"
-            onClick={connectBtnClicked}
-          />
+          <Web3Button icon="false" label="Connect Wallet" balance="false" />
         </section>
       </header>
 
@@ -234,12 +225,7 @@ const ShopLayout = () => {
           </Link>
         </div>
 
-        <Web3Button
-          icon="false"
-          label="Connect Wallet"
-          balance="false"
-          onClick={connectBtnClicked}
-        />
+        <Web3Button icon="false" label="Connect Wallet" balance="false" />
       </section>
       <hr className="border-0 bg-violet-600/20 h-0.5 hidden sm:block" />
       <section className="hidden flex-wrap py-5 gap-10 px-5 items-center sm:flex">
