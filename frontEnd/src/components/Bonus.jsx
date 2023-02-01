@@ -8,45 +8,122 @@ import master from "../assets/svg/achievement/master.svg";
 import legend from "../assets/svg/achievement/legend.svg";
 import { useSelector } from "react-redux";
 import NFTAbi from "../utils/MoonInkMedals.json";
+import {
+  useAccount,
+  useContractReads,
+  useContractWrite,
+  usePrepareContractWrite,
+  useWaitForTransaction,
+  useContractEvent,
+} from "wagmi";
 
 const Bonus = () => {
   const account = useSelector((state) => state.Account);
   const disconnectStatus = useSelector((state) => state.Disconnect);
-  const MINKcontractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42";
-  const contractABI = MINKabi.abi;
+
+  const MINKTokenContractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42";
+  const SoulBoundsContract = "0x748D5504958D86A0E18682aeED90f7EB45238B0F";
+  const SoulBoundsContractAbi = NFTAbi.abi;
 
   const [totalPurchase, setTotalPurchase] = useState(0);
   const [minted, setMinted] = useState({});
   const [loading, setLoading] = useState([false, false, false, false, false]);
 
-  const TotalPurchase = async () => {
-    try {
-      const { ethereum } = window;
-
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const minkToken = new ethers.Contract(
-          MINKcontractAddress,
-          contractABI,
-          signer
-        );
-
-        const total = await minkToken.getTotalPurchasePerUser(
-          ethereum.selectedAddress
-        );
-
-        return total;
-      } else {
-        console.log("Ethereum object does not found!");
-        return null;
-      }
-    } catch (error) {
-      console.error(error);
-    }
+  const SoulBoundTokenContract = {
+    address: SoulBoundsContract,
+    abi: NFTAbi.abi,
   };
 
-  let SumofAllPurchaes = Number(totalPurchase) / 1000;
+  const MINKTokenContract = {
+    address: MINKTokenContractAddress,
+    abi: MINKabi.abi,
+  };
+
+  const Account = useAccount();
+  const ContractRead = useContractReads({
+    contracts: [
+      {
+        ...MINKTokenContract,
+        functionName: "getTotalPurchasePerUser",
+        args: [Account.address],
+      },
+      {
+        ...SoulBoundTokenContract,
+        functionName: "getminted",
+        args: [Account.address, 1],
+      },
+      {
+        ...SoulBoundTokenContract,
+        functionName: "getminted",
+        args: [Account.address, 2],
+      },
+      {
+        ...SoulBoundTokenContract,
+        functionName: "getminted",
+        args: [Account.address, 3],
+      },
+      {
+        ...SoulBoundTokenContract,
+        functionName: "getminted",
+        args: [Account.address, 4],
+      },
+      {
+        ...SoulBoundTokenContract,
+        functionName: "getminted",
+        args: [Account.address, 5],
+      },
+    ],
+  });
+
+  const { config } = usePrepareContractWrite({
+    address: SoulBoundsContract,
+    abi: NFTAbi.abi,
+    functionName: "mintReward",
+  });
+
+  const ContractWrite = useContractWrite(config);
+
+  const WaitForTransaction = useWaitForTransaction({
+    hash: ContractWrite.data?.hash,
+  });
+
+  useContractEvent({
+    address: SoulBoundsContract,
+    abi: NFTAbi.abi,
+    eventName: "TransferSingle",
+    listener(operator, from, to, id, value) {
+      console.log(operator, from, to, id, value);
+    },
+  });
+
+  // const TotalPurchase = async () => {
+  //   try {
+  //     const { ethereum } = window;
+
+  //     if (ethereum) {
+  //       const provider = new ethers.providers.Web3Provider(ethereum);
+  //       const signer = provider.getSigner();
+  //       const minkToken = new ethers.Contract(
+  //         MINKcontractAddress,
+  //         contractABI,
+  //         signer
+  //       );
+
+  //       const total = await minkToken.getTotalPurchasePerUser(
+  //         ethereum.selectedAddress
+  //       );
+
+  //       return total;
+  //     } else {
+  //       console.log("Ethereum object does not found!");
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  let SumofAllPurchaes = totalPurchase / 1000;
 
   const achievement = {
     FirstyFirst: 0,
@@ -55,9 +132,6 @@ const Bonus = () => {
     Master: 1000,
     Legend: 1700,
   };
-
-  const SoulBoundsContract = "0x748D5504958D86A0E18682aeED90f7EB45238B0F";
-  const SoulBoundsContractAbi = NFTAbi.abi;
 
   const Mint = async (id) => {
     try {
@@ -128,61 +202,85 @@ const Bonus = () => {
     }
   };
 
-  const getMinted = async () => {
-    try {
-      const { ethereum } = window;
-      if (ethereum) {
-        const provider = new ethers.providers.Web3Provider(ethereum);
-        const signer = provider.getSigner();
-        const SoulBound = new ethers.Contract(
-          SoulBoundsContract,
-          SoulBoundsContractAbi,
-          signer
-        );
-
-        let mintStatus;
-        let mintedResults = [];
-
-        for (let i = 1; i <= 5; i++) {
-          mintStatus = await SoulBound.getminted(ethereum.selectedAddress, i);
-          mintedResults.push(mintStatus);
-        }
-
-        return mintedResults;
-      } else {
-        console.log("Ethereum object does not found!");
-        return null;
-      }
-    } catch (error) {
-      console.error(error);
+  const MintSoulBound = async (id) => {
+    if (id === 5) {
+      setLoading([false, false, false, false, true]);
+    } else if (id === 4) {
+      setLoading([false, false, false, true, false]);
+    } else if (id === 3) {
+      setLoading([false, false, true, false, false]);
+    } else if (id === 2) {
+      setLoading([false, true, false, false, false]);
+    } else if (id === 1) {
+      setLoading([true, false, false, false, false]);
     }
+
+    ContractWrite.writeAsync()
+      .then(() => {
+        console.log(ContractWrite.data.hash + ContractWrite.isSuccess);
+      })
+      .catch(() => {
+        setLoading([false, false, false, false, false]);
+      });
   };
 
+  // const getMinted = async () => {
+  //   try {
+  //     const { ethereum } = window;
+  //     if (ethereum) {
+  //       const provider = new ethers.providers.Web3Provider(ethereum);
+  //       const signer = provider.getSigner();
+  //       const SoulBound = new ethers.Contract(
+  //         SoulBoundsContract,
+  //         SoulBoundsContractAbi,
+  //         signer
+  //       );
+
+  //       let mintStatus;
+  //       let mintedResults = [];
+
+  //       for (let i = 1; i <= 5; i++) {
+  //         mintStatus = await SoulBound.getminted(ethereum.selectedAddress, i);
+  //         mintedResults.push(mintStatus);
+  //       }
+
+  //       return mintedResults;
+  //     } else {
+  //       console.log("Ethereum object does not found!");
+  //       return null;
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
   useEffect(() => {
-    const gettotal = async () => {
-      const total = await TotalPurchase();
-      if (total !== null) {
-        setTotalPurchase(total);
-      }
-    };
+    // const gettotal = async () => {
+    //   const total = await TotalPurchase();
+    //   if (total !== null) {
+    //     setTotalPurchase(total);
+    //   }
+    // };
+
+    setTotalPurchase(ContractRead.data[0]);
 
     const updateminted = async () => {
-      const Minted = await getMinted();
+      const Minted = ContractRead.data;
 
       const mintedStatus = {
-        ff: Minted[0],
-        bw: Minted[1],
-        ko: Minted[2],
-        mr: Minted[3],
-        ld: Minted[4],
+        ff: Minted[1],
+        bw: Minted[2],
+        ko: Minted[3],
+        mr: Minted[4],
+        ld: Minted[5],
       };
 
       if (
-        Minted[0] ||
         Minted[1] ||
         Minted[2] ||
         Minted[3] ||
-        Minted[4] !== null
+        Minted[4] ||
+        Minted[5] !== null
       ) {
         setMinted((minted) => ({
           ...minted,
@@ -192,8 +290,10 @@ const Bonus = () => {
     };
 
     updateminted().catch(console.error);
-    gettotal().catch(console.error);
+    // gettotal().catch(console.error);
   }, []);
+
+  console.log(minted);
 
   if (account && !disconnectStatus && SumofAllPurchaes === 0) {
     return (
@@ -372,7 +472,7 @@ const Bonus = () => {
                   if (!loading[0]) {
                     return (
                       <button
-                        onClick={() => Mint(1)}
+                        onClick={() => MintSoulBound(1)}
                         className="px-4 w-full uppercase font-semibold  py-3 bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 "
                       >
                         free MINT FirstyFirst
@@ -409,7 +509,7 @@ const Bonus = () => {
         <h1 className="font-bold text-4xl">Achievements</h1>
         <hr className="border-0 h-0.5 bg-violet-500/20 mt-5" />
         <section className="flex capitalize text-center h-full text-3xl items-center justify-center">
-          connect your metamask
+          connect your Wallet
         </section>
       </div>
     );

@@ -19,6 +19,7 @@ import {
   faInstagram,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import EtherscanIcon from "../assets/svg/etherscan-logo-light-circle.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Web3Button } from "@web3modal/react";
 import { useWeb3ModalTheme } from "@web3modal/react";
@@ -279,7 +280,10 @@ const ShopLayout = () => {
         <p className="text-xs text-white/50">
           Copyright © 2023 MOONINK Inc. All rights reserved.
         </p>
-        <div className="flex flex-wrap gap-10 lg:gap-5 text-2xl">
+        <div className="flex flex-wrap gap-9 lg:gap-7 text-2xl">
+          <a href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42">
+            <img src={EtherscanIcon} className="w-6 mt-1" />
+          </a>
           <a
             href="https://twitter.com/sinaproject007"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"

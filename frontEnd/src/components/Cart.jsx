@@ -90,7 +90,7 @@ const Cart = () => {
   const checkOut = async () => {
     contractWrite.writeAsync().catch(() => {
       if (contractWrite.isError) {
-        console.log(contractWrite.error);
+        console.error(contractWrite.error);
       }
     });
   };
@@ -129,7 +129,7 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    console.log(counter);
+    // console.log(counter);
     if (counter === 0) {
       setCounterBar(`w-0`);
     } else if (counter === 12) {
@@ -137,7 +137,7 @@ const Cart = () => {
     } else {
       setCounterBar(`w-${counter}/12`);
     }
-    console.log(counterBar);
+    // console.log(counterBar);
   }, [counter]);
 
   let mainbodyClass = "";
