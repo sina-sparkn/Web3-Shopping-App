@@ -25,7 +25,8 @@ const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
   const account = useSelector((state) => state.Account);
   const DisconnectStatus = useSelector((state) => state.Disconnect);
-  const [counter, setCounter] = useState(12);
+  const [counter, setCounter] = useState(0);
+  const [counterBar, setCounterBar] = useState("");
 
   const dispatch = useDispatch();
 
@@ -121,12 +122,23 @@ const Cart = () => {
     setSuccess(true);
 
     for (let i = 1; i <= 12; i++) {
+      setCounter(i);
       await sleep(1000);
-      setCounter(12 - i);
     }
-
     setSuccess(false);
   };
+
+  useEffect(() => {
+    console.log(counter);
+    if (counter === 0) {
+      setCounterBar(`w-0`);
+    } else if (counter === 12) {
+      setCounterBar(`w-full`);
+    } else {
+      setCounterBar(`w-${counter}/12`);
+    }
+    console.log(counterBar);
+  }, [counter]);
 
   let mainbodyClass = "";
   if (TotalPrice === 0) {
@@ -140,15 +152,6 @@ const Cart = () => {
   let successcontainer;
   let successmessage;
   let trxhash = "#";
-  let counterBar = "";
-
-  if (counter === 0) {
-    counterBar = `w-0`;
-  } else if (counter === 12) {
-    counterBar = `w-full`;
-  } else {
-    counterBar = `w-${counter}/12`;
-  }
 
   if (!success) {
     successcontainer =
@@ -182,7 +185,7 @@ const Cart = () => {
               Etherscan
             </a>
             <div className="w-full">
-              <div className={`bg-white ${counterBar} h-1 duration-200`}></div>
+              <div className={`bg-white ${counterBar} h-1 duration-1000`}></div>
             </div>
           </div>
         </div>
