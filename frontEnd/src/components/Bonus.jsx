@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import { useState, useEffect } from "react";
 import MINKabi from "../utils/MINKtoken.json";
 import firstyfirst from "../assets/svg/achievement/ff.svg";
@@ -22,10 +21,7 @@ const Bonus = () => {
 
   const MINKTokenContractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42";
   const SoulBoundsContract = "0x748D5504958D86A0E18682aeED90f7EB45238B0F";
-  const SoulBoundsContractAbi = NFTAbi.abi;
 
-  const [totalPurchase, setTotalPurchase] = useState(0);
-  const [minted, setMinted] = useState({});
   const [loading, setLoading] = useState([false, false, false, false, false]);
   const [minting, setMinting] = useState([false, false, false, false, false]);
   const [lastMintDetails, setLastMintDetails] = useState({});
@@ -42,6 +38,14 @@ const Bonus = () => {
   };
 
   const Account = useAccount();
+
+  const { config } = usePrepareContractWrite({
+    address: SoulBoundsContract,
+    abi: NFTAbi.abi,
+    functionName: "mintReward",
+  });
+
+  const ContractWrite = useContractWrite(config);
 
   const ContractRead = useContractReads({
     contracts: [
@@ -76,20 +80,14 @@ const Bonus = () => {
         args: [Account.address, 5],
       },
     ],
+    allowFailure: false,
+    watch: true,
   });
 
   let TotalPurchase;
   if (account && !disconnectStatus && ContractRead.isSuccess) {
     TotalPurchase = ContractRead.data[0] / 1000;
   }
-
-  const { config } = usePrepareContractWrite({
-    address: SoulBoundsContract,
-    abi: NFTAbi.abi,
-    functionName: "mintReward",
-  });
-
-  const ContractWrite = useContractWrite(config);
 
   useContractEvent({
     address: SoulBoundsContract,
@@ -110,11 +108,6 @@ const Bonus = () => {
     },
   });
 
-  const Minted = [];
-  ContractRead.data.map((name, index) => {
-    if (index > 0) Minted.push(name);
-  });
-
   useEffect(() => {
     checkResults();
   }, [lastMintDetails]);
@@ -125,37 +118,7 @@ const Bonus = () => {
     } else {
       setMinting([false, false, false, false, false]);
     }
-    Minted[currentId - 1] = true;
   };
-
-  // console.log(Minted);
-
-  // const TotalPurchase = async () => {
-  //   try {
-  //     const { ethereum } = window;
-
-  //     if (ethereum) {
-  //       const provider = new ethers.providers.Web3Provider(ethereum);
-  //       const signer = provider.getSigner();
-  //       const minkToken = new ethers.Contract(
-  //         MINKcontractAddress,
-  //         contractABI,
-  //         signer
-  //       );
-
-  //       const total = await minkToken.getTotalPurchasePerUser(
-  //         ethereum.selectedAddress
-  //       );
-
-  //       return total;
-  //     } else {
-  //       console.log("Ethereum object does not found!");
-  //       return null;
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   const achievement = {
     FirstyFirst: 0,
@@ -164,75 +127,6 @@ const Bonus = () => {
     Master: 1000,
     Legend: 1700,
   };
-
-  // const Mint = async (id) => {
-  //   try {
-  //     const { ethereum } = window;
-  //     if (ethereum && ethereum.networkVersion === "5") {
-  //       if (id === 5) {
-  //         setLoading([false, false, false, false, true]);
-  //       } else if (id === 4) {
-  //         setLoading([false, false, false, true, false]);
-  //       } else if (id === 3) {
-  //         setLoading([false, false, true, false, false]);
-  //       } else if (id === 2) {
-  //         setLoading([false, true, false, false, false]);
-  //       } else if (id === 1) {
-  //         setLoading([true, false, false, false, false]);
-  //       }
-  //       const provider = new ethers.providers.Web3Provider(ethereum);
-  //       const signer = provider.getSigner();
-  //       const SoulBound = new ethers.Contract(
-  //         SoulBoundsContract,
-  //         SoulBoundsContractAbi,
-  //         signer
-  //       );
-
-  //       const mint = await SoulBound.mintReward();
-  //       console.log("minting...");
-  //       await mint.wait();
-  //       console.log("minted--");
-
-  //       setLoading([false, false, false, false, false]);
-
-  //       let mintStatus;
-  //       let mintedResults = [];
-
-  //       for (let i = 1; i <= 5; i++) {
-  //         mintStatus = await SoulBound.getminted(ethereum.selectedAddress, i);
-  //         mintedResults.push(mintStatus);
-  //       }
-
-  //       const mintedStatus = {
-  //         ff: mintedResults[0],
-  //         bw: mintedResults[1],
-  //         ko: mintedResults[2],
-  //         mr: mintedResults[3],
-  //         ld: mintedResults[4],
-  //       };
-
-  //       if (
-  //         mintedResults[0] ||
-  //         mintedResults[1] ||
-  //         mintedResults[2] ||
-  //         mintedResults[3] ||
-  //         mintedResults[4] !== null
-  //       ) {
-  //         setMinted((minted) => ({
-  //           ...minted,
-  //           ...mintedStatus,
-  //         }));
-  //       }
-  //     } else {
-  //       console.error(
-  //         "Ethereum object does not found! or the test network you are connected with is not goerli!"
-  //       );
-  //     }
-  //   } catch (error) {
-  //     setLoading([false, false, false, false, false]);
-  //     console.error(error);
-  //   }
-  // };
 
   const MintSoulBound = async (id) => {
     if (id === 5) {
@@ -271,81 +165,6 @@ const Bonus = () => {
       });
   };
 
-  // const getMinted = async () => {
-  //   try {
-  //     const { ethereum } = window;
-  //     if (ethereum) {
-  //       const provider = new ethers.providers.Web3Provider(ethereum);
-  //       const signer = provider.getSigner();
-  //       const SoulBound = new ethers.Contract(
-  //         SoulBoundsContract,
-  //         SoulBoundsContractAbi,
-  //         signer
-  //       );
-
-  //       let mintStatus;
-  //       let mintedResults = [];
-
-  //       for (let i = 1; i <= 5; i++) {
-  //         mintStatus = await SoulBound.getminted(ethereum.selectedAddress, i);
-  //         mintedResults.push(mintStatus);
-  //       }
-
-  //       return mintedResults;
-  //     } else {
-  //       console.log("Ethereum object does not found!");
-  //       return null;
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   if (account && !disconnectStatus) {
-  //     setTotalPurchase(ContractRead.data[0] / 1000);
-  //   }
-  // }, [totalPurchase]);
-
-  // useEffect(() => {
-  // const gettotal = async () => {
-  //   const total = await TotalPurchase();
-  //   if (total !== null) {
-  //     setTotalPurchase(total);
-  //   }
-  // };
-  //   if (account && !disconnectStatus) {
-  //     const updateminted = async () => {
-  //       setTotalPurchase(ContractRead.data[0] / 1000);
-
-  //       const Minted = ContractRead.data;
-  //       const mintedStatus = {
-  //         ff: Minted[1],
-  //         bw: Minted[2],
-  //         ko: Minted[3],
-  //         mr: Minted[4],
-  //         ld: Minted[5],
-  //       };
-
-  //       if (
-  //         Minted[1] ||
-  //         Minted[2] ||
-  //         Minted[3] ||
-  //         Minted[4] ||
-  //         Minted[5] !== null
-  //       ) {
-  //         setMinted((minted) => ({
-  //           ...minted,
-  //           ...mintedStatus,
-  //         }));
-  //       }
-  //     };
-
-  //     updateminted().catch(console.error);
-  //   }
-  //   // gettotal().catch(console.error);
-  // }, []);
-
   if (account && !disconnectStatus && TotalPurchase === 0) {
     return (
       <div className="h-full bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple p-5">
@@ -369,9 +188,9 @@ const Bonus = () => {
         <div className="grid p-5 sm:p-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
           {TotalPurchase >= achievement.Legend && (
             <div className="flex flex-col gap-5 ">
-              <img src={legend} className="w-full" />
+              <img src={legend} alt="Legend medal" className="w-full" />
               {(() => {
-                if (!Minted[4]) {
+                if (!ContractRead.data[5]) {
                   if (loading[4]) {
                     return (
                       <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achgold rounded-full ring-4 ring-achgold/50 text-xl hover:ring-0 duration-200 ">
@@ -413,9 +232,9 @@ const Bonus = () => {
 
           {TotalPurchase >= achievement.Master && (
             <div className="flex flex-col gap-5 ">
-              <img src={master} alt="FIRSTYFIRST" className="w-full" />
+              <img src={master} alt="Master medal" className="w-full" />
               {(() => {
-                if (!Minted[3]) {
+                if (!ContractRead.data[4]) {
                   if (loading[3]) {
                     return (
                       <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achred rounded-full ring-4 ring-achred/50 text-xl hover:ring-0 duration-200 ">
@@ -457,9 +276,9 @@ const Bonus = () => {
 
           {TotalPurchase >= achievement.KO && (
             <div className="flex flex-col gap-5 ">
-              <img src={ko} alt="FIRSTYFIRST" className="w-full" />
+              <img src={ko} alt="KO Medal" className="w-full" />
               {(() => {
-                if (!Minted[2]) {
+                if (!ContractRead.data[3]) {
                   if (loading[2]) {
                     return (
                       <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achpink rounded-full ring-4 ring-achpink/50 text-xl hover:ring-0 duration-200 ">
@@ -501,13 +320,13 @@ const Bonus = () => {
 
           {TotalPurchase >= achievement.BrightWay && (
             <div className="flex flex-col gap-5">
-              <img src={brightway} alt="FIRSTYFIRST" className="w-full" />
+              <img src={brightway} alt="brightway medal" className="w-full" />
               {(() => {
-                if (!Minted[1]) {
+                if (!ContractRead.data[2]) {
                   if (loading[1]) {
                     return (
                       <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achblue rounded-full ring-4 ring-achblue/50 text-xl hover:ring-0 duration-200 ">
-                        Confirm the Transaction
+                        Confirm Transaction
                         <span className="loader"></span>
                       </button>
                     );
@@ -545,9 +364,13 @@ const Bonus = () => {
 
           {TotalPurchase > achievement.FirstyFirst && (
             <div className="flex flex-col items-center gap-5">
-              <img src={firstyfirst} alt="FIRSTYFIRST" className="w-full" />
+              <img
+                src={firstyfirst}
+                alt="FIRSTYFIRST Medal"
+                className="w-full"
+              />
               {(() => {
-                if (!Minted[0]) {
+                if (!ContractRead.data[1]) {
                   if (loading[0]) {
                     return (
                       <button className="px-4 w-full font-semibold flex items-center justify-center gap-3 py-3 bg-achpurple rounded-full ring-4 ring-achpurple/50 text-xl hover:ring-0 duration-200 ">

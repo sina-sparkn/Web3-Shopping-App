@@ -25,8 +25,6 @@ const Cart = () => {
   const AddedProducts = useSelector((state) => state.Cart);
   const account = useSelector((state) => state.Account);
   const DisconnectStatus = useSelector((state) => state.Disconnect);
-  const [counter, setCounter] = useState(0);
-  const [counterBar, setCounterBar] = useState("");
 
   const dispatch = useDispatch();
 
@@ -121,24 +119,11 @@ const Cart = () => {
   const testSleep = async () => {
     setSuccess(true);
 
-    for (let i = 1; i <= 12; i++) {
-      setCounter(i);
+    for (let i = 1; i <= 7; i++) {
       await sleep(1000);
     }
     setSuccess(false);
   };
-
-  useEffect(() => {
-    // console.log(counter);
-    if (counter === 0) {
-      setCounterBar(`w-0`);
-    } else if (counter === 12) {
-      setCounterBar(`w-full`);
-    } else {
-      setCounterBar(`w-${counter}/12`);
-    }
-    // console.log(counterBar);
-  }, [counter]);
 
   let mainbodyClass = "";
   if (TotalPrice === 0) {
@@ -159,10 +144,9 @@ const Cart = () => {
     successmessage =
       "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded duration-300";
   } else {
-    successcontainer =
-      "fixed w-62 h-24 overflow-hidden rounded-xl bottom-5 right-5";
+    successcontainer = "fixed w-72 h-24 overflow-hidden bottom-5 right-5";
     successmessage =
-      "translate-x-0 w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded-xl duration-300";
+      "translate-x-0 w-full px-2 capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded-md duration-300";
     trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data.hash}`;
   }
 
@@ -179,14 +163,11 @@ const Cart = () => {
             <span className="mt-2">purchase done!</span>
             <a
               href={trxhash}
-              className="flex items-center gap-x-2 bg-green-600 mb-1 font-medium mt-1 p-2 px-14 rounded-lg hover:no-underline text-base"
+              className="flex items-center justify-center py-2 gap-x-2 w-full bg-green-700/80 mb-1 font-medium mt-1.5 rounded-md hover:no-underline text-base"
             >
               <img src={EtherscanIcon} className="w-5" />
               Etherscan
             </a>
-            <div className="w-full">
-              <div className={`bg-white ${counterBar} h-1 duration-1000`}></div>
-            </div>
           </div>
         </div>
 

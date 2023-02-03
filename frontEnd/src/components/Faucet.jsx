@@ -53,6 +53,7 @@ const Faucet = () => {
         contract.transfer(receiver, amountToSend * 1000).then(function (tx) {
           setTxdetails(tx);
           setLoading(false);
+          SetReceiver("");
         });
       }
     } catch (error) {
