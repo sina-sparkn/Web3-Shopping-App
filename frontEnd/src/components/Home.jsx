@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faCircleExclamation,
+  faWarning,
   faAngleUp,
   faHeart,
 } from "@fortawesome/free-solid-svg-icons";
@@ -44,14 +44,14 @@ const Home = () => {
             className="w-32 hidden sm:block"
           ></img>
         </div>
-        <div className="text-red-500 flex items-center gap-2 font-bold  rounded-full">
-          <FontAwesomeIcon icon={faCircleExclamation} className="text-lg" />
+        <div className="text-red-500 flex items-baseline gap-2 font-bold  rounded-full">
+          <FontAwesomeIcon icon={faWarning} className="text-lg" />
           Goerli testnet version
         </div>
       </header>
       <hr className="border-0 h-0.5 bg-white/10" />
-      <main className="h-auto flex relative flex-col items-center justify-center gap-10">
-        <h1 className="font-bold mt-20 text-5xl sm:text-7xl text-center z-10">
+      <main className="h-auto flex relative flex-col items-center justify-center gap-10 overflow-hidden">
+        <h1 className="font-extrabold mt-20 text-5xl sm:text-7xl text-center z-10">
           THE FIRST WEB3 <br />
           SHOPPING EXPERIENCE
         </h1>
@@ -60,12 +60,12 @@ const Home = () => {
         </h2>
 
         <Link to="/Shop">
-          <button className="button-77 font-semibold">Launch The App</button>
+          <button className="button-77 font-bold">Launch The App</button>
         </Link>
         <img
           src={bg}
           draggable="false"
-          className="z-0 absolute top-0 hidden sm:block"
+          className="z-0 absolute opacity-70 top-32 scale-150 sm:top-0 sm:scale-100 sm:opacity-100"
         />
         <h3 className="font-bold text-4xl mt-20 z-10 text-center">
           What you can do with Moonink ?
@@ -216,10 +216,10 @@ const Home = () => {
       </section>
       <hr className="border-0 mt-10 w-full h-0.5 z-10 bg-white/10" />
       <div className="flex justify-center items-baseline sm:items-center text-red-500 gap-3 mt-5 ">
-        <FontAwesomeIcon icon={faCircleExclamation} />
+        <FontAwesomeIcon icon={faWarning} />
         <p>
-          note that this is a testnet product and sending products is not
-          available !
+          note that this is a testnet product and sending the orders is not
+          available yet!
         </p>
       </div>
       <hr className="border-0 mt-5 w-full h-0.5 z-10 bg-white/10" />
@@ -228,7 +228,7 @@ const Home = () => {
           Made with <FontAwesomeIcon className="text-red-600" icon={faHeart} />{" "}
           by{" "}
           <a
-            className="hover:text-violet-400 duration-100"
+            className="text-violet-400 hover:underline"
             href="https://github.com/ssparknt"
           >
             sinasparkn

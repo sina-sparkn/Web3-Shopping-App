@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
 html,
 body,
 #root {
@@ -16,7 +14,7 @@ body,
 * {
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Archivo", "Space Grotesk";
 }
 
 ::-webkit-scrollbar {
@@ -24,12 +22,16 @@ body,
 }
 
 ::-webkit-scrollbar-track {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: #140029;
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 50px;
-  background: rgba(144, 59, 218, 0.368);
+  background: rgba(255, 255, 255, 0.192);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff54;
 }
 
 .loader {
@@ -96,7 +98,7 @@ body,
   min-height: 64px;
   outline: none;
   overflow: visible;
-  padding: 19px 65px;
+  padding: 19px 45px;
   pointer-events: auto;
   position: relative;
   text-align: center;
@@ -106,6 +108,7 @@ body,
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: middle;
+
   width: auto;
   word-break: keep-all;
   z-index: 10;
@@ -113,11 +116,12 @@ body,
 
 .button-77:before,
 .button-77:after {
-  border-radius: 17px;
+  border-radius: 14px;
 }
 
 .button-77:before {
-  background-color: #924aff5e;
+  background-color: #924aff71;
+
   content: "";
   display: block;
   height: 100%;
@@ -126,6 +130,7 @@ body,
   position: absolute;
   top: 0;
   width: 100%;
+  border-radius: 16px;
   z-index: -2;
 }
 
@@ -149,29 +154,8 @@ body,
   left: 0;
   right: 0;
   top: 0;
+  background-image: linear-gradient(10deg, #8b26ff 0, #6f13f9 100%);
   transition-timing-function: ease-in;
-}
-
-.button-77:active:not(:disabled) {
-  color: rgb(235, 235, 235);
-}
-
-.button-77:active:not(:disabled):after {
-  background-image: linear-gradient(
-      0deg,
-      rgba(82, 82, 82, 0.2),
-      rgba(98, 98, 98, 0.2)
-    ),
-    linear-gradient(92.83deg, #8b26ff 0, #6f13f9 100%);
-  bottom: 4px;
-  left: 4px;
-  right: 4px;
-  top: 4px;
-}
-
-.button-77:disabled {
-  cursor: default;
-  opacity: 0.24;
 }
 
 .tooltip {
@@ -220,4 +204,48 @@ body,
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.loader2 {
+  position: relative;
+  width: 85px;
+  height: 15px;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#fff 50px, transparent 0),
+    linear-gradient(#fff 50px, transparent 0),
+    linear-gradient(#fff 50px, transparent 0),
+    linear-gradient(#fff 50px, transparent 0),
+    linear-gradient(#fff 50px, transparent 0),
+    linear-gradient(#fff 50px, transparent 0);
+  background-position: 0px center, 15px center, 30px center, 45px center,
+    60px center, 75px center, 90px center;
+  animation: rikSpikeRoll 1s linear infinite alternate;
+}
+@keyframes rikSpikeRoll {
+  0% {
+    background-size: 10px 3px;
+  }
+  16% {
+    background-size: 10px 50px, 10px 3px, 10px 3px, 10px 3px, 10px 3px, 10px 3px;
+  }
+  33% {
+    background-size: 10px 30px, 10px 50px, 10px 3px, 10px 3px, 10px 3px,
+      10px 3px;
+  }
+  50% {
+    background-size: 10px 10px, 10px 30px, 10px 50px, 10px 3px, 10px 3px,
+      10px 3px;
+  }
+  66% {
+    background-size: 10px 3px, 10px 10px, 10px 30px, 10px 50px, 10px 3px,
+      10px 3px;
+  }
+  83% {
+    background-size: 10px 3px, 10px 3px, 10px 10px, 10px 30px, 10px 50px,
+      10px 3px;
+  }
+  100% {
+    background-size: 10px 3px, 10px 3px, 10px 3px, 10px 10px, 10px 30px,
+      10px 50px;
+  }
 }

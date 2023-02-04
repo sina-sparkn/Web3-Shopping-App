@@ -113,7 +113,6 @@ const ShopLayout = () => {
               className="text-3xl cursor-pointer"
               onClick={menuClicked}
             />
-
             <div className="w-full flex flex-col">
               <Link
                 to="/Shop"
@@ -148,6 +147,20 @@ const ShopLayout = () => {
                 <FontAwesomeIcon icon={faAngleRight} />
               </Link>
             </div>
+            <br />
+            <p className="flex items-center justify-center gap-2 w-full text-lg">
+              <img className="w-5" src={EtherscanIcon} /> Smart Contracts
+            </p>
+            <hr className="w-full" />
+            <div className="w-full flex justify-between underline underline-offset-4">
+              <a href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42">
+                MINK TOKEN
+              </a>
+              <a href="https://goerli.etherscan.io/address/0x748d5504958d86a0e18682aeed90f7eb45238b0f">
+                MINK MEDALS
+              </a>
+            </div>
+            <hr className="w-full" />
           </nav>
         </section>
 
@@ -267,7 +280,10 @@ const ShopLayout = () => {
           Copyright © 2023 MOONINK Inc. All rights reserved.
         </p>
         <div className="flex flex-wrap gap-9 lg:gap-7 text-2xl">
-          <a href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42">
+          <a
+            className="hidden"
+            href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
+          >
             <img src={EtherscanIcon} className="w-6 mt-1" />
           </a>
           <a

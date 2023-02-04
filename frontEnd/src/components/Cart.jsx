@@ -85,22 +85,26 @@ const Cart = () => {
     checkResults();
   }, [lastPurchaseDetails]);
 
-  const checkOut = async () => {
-    contractWrite.writeAsync().catch(() => {
-      if (contractWrite.isError) {
-        console.error(contractWrite.error);
-      }
-    });
-  };
-
   const checkResults = () => {
     if (Object.keys(lastPurchaseDetails).length === 0) {
       window.setTimeout(checkResults, 1000);
     } else {
       dispatch(RemoveAllCart());
       dispatch(CleanCart());
-      testSleep();
     }
+  };
+
+  const checkOut = async () => {
+    contractWrite
+      .writeAsync()
+      .then(() => {
+        testSleep();
+      })
+      .catch(() => {
+        if (contractWrite.isError) {
+          console.error(contractWrite.error);
+        }
+      });
   };
 
   const removeItem = (ItemName) => {
@@ -119,7 +123,7 @@ const Cart = () => {
   const testSleep = async () => {
     setSuccess(true);
 
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 1; i <= 10; i++) {
       await sleep(1000);
     }
     setSuccess(false);
@@ -142,12 +146,12 @@ const Cart = () => {
     successcontainer =
       "fixed w-0 h-0 delay-300 overflow-hidden bottom-5 right-5";
     successmessage =
-      "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded duration-300";
+      "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-white/10 backdrop-blur-lg rounded duration-300";
   } else {
     successcontainer = "fixed w-72 h-24 overflow-hidden bottom-5 right-5";
     successmessage =
-      "translate-x-0 w-full px-2 capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-green-500 rounded-md duration-300";
-    trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data.hash}`;
+      "translate-x-0 w-full px-2 capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-white/10 backdrop-blur-lg rounded-md duration-300";
+    trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data?.hash}`;
   }
 
   return (
@@ -160,10 +164,10 @@ const Cart = () => {
       <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
         <div className={successcontainer}>
           <div className={successmessage}>
-            <span className="mt-2">purchase done!</span>
+            <span className="mt-2">Transaction Submitted!</span>
             <a
               href={trxhash}
-              className="flex items-center justify-center py-2 gap-x-2 w-full bg-green-700/80 mb-1 font-medium mt-1.5 rounded-md hover:no-underline text-base"
+              className="flex items-center justify-center py-2 gap-x-2 w-full bg-violet-600 mb-1 font-medium mt-1.5 rounded-md hover:bg-violet-500 duration-200"
             >
               <img src={EtherscanIcon} className="w-5" />
               Etherscan
@@ -267,7 +271,7 @@ const Cart = () => {
                     disabled
                     className="px-7 py-3 flex justify-center items-center gap-3 capitalize rounded-xl text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40"
                   >
-                    confirm transaction
+                    Confirm the Transaction
                     <span className="loader"></span>
                   </button>
                 );
@@ -277,7 +281,7 @@ const Cart = () => {
                     disabled
                     className="px-7 py-3 flex justify-center items-center gap-3 capitalize rounded-xl text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40"
                   >
-                    wait for transaction
+                    Wait for Transaction
                     <span className="loader"></span>
                   </button>
                 );
@@ -296,7 +300,7 @@ const Cart = () => {
                     onClick={checkOut}
                     className="px-7 py-3 capitalize rounded-xl text-xl text-center font-semibold text-white bg-violet-600 ring-4 ring-violet-500/40 hover:bg-violet-500 active:ring-0 duration-200"
                   >
-                    Checkout with your wallet
+                    Checkout with Your Wallet
                   </button>
                 );
               }
@@ -304,9 +308,9 @@ const Cart = () => {
               return (
                 <button
                   disabled
-                  className="px-7 text-xl py-3 font-semibold capitalize rounded-xl text-gray-800 bg-gray-600 cursor-not-allowed"
+                  className="px-7 text-xl py-3 font-semibold capitalize rounded-xl text-black/80 bg-gray-600 cursor-not-allowed"
                 >
-                  Connect your Wallet
+                  Connect Your Wallet
                 </button>
               );
             }

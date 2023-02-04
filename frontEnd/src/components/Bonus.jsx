@@ -5,6 +5,7 @@ import brightway from "../assets/svg/achievement/bw.svg";
 import ko from "../assets/svg/achievement/ko.svg";
 import master from "../assets/svg/achievement/master.svg";
 import legend from "../assets/svg/achievement/legend.svg";
+import EtherscanIcon from "../assets/svg/etherscan-logo-light-circle.svg";
 import { useSelector } from "react-redux";
 import NFTAbi from "../utils/MoonInkMedals.json";
 import {
@@ -13,6 +14,7 @@ import {
   useContractWrite,
   usePrepareContractWrite,
   useContractEvent,
+  useWaitForTransaction,
 } from "wagmi";
 
 const Bonus = () => {
@@ -25,7 +27,7 @@ const Bonus = () => {
   const [loading, setLoading] = useState([false, false, false, false, false]);
   const [minting, setMinting] = useState([false, false, false, false, false]);
   const [lastMintDetails, setLastMintDetails] = useState({});
-  const [currentId, setCurrentId] = useState();
+  const [success, setSuccess] = useState(false);
 
   const SoulBoundTokenContract = {
     address: SoulBoundsContract,
@@ -84,6 +86,10 @@ const Bonus = () => {
     watch: true,
   });
 
+  const WaitForTransaction = useWaitForTransaction({
+    hash: ContractWrite.data?.hash,
+  });
+
   let TotalPurchase;
   if (account && !disconnectStatus && ContractRead.isSuccess) {
     TotalPurchase = ContractRead.data[0] / 1000;
@@ -114,6 +120,8 @@ const Bonus = () => {
 
   const checkResults = () => {
     if (Object.keys(lastMintDetails).length === 0) {
+      if (WaitForTransaction.isError)
+        setMinting([false, false, false, false, false]);
       window.setTimeout(checkResults, 1000);
     } else {
       setMinting([false, false, false, false, false]);
@@ -157,13 +165,44 @@ const Bonus = () => {
           setMinting([true, false, false, false, false]);
         }
 
-        setCurrentId(id);
+        testSleep();
       })
       .catch(() => {
         setLoading([false, false, false, false, false]);
         setMinting([false, false, false, false, false]);
       });
   };
+
+  const sleep = async (milliseconds) => {
+    await new Promise((resolve) => {
+      return setTimeout(resolve, milliseconds);
+    });
+  };
+
+  const testSleep = async () => {
+    setSuccess(true);
+    for (let i = 1; i <= 10; i++) {
+      await sleep(1000);
+    }
+    setSuccess(false);
+  };
+
+  let successcontainer;
+  let successmessage;
+  let trxhash = "#";
+
+  if (!success) {
+    successcontainer =
+      "fixed w-0 h-0 delay-500 overflow-hidden bottom-5 right-5 text-white";
+    successmessage =
+      "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-black/70 backdrop-blur-lg rounded duration-500";
+  } else {
+    successcontainer =
+      "fixed w-72 h-24 overflow-hidden text-white rounded-md bottom-5 right-5";
+    successmessage =
+      "translate-x-0 w-full px-2 capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-black/70 backdrop-blur-lg rounded-md duration-500";
+    trxhash = `https://goerli.etherscan.io/tx/${ContractWrite.data?.hash}`;
+  }
 
   if (account && !disconnectStatus && TotalPurchase === 0) {
     return (
@@ -182,10 +221,28 @@ const Bonus = () => {
         <hr className="border-0 h-0.5 bg-violet-500/20" />
         <div className="flex justify-between">
           <span className="text-xl">{`Total Purchases`}</span>
-          <span className="text-xl">{`${TotalPurchase} MINK`}</span>
+          {ContractRead.isLoading || ContractRead.isFetching ? (
+            <div className="flex items-center gap-2">
+              <span className="loader2"></span>
+            </div>
+          ) : (
+            <span className="text-xl">{`${TotalPurchase} MINK`}</span>
+          )}
         </div>
         <hr className="border-0 h-0.5 bg-violet-500/20" />
         <div className="grid p-5 sm:p-0 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+          <div className={successcontainer}>
+            <div className={successmessage}>
+              <span className="mt-2">Transaction Submitted!</span>
+              <a
+                href={trxhash}
+                className="flex items-center justify-center py-2 gap-x-2 w-full bg-violet-600 text-white mb-1 font-medium mt-1.5 rounded-md hover:no-underline text-base hover:bg-violet-500 duration-150"
+              >
+                <img src={EtherscanIcon} className="w-5" />
+                Etherscan
+              </a>
+            </div>
+          </div>
           {TotalPurchase >= achievement.Legend && (
             <div className="flex flex-col gap-5 ">
               <img src={legend} alt="Legend medal" className="w-full" />

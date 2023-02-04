@@ -19,6 +19,9 @@ module.exports = {
         128: "32rem",
         256: "54rem",
       },
+      fontFamily: {
+        display: ["Archivo", "Space Grotesk"],
+      },
     },
   },
   plugins: [
