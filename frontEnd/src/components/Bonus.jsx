@@ -193,14 +193,14 @@ const Bonus = () => {
 
   if (!success) {
     successcontainer =
-      "fixed w-0 h-0 delay-500 overflow-hidden bottom-5 right-5 text-white";
+      "fixed w-0 h-0 delay-300 overflow-hidden bottom-5 right-5 text-white";
     successmessage =
-      "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-black/70 backdrop-blur-lg rounded duration-500";
+      "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-black/70 backdrop-blur-lg rounded duration-300";
   } else {
     successcontainer =
       "fixed w-72 h-24 overflow-hidden text-white rounded-md bottom-5 right-5";
     successmessage =
-      "translate-x-0 w-full px-2 capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-black/70 backdrop-blur-lg rounded-md duration-500";
+      "translate-x-0 w-full px-2 capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-black/70 backdrop-blur-lg rounded-md duration-300";
     trxhash = `https://goerli.etherscan.io/tx/${ContractWrite.data?.hash}`;
   }
 
@@ -221,12 +221,40 @@ const Bonus = () => {
         <hr className="border-0 h-0.5 bg-violet-500/20" />
         <div className="flex justify-between">
           <span className="text-xl">{`Total Purchases`}</span>
-          {ContractRead.isLoading || ContractRead.isFetching ? (
+          {ContractRead.isLoading ? (
             <div className="flex items-center gap-2">
               <span className="loader2"></span>
             </div>
           ) : (
             <span className="text-xl">{`${TotalPurchase} MINK`}</span>
+          )}
+        </div>
+
+        <div className="flex justify-between gap-5">
+          {TotalPurchase > achievement.FirstyFirst ? (
+            <span className="bg-achpurple grow h-2.5 rounded-full"></span>
+          ) : (
+            <span className="bg-gray-500 grow h-2.5 rounded-full"></span>
+          )}
+          {TotalPurchase >= achievement.BrightWay ? (
+            <span className="bg-achblue grow h-2.5 rounded-full"></span>
+          ) : (
+            <span className="bg-gray-500 grow h-2.5 rounded-full"></span>
+          )}
+          {TotalPurchase >= achievement.KO ? (
+            <span className="bg-achpink grow h-2.5 rounded-full"></span>
+          ) : (
+            <span className="bg-gray-500 grow h-2.5 rounded-full"></span>
+          )}
+          {TotalPurchase >= achievement.Master ? (
+            <span className="bg-achred grow h-2.5 rounded-full"></span>
+          ) : (
+            <span className="bg-gray-500 grow h-2.5 rounded-full"></span>
+          )}
+          {TotalPurchase >= achievement.Legend ? (
+            <span className="bg-achgold grow h-2.5 rounded-full"></span>
+          ) : (
+            <span className="bg-gray-500 grow h-2.5 rounded-full"></span>
           )}
         </div>
         <hr className="border-0 h-0.5 bg-violet-500/20" />
