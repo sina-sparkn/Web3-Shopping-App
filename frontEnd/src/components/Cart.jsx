@@ -33,10 +33,12 @@ const Cart = () => {
 
   let TotalPrice = 0;
   let AllItems = "";
+  let TotalNumOfProducts = 0;
 
   AddedProducts.map((item) => {
-    TotalPrice += parseInt(item.price);
+    TotalPrice += parseInt(item.price * item.count);
     AllItems += ` (${item.name} ${item.price}MINK) , `;
+    TotalNumOfProducts += item.count;
   });
 
   AllItems = AllItems.slice(0, AllItems.length - 3);
@@ -142,6 +144,8 @@ const Cart = () => {
   let successmessage;
   let trxhash = "#";
 
+  console.log(AddedProducts);
+
   if (!success) {
     successcontainer =
       "fixed w-0 h-0 delay-300 overflow-hidden bottom-5 right-5";
@@ -158,7 +162,7 @@ const Cart = () => {
     <div className={mainbodyClass}>
       <div className="flex ease-in drop justify-between items-center gap-5  pb-5 font-semibold text-lg md:text-2xl">
         <h2>YOUR SHOPPING BAG</h2>
-        <span className="bg-violet-500/50 rounded-lg py-0.5 px-2.5 text-base">{`${AddedProducts.length}`}</span>
+        <span className="bg-violet-500/50 rounded-lg py-0.5 px-2.5 text-base">{`${TotalNumOfProducts}`}</span>
       </div>
 
       <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
@@ -196,11 +200,14 @@ const Cart = () => {
                 className="h-full rounded-xl"
               />
               <div className="py-5 font-semibold flex flex-col gap-3">
-                <p>{item.name}</p>
+                <div className="flex justify-between">
+                  <p>{item.name}</p>
+                  {item.count && <span>{item.count}x</span>}
+                </div>
                 <p className="flex items-center gap-2 font-medium">
-                  {item.price} MINK
+                  {item.price * item.count} MINK
                   <span className="text-slate-300">{`≈ $${Math.floor(
-                    item.price * mooninkprice
+                    item.price * item.count * mooninkprice
                   )}`}</span>
                 </p>
 

@@ -8,17 +8,43 @@ const CartSlicer = createSlice({
 
   reducers: {
     AddtoCart(state, action) {
-      state.unshift({
-        name: action.payload.name,
-        price: action.payload.price,
-        image: action.payload.image,
+      let status = false;
+      let prevCount;
+      state.map((item, index) => {
+        if (item.name === action.payload.name) {
+          prevCount = state[index].count;
+          state[index] = {
+            name: action.payload.name,
+            price: action.payload.price,
+            image: action.payload.image,
+            count: prevCount + 1,
+          };
+          status = true;
+        }
       });
+      if (!status) {
+        state.unshift({
+          name: action.payload.name,
+          price: action.payload.price,
+          image: action.payload.image,
+          count: 1,
+        });
+      }
     },
     RemoveAllCart(state, action) {
       state = state.splice(0, state.length);
     },
     RemoveFromCart(state, action) {
-      return state.filter((item) => item.name != action.payload.name);
+      let morethan1 = false;
+      state.map((item, index) => {
+        if (item.name === action.payload.name && item.count > 1) {
+          morethan1 = true;
+          state[index].count = state[index].count - 1;
+        }
+      });
+      if (!morethan1) {
+        return state.filter((item) => item.name != action.payload.name);
+      }
     },
   },
 });

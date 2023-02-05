@@ -35,6 +35,7 @@ const ProductPage = () => {
         name: productDetails.item,
         price: productDetails.price,
         image: productDetails.image,
+        count: 1,
       })
     );
     testSleep();
