@@ -61,14 +61,14 @@ const ShopLayout = () => {
 
   if (menuOpen) {
     classClose =
-      "duration-300 ease-in-out opacity-0 translate-x-full flex flex-col items-end gap-7 h-full p-5 ";
+      "duration-200 ease-in-out translate-x-full flex overflow-hidden flex-col items-end gap-7 h-full p-5 ";
     classDiv =
-      "absolute top-0 delay-75 right-0 bg-black z-50 w-0 blur-xl opacity-0 h-screen overflow-hidden ease-out duration-300";
+      "fixed top-0 right-0 bg-black z-50 w-0 h-screen opacity-0 overflow-hidden ease-in-out duration-200";
   } else {
     classClose =
-      "duration-300 ease-in-out translate-x-0 flex flex-col items-end gap-7 top-0 right-0 h-screen p-5 ";
+      "duration-200 ease-in-out translate-x-0 flex flex-col items-end gap-7 top-0 right-0 h-screen p-5 ";
     classDiv =
-      "fixed top-0 right-0 bg-black/90 backdrop-blur-xl w-full h-screen z-50 ease-out overflow-hidden duration-300";
+      "fixed top-0 right-0 bg-black/90 backdrop-blur-xl w-full h-screen z-50 ease-in-out overflow-hidden duration-200";
   }
 
   const menuClicked = () => {
@@ -150,7 +150,7 @@ const ShopLayout = () => {
             </div>
             <br />
             <p className="flex items-center justify-center gap-2 w-full text-lg">
-              <img className="w-5" src={EtherscanIcon} /> Smart Contracts
+              Smart Contracts
             </p>
             <hr className="w-full border-white/20" />
             <div className="w-full flex justify-between underline underline-offset-4">
