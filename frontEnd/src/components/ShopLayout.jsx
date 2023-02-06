@@ -12,6 +12,7 @@ import {
   faXmark,
   faAngleRight,
   faFaucet,
+  faUpRightFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faTwitter,
@@ -60,14 +61,14 @@ const ShopLayout = () => {
 
   if (menuOpen) {
     classClose =
-      "duration-200 ease-in-out opacity-0 translate-x-full flex flex-col items-end gap-7 h-full p-5 ";
+      "duration-300 ease-in-out opacity-0 translate-x-full flex flex-col items-end gap-7 h-full p-5 ";
     classDiv =
-      "absolute top-0 right-0 bg-black z-50 w-0 blur opacity-0 h-screen overflow-hidden ease-out duration-200";
+      "absolute top-0 delay-75 right-0 bg-black z-50 w-0 blur-xl opacity-0 h-screen overflow-hidden ease-out duration-300";
   } else {
     classClose =
-      "duration-200 ease-in-out translate-x-0 flex flex-col items-end gap-7 top-0 right-0 h-screen p-5 ";
+      "duration-300 ease-in-out translate-x-0 flex flex-col items-end gap-7 top-0 right-0 h-screen p-5 ";
     classDiv =
-      "fixed top-0 right-0 bg-black/90 backdrop-blur-xl w-full h-screen z-50 ease-out overflow-hidden duration-200";
+      "fixed top-0 right-0 bg-black/90 backdrop-blur-xl w-full h-screen z-50 ease-out overflow-hidden duration-300";
   }
 
   const menuClicked = () => {
@@ -117,7 +118,7 @@ const ShopLayout = () => {
               <Link
                 to="/Shop"
                 onClick={menuClicked}
-                className="text-slate-300  flex items-center justify-center gap-2  py-5 border border-x-0 hover:text-white duration-200"
+                className="text-slate-300  flex items-center justify-center gap-2 py-5 border border-x-0 border-white/20 hover:text-white duration-200"
               >
                 Start
                 <FontAwesomeIcon icon={faAngleRight} />
@@ -125,7 +126,7 @@ const ShopLayout = () => {
               <Link
                 to="Tshirts"
                 onClick={menuClicked}
-                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 hover:text-white duration-200"
+                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-white/20 border-t-0 hover:text-white duration-200"
               >
                 Tshirts
                 <FontAwesomeIcon icon={faAngleRight} />
@@ -133,7 +134,7 @@ const ShopLayout = () => {
               <Link
                 to="Accessories"
                 onClick={menuClicked}
-                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 hover:text-white duration-200"
+                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 border-white/20 hover:text-white duration-200"
               >
                 Accessories
                 <FontAwesomeIcon icon={faAngleRight} />
@@ -141,7 +142,7 @@ const ShopLayout = () => {
               <Link
                 to="Watches"
                 onClick={menuClicked}
-                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 hover:text-white duration-200"
+                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 border-white/20 hover:text-white duration-200"
               >
                 Watches
                 <FontAwesomeIcon icon={faAngleRight} />
@@ -151,16 +152,30 @@ const ShopLayout = () => {
             <p className="flex items-center justify-center gap-2 w-full text-lg">
               <img className="w-5" src={EtherscanIcon} /> Smart Contracts
             </p>
-            <hr className="w-full" />
+            <hr className="w-full border-white/20" />
             <div className="w-full flex justify-between underline underline-offset-4">
-              <a href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42">
+              <a
+                className="flex items-center gap-1.5"
+                href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
+              >
                 MINK TOKEN
+                <FontAwesomeIcon
+                  className="text-sm"
+                  icon={faUpRightFromSquare}
+                />
               </a>
-              <a href="https://goerli.etherscan.io/address/0x748d5504958d86a0e18682aeed90f7eb45238b0f">
+              <a
+                className="flex items-center gap-1.5"
+                href="https://goerli.etherscan.io/address/0x748d5504958d86a0e18682aeed90f7eb45238b0f"
+              >
                 MINK MEDALS
+                <FontAwesomeIcon
+                  className="text-sm"
+                  icon={faUpRightFromSquare}
+                />
               </a>
             </div>
-            <hr className="w-full" />
+            <hr className="w-full border-white/20" />
           </nav>
         </section>
 
