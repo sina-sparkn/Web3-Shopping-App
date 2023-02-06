@@ -60,14 +60,14 @@ const ShopLayout = () => {
 
   if (menuOpen) {
     classClose =
-      "duration-200 ease-out translate-x-full flex flex-col items-end gap-7 h-full p-5 ";
+      "duration-200 ease-in-out opacity-0 translate-x-full flex flex-col items-end gap-7 h-full p-5 ";
     classDiv =
-      "absolute top-0 right-0 bg-black h-full w-full overflow-hidden ease-out duration-300";
+      "absolute top-0 right-0 bg-black z-50 w-0 blur opacity-0 h-screen overflow-hidden ease-out duration-200";
   } else {
     classClose =
-      "duration-200 ease-out translate-x-0 z-20 flex flex-col items-end gap-7 top-0 right-0 bg-black h-screen p-5 ";
+      "duration-200 ease-in-out translate-x-0 flex flex-col items-end gap-7 top-0 right-0 h-screen p-5 ";
     classDiv =
-      "fixed top-0 right-0 h-screen w-full bg-black z-20 ease-out overflow-hidden duration-300";
+      "fixed top-0 right-0 bg-black/90 backdrop-blur-xl w-full h-screen z-50 ease-out overflow-hidden duration-200";
   }
 
   const menuClicked = () => {
@@ -83,7 +83,7 @@ const ShopLayout = () => {
 
   return (
     <>
-      <header className="w-full bg-maindarkpurple/70 relative px-5 py-3.5 flex justify-between items-center">
+      <header className="w-full bg-black relative px-5 py-3.5 flex justify-between items-center">
         <Link to="/" className="z-10 flex gap-2">
           <img src={mooninklogo} alt="mooninklogo" className="w-7" />
           <img src={mooninklogoType} alt="mooninklogo" className="w-28" />
@@ -117,7 +117,7 @@ const ShopLayout = () => {
               <Link
                 to="/Shop"
                 onClick={menuClicked}
-                className="text-slate-300 flex items-center justify-center gap-2  py-5 border border-x-0 hover:text-white duration-200"
+                className="text-slate-300  flex items-center justify-center gap-2  py-5 border border-x-0 hover:text-white duration-200"
               >
                 Start
                 <FontAwesomeIcon icon={faAngleRight} />

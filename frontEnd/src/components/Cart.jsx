@@ -125,7 +125,7 @@ const Cart = () => {
   const testSleep = async () => {
     setSuccess(true);
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 12; i++) {
       await sleep(1000);
     }
     setSuccess(false);
@@ -152,7 +152,7 @@ const Cart = () => {
     successmessage =
       "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-white/10 backdrop-blur-lg rounded duration-300";
   } else {
-    successcontainer = "fixed w-72 h-24 overflow-hidden bottom-5 right-5";
+    successcontainer = "fixed z-50 w-72 h-24 overflow-hidden bottom-5 right-5";
     successmessage =
       "translate-x-0 w-full px-2 capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-white/10 backdrop-blur-lg rounded-md duration-300";
     trxhash = `https://goerli.etherscan.io/tx/${contractWrite.data?.hash}`;

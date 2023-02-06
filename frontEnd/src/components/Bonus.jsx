@@ -195,12 +195,12 @@ const Bonus = () => {
     successcontainer =
       "fixed w-0 h-0 delay-300 overflow-hidden bottom-5 right-5 text-white";
     successmessage =
-      "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-black/70 backdrop-blur-lg rounded duration-300";
+      "translate-x-full w-full capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-white/10 backdrop-blur-lg rounded duration-300";
   } else {
     successcontainer =
-      "fixed w-72 h-24 overflow-hidden text-white rounded-md bottom-5 right-5";
+      "fixed w-72 h-24 z-50 overflow-hidden text-white rounded-md bottom-5 right-5";
     successmessage =
-      "translate-x-0 w-full px-2 capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-black/70 backdrop-blur-lg rounded-md duration-300";
+      "translate-x-0 w-full px-2 capitalize font-semibold cursor-default tracking-wide h-full flex flex-col gap-1 items-center justify-center text-lg bg-white/10 backdrop-blur-lg rounded-md duration-300";
     trxhash = `https://goerli.etherscan.io/tx/${ContractWrite.data?.hash}`;
   }
 
@@ -221,7 +221,7 @@ const Bonus = () => {
         <hr className="border-0 h-0.5 bg-violet-500/20" />
         <div className="flex justify-between">
           <span className="text-xl">{`Total Purchases`}</span>
-          {ContractRead.isLoading ? (
+          {ContractRead.isLoading || ContractRead.isFetching ? (
             <div className="flex items-center gap-2">
               <span className="loader2"></span>
             </div>
@@ -230,7 +230,7 @@ const Bonus = () => {
           )}
         </div>
 
-        <div className="flex justify-between gap-5">
+        <div className="flex justify-between gap-4">
           {TotalPurchase > achievement.FirstyFirst ? (
             <span className="bg-achpurple grow h-2.5 rounded-full"></span>
           ) : (
