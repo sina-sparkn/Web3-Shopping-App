@@ -205,9 +205,9 @@ const Cart = () => {
                   {item.count && <span>{item.count}x</span>}
                 </div>
                 <p className="flex items-center gap-2 font-medium">
-                  {item.price * item.count} MINK
+                  {item.price} MINK
                   <span className="text-slate-300">{`≈ $${Math.floor(
-                    item.price * item.count * mooninkprice
+                    item.price * mooninkprice
                   )}`}</span>
                 </p>
 
