@@ -86,6 +86,7 @@ const Home = () => {
             <p className="text-lg font-normal text-white/80 text-center">
               Easier than ever with{" "}
               <a
+                target="_blank"
                 href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
                 className="text-white font-bold underline underline-offset-2"
               >
@@ -205,6 +206,7 @@ const Home = () => {
             <p className="px-5 pb-5 leading-8 antialiased max-w-xl text-lg rounded-xl truncate">
               • Contract Address on Goerli: <br />
               <a
+                target="_blank"
                 href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
                 className="text-base underline underline-offset-2"
               >
@@ -228,6 +230,7 @@ const Home = () => {
           Made with <FontAwesomeIcon className="text-red-600" icon={faHeart} />{" "}
           by{" "}
           <a
+            target="_blank"
             className="text-violet-400 hover:underline"
             href="https://github.com/ssparknt"
           >
@@ -241,6 +244,7 @@ const Home = () => {
 
         <div className="flex flex-wrap gap-10 lg:gap-5 text-2xl">
           <a
+            target="_blank"
             href="https://twitter.com/sinaproject007"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
@@ -248,6 +252,7 @@ const Home = () => {
           </a>
 
           <a
+            target="_blank"
             href="https://instagram.com/sparknsina"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
@@ -255,6 +260,7 @@ const Home = () => {
           </a>
 
           <a
+            target="_blank"
             href="https://www.linkedin.com/in/ali-zare-a01550238/"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
@@ -262,6 +268,7 @@ const Home = () => {
           </a>
 
           <a
+            target="_blank"
             href="https://github.com/ssparknt/Web3-Shopping-App"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >

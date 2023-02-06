@@ -155,6 +155,7 @@ const ShopLayout = () => {
             <hr className="w-full border-white/20" />
             <div className="w-full flex justify-between underline underline-offset-4">
               <a
+                target="_blank"
                 className="flex items-center gap-1.5"
                 href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
               >
@@ -165,6 +166,7 @@ const ShopLayout = () => {
                 />
               </a>
               <a
+                target="_blank"
                 className="flex items-center gap-1.5"
                 href="https://goerli.etherscan.io/address/0x748d5504958d86a0e18682aeed90f7eb45238b0f"
               >
@@ -296,12 +298,14 @@ const ShopLayout = () => {
         </p>
         <div className="flex flex-wrap gap-9 lg:gap-7 text-2xl">
           <a
+            target="_blank"
             className="hidden"
             href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
           >
             <img src={EtherscanIcon} className="w-6 mt-1" />
           </a>
           <a
+            target="_blank"
             href="https://twitter.com/sinaproject007"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
@@ -309,6 +313,7 @@ const ShopLayout = () => {
           </a>
 
           <a
+            target="_blank"
             href="https://instagram.com/sparknsina"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
@@ -316,6 +321,7 @@ const ShopLayout = () => {
           </a>
 
           <a
+            target="_blank"
             href="https://www.linkedin.com/in/ali-zare-a01550238/"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
@@ -323,6 +329,7 @@ const ShopLayout = () => {
           </a>
 
           <a
+            target="_blank"
             href="https://github.com/ssparknt/Web3-Shopping-App"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >

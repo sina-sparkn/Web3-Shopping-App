@@ -92,6 +92,7 @@ const Faucet = () => {
       <div className="w-full flex justify-between items-center">
         <h3 className="text-3xl font-semibold">
           <a
+            target="_blank"
             className="underline underline-offset-4 hover:no-underline"
             href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
           >
@@ -262,6 +263,7 @@ const Faucet = () => {
             <div className="truncate flex items-center justify-center gap-2.5 px-5 py-3.5">
               <img src={EtherScanIcon} className="w-5" />
               <a
+                target="_blank"
                 className="truncate underline text-white/90 underline-offset-2"
                 href={`https://goerli.etherscan.io/tx/${txdetails.hash}`}
               >

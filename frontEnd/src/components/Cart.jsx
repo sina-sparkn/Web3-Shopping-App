@@ -170,6 +170,7 @@ const Cart = () => {
           <div className={successmessage}>
             <span className="mt-2">Transaction Submitted!</span>
             <a
+              target="_blank"
               href={trxhash}
               className="flex items-center justify-center py-2 gap-x-2 w-full bg-violet-600 mb-1 font-medium mt-1.5 rounded-md hover:bg-violet-500 duration-200"
             >
