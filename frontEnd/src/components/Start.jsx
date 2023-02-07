@@ -76,7 +76,7 @@ const Start = () => {
         <section className="flex flex-col gap-5 sm:flex-row">
           <div className="w-full flex flex-col gap-3">
             <p className="text-3xl font-semibold">
-              Easiest Shopping Experience
+              Simplest Shopping Experience
             </p>
             <p className="text-white/70 text-lg">
               It can't be easir you can purchse your orders with just one click.
