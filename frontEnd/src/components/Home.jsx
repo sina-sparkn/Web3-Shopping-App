@@ -138,7 +138,7 @@ const Home = () => {
       </main>
       <hr className="border-0 w-full lmd:w-10/12 h-0.5 bg-white/10 m-auto mt-10" />
       <h4 className="text-4xl leading-snug md:px-32 mt-10 font-bold text-center">
-        Frequently asked qustions :
+        Frequently asked qustions
       </h4>
       <section className="mt-10 flex flex-col items-center gap-5 md:px-32">
         <div className="flex w-full flex-col gap-5 md:w-3/4 rounded-xl">
