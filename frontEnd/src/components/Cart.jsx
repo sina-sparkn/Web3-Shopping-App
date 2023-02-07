@@ -201,17 +201,15 @@ const Cart = () => {
                 className="h-full rounded-xl"
               />
               <div className="py-5 font-semibold flex flex-col gap-3">
-                <div className="bg-violet-500/30 py-1 px-1 pl-2 rounded-lg flex justify-between">
-                  <div className="w-full flex justify-between">
+                <div className="bg-violet-500/30 py-1 px-1 rounded-lg flex justify-between">
+                  <div className="w-full flex justify-between items-center pr-1">
                     <Link
-                      className="hover:underline underline-offset-2"
+                      className="bg-violet-600/50 py-0.5 px-1.5 rounded-md hover:underline underline-offset-2"
                       to={`../${item.category}/${item.name}`}
                     >
                       <p>{item.name}</p>
                     </Link>
-                    <span className="bg-violet-600/70 px-1 rounded-md">
-                      {item.count}×
-                    </span>
+                    <span className="">{item.count}×</span>
                   </div>
                 </div>
                 <p className="flex items-center gap-2 font-medium">
