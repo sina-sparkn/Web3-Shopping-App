@@ -17,6 +17,7 @@ const CartSlicer = createSlice({
             name: action.payload.name,
             price: action.payload.price,
             image: action.payload.image,
+            category: action.payload.category,
             count: prevCount + 1,
           };
           status = true;
@@ -27,6 +28,7 @@ const CartSlicer = createSlice({
           name: action.payload.name,
           price: action.payload.price,
           image: action.payload.image,
+          category: action.payload.category,
           count: 1,
         });
       }

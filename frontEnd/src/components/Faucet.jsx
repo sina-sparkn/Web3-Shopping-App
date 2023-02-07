@@ -90,16 +90,7 @@ const Faucet = () => {
   return (
     <main className="p-5 h-full flex flex-col gap-5 items-start bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
       <div className="w-full flex justify-between items-center">
-        <h3 className="text-3xl font-semibold">
-          <a
-            target="_blank"
-            className="underline underline-offset-4 hover:no-underline"
-            href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
-          >
-            MINK
-          </a>{" "}
-          Faucet
-        </h3>
+        <h3 className="text-3xl font-semibold">MINK Faucet</h3>
         {!copied ? (
           <button
             onClick={copy}

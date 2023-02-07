@@ -1,18 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import wallets from "../assets/image/start/wallets.png";
 import click from "../assets/image/start/click.png";
+import bg from "../assets/image/start/bg.png";
 import { Link } from "react-router-dom";
 
 const Start = () => {
   return (
-    <main className="p-5 md:p-20 flex flex-col items-center gap-7 bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
-      <h2 className="w-full text-xl flex justify-start items-center gap-2 font-semibold">
+    <main className="p-5 md:p-20 relative flex overflow-hidden flex-col items-center gap-5 bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
+      <img className="fixed z-0 top-28 left-0 blur-xl opacity-40" src={bg} />
+      <h2 className="w-full z-30 text-xl flex justify-start items-center gap-2 font-semibold">
         MOONINK Features
         <FontAwesomeIcon className="text-lg" icon={faArrowRight} />
       </h2>
       <hr className="w-full border-0 h-0.5 bg-violet-500/20" />
-      <div className="flex flex-col gap-16 w-full">
+      <div className="flex flex-col gap-16 z-30 w-full">
         <section className="flex flex-col gap-5 sm:flex-row">
           <div className="w-full flex flex-col gap-3">
             <p className="text-3xl font-semibold">No Signup Email needed</p>
@@ -88,24 +90,9 @@ const Start = () => {
             </div>
 
             <Link to="Tshirts" className="max-w-max">
-              <button className="flex items-center p-2 z-30 bg-violet-500 hover:ring-2 hover:ring-white max-w-max rounded-lg duration-300">
+              <button className="flex items-center gap-1.5 p-2 z-30 bg-violet-500 hover:ring-2 hover:ring-white max-w-max rounded-lg duration-300">
                 Get Started
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-arrow-up-right"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                  <path d="M17 7l-10 10"></path>
-                  <path d="M8 7l9 0l0 9"></path>
-                </svg>
+                <FontAwesomeIcon className="text-sm" icon={faAngleRight} />
               </button>
             </Link>
             <img

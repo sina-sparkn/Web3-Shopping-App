@@ -35,6 +35,7 @@ const ProductPage = () => {
         name: productDetails.item,
         price: productDetails.price,
         image: productDetails.image,
+        category: id,
         count: 1,
       })
     );
@@ -53,7 +54,7 @@ const ProductPage = () => {
 
   const testSleep = async () => {
     setAddedtobag(true);
-    for (let i = 0; i < 2.5; i++) {
+    for (let i = 0; i < 1; i++) {
       await sleep(1000);
     }
     setAddedtobag(false);

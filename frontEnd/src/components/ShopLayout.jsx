@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import mooninklogo from "../assets/svg/ticonwhite.svg";
 import mooninklogoType from "../assets/svg/typefacewhite.svg";
+import { useParams } from "react-router-dom";
 import {
   faBagShopping,
   faStar,
@@ -27,6 +28,7 @@ import { useWeb3ModalTheme } from "@web3modal/react";
 import { useAccount } from "wagmi";
 
 const ShopLayout = () => {
+  const { id } = useParams();
   const { address, isConnected } = useAccount();
 
   const dispatch = useDispatch();
@@ -63,7 +65,7 @@ const ShopLayout = () => {
     classClose =
       "duration-200 ease-in-out translate-x-full flex overflow-hidden flex-col items-end gap-7 h-full p-5 ";
     classDiv =
-      "fixed top-0 right-0 bg-black z-50 w-0 h-screen opacity-0 overflow-hidden ease-in-out duration-200";
+      "fixed top-0 right-0 bg-black z-50 w-0 h-screen overflow-hidden ease-in-out duration-200";
   } else {
     classClose =
       "duration-200 ease-in-out translate-x-0 flex flex-col items-end gap-7 top-0 right-0 h-screen p-5 ";
@@ -115,45 +117,92 @@ const ShopLayout = () => {
               onClick={menuClicked}
             />
             <div className="w-full flex flex-col">
-              <Link
-                to="/Shop"
-                onClick={menuClicked}
-                className="text-slate-300  flex items-center justify-center gap-2 py-5 border border-x-0 border-white/20 hover:text-white duration-200"
-              >
-                Start
-                <FontAwesomeIcon icon={faAngleRight} />
-              </Link>
-              <Link
-                to="Tshirts"
-                onClick={menuClicked}
-                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-white/20 border-t-0 hover:text-white duration-200"
-              >
-                Tshirts
-                <FontAwesomeIcon icon={faAngleRight} />
-              </Link>
-              <Link
-                to="Accessories"
-                onClick={menuClicked}
-                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 border-white/20 hover:text-white duration-200"
-              >
-                Accessories
-                <FontAwesomeIcon icon={faAngleRight} />
-              </Link>
-              <Link
-                to="Watches"
-                onClick={menuClicked}
-                className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 border border-x-0 border-t-0 border-white/20 hover:text-white duration-200"
-              >
-                Watches
-                <FontAwesomeIcon icon={faAngleRight} />
-              </Link>
+              {id === undefined ? (
+                <Link
+                  to="/Shop"
+                  onClick={menuClicked}
+                  className="text-slate-300 bg-violet-500/30 rounded-xl flex items-center justify-center gap-2 py-5 hover:text-white duration-200"
+                >
+                  Start
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              ) : (
+                <Link
+                  to="/Shop"
+                  onClick={menuClicked}
+                  className="text-slate-300 flex items-center justify-center gap-2 py-5 hover:text-white duration-200"
+                >
+                  Start
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              )}
+              <hr className="border-0 my-1" />
+              {id === "Tshirts" ? (
+                <Link
+                  to="Tshirts"
+                  onClick={menuClicked}
+                  className="text-slate-300 bg-violet-500/30 rounded-xl flex items-center justify-center gap-2 text-center py-5 hover:text-white duration-200"
+                >
+                  Tshirts
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              ) : (
+                <Link
+                  to="Tshirts"
+                  onClick={menuClicked}
+                  className="text-slate-300 flex items-center justify-center gap-2 text-center py-5  hover:text-white duration-200"
+                >
+                  Tshirts
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              )}
+              <hr className="border-0 my-1" />
+              {id === "Accessories" ? (
+                <Link
+                  to="Accessories"
+                  onClick={menuClicked}
+                  className="text-slate-300 bg-violet-500/30 rounded-xl flex items-center justify-center gap-2 text-center py-5 hover:text-white duration-200"
+                >
+                  Accessories
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              ) : (
+                <Link
+                  to="Accessories"
+                  onClick={menuClicked}
+                  className="text-slate-300 flex items-center justify-center gap-2 text-center py-5  hover:text-white duration-200"
+                >
+                  Accessories
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              )}
+              <hr className="border-0 my-1" />
+              {id === "Watches" ? (
+                <Link
+                  to="Watches"
+                  onClick={menuClicked}
+                  className="text-slate-300 bg-violet-500/30 rounded-xl flex items-center justify-center gap-2 text-center py-5 hover:text-white duration-200"
+                >
+                  Watches
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              ) : (
+                <Link
+                  to="Watches"
+                  onClick={menuClicked}
+                  className="text-slate-300 flex items-center justify-center gap-2 text-center py-5 hover:text-white duration-200"
+                >
+                  Watches
+                  <FontAwesomeIcon icon={faAngleRight} />
+                </Link>
+              )}
             </div>
             <br />
             <p className="flex items-center justify-center gap-2 w-full text-lg">
               Smart Contracts
             </p>
             <hr className="w-full border-white/20" />
-            <div className="w-full flex justify-between underline underline-offset-4">
+            <div className="w-full text-gray-200 text-sm flex justify-between">
               <a
                 target="_blank"
                 className="flex items-center gap-1.5"
@@ -161,7 +210,7 @@ const ShopLayout = () => {
               >
                 MINK TOKEN
                 <FontAwesomeIcon
-                  className="text-sm"
+                  className="text-xs"
                   icon={faUpRightFromSquare}
                 />
               </a>
@@ -172,7 +221,7 @@ const ShopLayout = () => {
               >
                 MINK MEDALS
                 <FontAwesomeIcon
-                  className="text-sm"
+                  className="text-xs"
                   icon={faUpRightFromSquare}
                 />
               </a>
@@ -224,7 +273,7 @@ const ShopLayout = () => {
       </header>
 
       <hr className="border-0 bg-violet-600/20 sm:hidden h-0.5" />
-      <section className="flex justify-between py-2 sm:hidden px-4">
+      <section className="flex justify-between py-2 relative z-30 sm:hidden px-5">
         <div className="flex gap-x-2">
           <Link to="Cart">
             <div className="relative cursor-pointer">
@@ -258,7 +307,7 @@ const ShopLayout = () => {
         <Web3Button icon="false" label="Connect Wallet" balance="false" />
       </section>
       <hr className="border-0 bg-violet-600/20 h-0.5 hidden sm:block" />
-      <section className="hidden flex-wrap py-5 gap-10 px-5 items-center sm:flex">
+      <section className="hidden relative z-30 flex-wrap py-5 gap-10 px-5 items-center sm:flex">
         <Link
           to="/Shop"
           className="text-slate-300 hover:text-white duration-200"
@@ -292,11 +341,15 @@ const ShopLayout = () => {
       <hr className="border-0 bg-violet-600/40 h-0.5" />
 
       <footer className="flex flex-col gap-7 bg-maindarkpurple items-center md:flex-row justify-between px-5 py-8">
-        <img src={mooninklogoType} alt="mooninklogoType" className="w-28 " />
-        <p className="text-xs text-white/50">
+        <img
+          src={mooninklogoType}
+          alt="mooninklogoType"
+          className="relative z-30 w-28 "
+        />
+        <p className="relative z-30 text-xs text-white/50">
           Copyright © 2023 MOONINK Inc. All rights reserved.
         </p>
-        <div className="flex flex-wrap gap-9 lg:gap-7 text-2xl">
+        <div className="flex relative z-30 flex-wrap gap-9 lg:gap-7 text-2xl">
           <a
             target="_blank"
             className="hidden"

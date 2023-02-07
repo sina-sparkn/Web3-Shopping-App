@@ -216,8 +216,8 @@ const Bonus = () => {
     );
   } else if (account && !disconnectStatus) {
     return (
-      <main className="p-5 flex flex-col bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple gap-7">
-        <h1 className="font-bold text-4xl">Achievements</h1>
+      <main className="p-5 flex flex-col bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple gap-5">
+        <h1 className="font-bold text-4xl">🏅Achievements</h1>
         <hr className="border-0 h-0.5 bg-violet-500/20" />
         <div className="flex justify-between">
           <span className="text-xl">{`Total Purchases`}</span>

@@ -162,7 +162,7 @@ const Cart = () => {
     <div className={mainbodyClass}>
       <div className="flex ease-in drop justify-between items-center gap-5  pb-5 font-semibold text-lg md:text-2xl">
         <h2>YOUR SHOPPING BAG</h2>
-        <span className="bg-violet-500/50 rounded-lg py-0.5 px-2.5 text-base">{`${TotalNumOfProducts}`}</span>
+        <span className="bg-violet-500/70 rounded-lg py-0.5 px-2.5 text-base">{`${TotalNumOfProducts}`}</span>
       </div>
 
       <section className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 w-full">
@@ -201,9 +201,18 @@ const Cart = () => {
                 className="h-full rounded-xl"
               />
               <div className="py-5 font-semibold flex flex-col gap-3">
-                <div className="flex justify-between">
-                  <p>{item.name}</p>
-                  {item.count && <span>{item.count}x</span>}
+                <div className="bg-violet-500/30 py-1 px-1 pl-2 rounded-lg flex justify-between">
+                  <div className="w-full flex justify-between">
+                    <Link
+                      className="hover:underline underline-offset-2"
+                      to={`../${item.category}/${item.name}`}
+                    >
+                      <p>{item.name}</p>
+                    </Link>
+                    <span className="bg-violet-600/70 px-1 rounded-md">
+                      {item.count}×
+                    </span>
+                  </div>
                 </div>
                 <p className="flex items-center gap-2 font-medium">
                   {item.price} MINK
