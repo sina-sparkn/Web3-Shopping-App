@@ -37,7 +37,9 @@ const Cart = () => {
 
   AddedProducts.map((item) => {
     TotalPrice += parseInt(item.price * item.count);
-    AllItems += ` (${item.name} ${item.price}MINK) , `;
+    AllItems += ` (${item.category} : ${item.name} × ${item.count} = ${
+      item.price * item.count
+    }MINK) , `;
     TotalNumOfProducts += item.count;
   });
 
@@ -143,8 +145,6 @@ const Cart = () => {
   let successcontainer;
   let successmessage;
   let trxhash = "#";
-
-  console.log(AddedProducts);
 
   if (!success) {
     successcontainer =

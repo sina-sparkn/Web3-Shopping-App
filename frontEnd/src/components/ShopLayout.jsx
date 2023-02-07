@@ -217,7 +217,7 @@ const ShopLayout = () => {
               <a
                 target="_blank"
                 className="flex items-center gap-1.5"
-                href="https://goerli.etherscan.io/address/0x748d5504958d86a0e18682aeed90f7eb45238b0f"
+                href="https://goerli.etherscan.io/address/0x260dd84D026479Ec5cF7b218796e668aA0f84f97"
               >
                 MINK MEDALS
                 <FontAwesomeIcon
@@ -350,13 +350,6 @@ const ShopLayout = () => {
           Copyright © 2023 MOONINK Inc. All rights reserved.
         </p>
         <div className="flex relative z-30 flex-wrap gap-9 lg:gap-7 text-2xl">
-          <a
-            target="_blank"
-            className="hidden"
-            href="https://goerli.etherscan.io/address/0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42"
-          >
-            <img src={EtherscanIcon} className="w-6 mt-1" />
-          </a>
           <a
             target="_blank"
             href="https://twitter.com/sinaproject007"

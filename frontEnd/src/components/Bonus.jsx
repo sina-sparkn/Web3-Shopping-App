@@ -22,7 +22,7 @@ const Bonus = () => {
   const disconnectStatus = useSelector((state) => state.Disconnect);
 
   const MINKTokenContractAddress = "0x2B8C1DCdc986e50e3Fb1c29F6c118535a5Cc4e42";
-  const SoulBoundsContract = "0x748D5504958D86A0E18682aeED90f7EB45238B0F";
+  const SoulBoundsContract = "0x260dd84D026479Ec5cF7b218796e668aA0f84f97";
 
   const [loading, setLoading] = useState([false, false, false, false, false]);
   const [minting, setMinting] = useState([false, false, false, false, false]);
