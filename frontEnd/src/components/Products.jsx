@@ -19,11 +19,11 @@ const Cloting = () => {
 
   return (
     <>
-      <h6 className="mx-5 mt-3 py-1.5 text-4xl flex items-center justify-between bg-violet-500 rounded-xl px-3">
+      <h6 className="mx-5 mt-5 py-1.5 text-3xl flex items-center justify-between bg-violet-500/40 rounded-xl px-3">
         <div className="flex items-center gap-1">{id}</div>
         <span className="text-3xl">{counter}</span>
       </h6>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-10 gap-3 px-5 mt-3 bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 lg:gap-10 gap-3 px-5 pb-5 mt-5 bg-gradient-to-b from-maindarkpurple/20 to-maindarkpurple">
         {AllProducts.map((item, index) => {
           return (
             <Link key={index} to={`${item.item}`}>
