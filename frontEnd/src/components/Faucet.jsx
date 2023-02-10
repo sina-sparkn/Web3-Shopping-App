@@ -186,7 +186,7 @@ const Faucet = () => {
           <input
             type="text"
             placeholder="Enter Your Wallet Address (0x...)"
-            className="py-4 px-5 font-base w-full rounded-2xl caret-violet-600 text-black outline-none focus:ring focus:ring-violet-500 duration-300"
+            className="py-4 px-5 font-base w-full rounded-xl caret-violet-600 text-black outline-none focus:ring focus:ring-violet-500 duration-300"
             value={receiver}
             onChange={(e) => {
               SetReceiver(e.target.value);

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import mooninklogo from "../assets/svg/ticonwhite.svg";
 import mooninklogoType from "../assets/svg/typefacewhite.svg";
 import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import {
   faBagShopping,
   faStar,
@@ -21,7 +22,6 @@ import {
   faInstagram,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
-import EtherscanIcon from "../assets/svg/etherscan-logo-light-circle.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Web3Button } from "@web3modal/react";
 import { useWeb3ModalTheme } from "@web3modal/react";
@@ -29,6 +29,8 @@ import { useAccount } from "wagmi";
 
 const ShopLayout = () => {
   const { id } = useParams();
+  const Location = useLocation().pathname;
+
   const { address, isConnected } = useAccount();
 
   const dispatch = useDispatch();
@@ -117,7 +119,7 @@ const ShopLayout = () => {
               onClick={menuClicked}
             />
             <div className="w-full flex flex-col">
-              {id === undefined ? (
+              {Location === "/Shop" ? (
                 <Link
                   to="/Shop"
                   onClick={menuClicked}

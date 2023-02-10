@@ -11,8 +11,8 @@ function App() {
         <Route index element={<Home />}></Route>
         <Route path="QA" element={<QA />}></Route>
       </Route>
-      <Route path="/Shop/*" element={<Shop />}></Route>
       <Route path="*" element={<NotFound />}></Route>
+      <Route path="/Shop/*" element={<Shop />}></Route>
     </Routes>
   );
 }

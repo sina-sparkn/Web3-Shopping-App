@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import MintLogo from "../assets/svg/ticonwhite.svg";
+import NotFound from "./NotFound";
 
 const Cloting = () => {
   const { id } = useParams();
@@ -11,6 +12,8 @@ const Cloting = () => {
     AllProducts = useSelector((state) => state.Tshirts);
   } else if (id === "Watches") {
     AllProducts = useSelector((state) => state.Watches);
+  } else {
+    return <NotFound />;
   }
 
   const mooninkprice = 0.328;
