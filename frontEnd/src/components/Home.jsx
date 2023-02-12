@@ -232,7 +232,7 @@ const Home = () => {
           <a
             target="_blank"
             className="text-violet-400 hover:underline"
-            href="https://github.com/ssparknt"
+            href="https://github.com/alizaregit"
           >
             sinasparkn
           </a>
@@ -269,7 +269,7 @@ const Home = () => {
 
           <a
             target="_blank"
-            href="https://github.com/ssparknt/Web3-Shopping-App"
+            href="https://github.com/alizaregit/Web3-Shopping-App"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
             <FontAwesomeIcon icon={faGithub} />

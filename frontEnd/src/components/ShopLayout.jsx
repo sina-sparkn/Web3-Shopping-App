@@ -82,7 +82,7 @@ const ShopLayout = () => {
   const { setTheme } = useWeb3ModalTheme();
   setTheme({
     themeColor: "purple",
-    themeMode: "dark",
+    themeMode: "light",
     themeBackground: "themeColor",
   });
 
@@ -270,7 +270,7 @@ const ShopLayout = () => {
             </div>
           </div>
 
-          <Web3Button icon="false" label="Connect Wallet" balance="false" />
+          <Web3Button icon="hide" label="Connect Wallet" balance="hide" />
         </section>
       </header>
 
@@ -306,7 +306,7 @@ const ShopLayout = () => {
           </Link>
         </div>
 
-        <Web3Button icon="false" label="Connect Wallet" balance="false" />
+        <Web3Button icon="hide" label="Connect Wallet" balance="hide" />
       </section>
       <hr className="border-0 bg-violet-600/20 h-0.5 hidden sm:block" />
       <section className="hidden relative z-30 flex-wrap py-5 gap-10 px-5 items-center sm:flex">
@@ -378,7 +378,7 @@ const ShopLayout = () => {
 
           <a
             target="_blank"
-            href="https://github.com/ssparknt/Web3-Shopping-App"
+            href="https://github.com/alizaregit/Web3-Shopping-App"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
             <FontAwesomeIcon icon={faGithub} />
