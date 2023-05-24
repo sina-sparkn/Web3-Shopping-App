@@ -378,7 +378,7 @@ const ShopLayout = () => {
 
           <a
             target="_blank"
-            href="https://github.com/alizaregit/Web3-Shopping-App"
+            href="https://github.com/sina-sparkn/Web3-Shopping-App"
             className="text-white/80 hover:underline hover:text-white cursor-pointer"
           >
             <FontAwesomeIcon icon={faGithub} />
