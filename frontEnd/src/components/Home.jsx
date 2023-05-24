@@ -34,20 +34,14 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-maindarkpurple/70 h-auto text-white px-6 ">
-      <header className="flex items-center justify-between py-6">
+    <div className="bg-maindarkpurple/70 h-auto text-white px-6">
+      <header className="flex items-center justify-between py-10 px-4">
         <div className="flex gap-3">
-          <img src={mooninkicon} alt="mooninklogo" className="w-9 rota" />
-          <img
-            src={mooninktypeface}
-            alt="mooninktypeface"
-            className="w-32 hidden sm:block"
-          ></img>
+          <img src={mooninkicon} alt="mooninklogo" className="w-10" />
         </div>
-        <div className="text-red-500 flex items-baseline gap-2 font-bold  rounded-full">
-          <FontAwesomeIcon icon={faWarning} className="text-lg" />
-          Goerli testnet version
-        </div>
+        <Link to="/Shop">
+          <button className="p-2 px-5 bg-white text-black rounded-xl">The App</button>
+        </Link>
       </header>
       <hr className="border-0 h-0.5 bg-white/10" />
       <main className="h-auto flex relative flex-col items-center justify-center gap-10 overflow-hidden">
